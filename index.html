@@ -6,7 +6,7 @@
 <title>archiving trends.com - Y2K Dress Up Game</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&family=Space+Grotesk:wght@400;600;700&family=VT323&family=Galmuri9&family=NeoDunggeunmo&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&family=Space+Grotesk:wght@400;600;700;800&family=VT323&family=Galmuri9&family=NeoDunggeunmo&display=swap" rel="stylesheet">
 <style>
 * {
 box-sizing: border-box;
@@ -553,12 +553,13 @@ align-items: center;
 justify-content: flex-end;
 position: relative;
 padding-bottom: 12px;
+z-index: 15 !important;
 }
 .character-canvas {
 position: relative;
 width: 270px;
 height: 480px;
-z-index: 2;
+z-index: 15 !important;
 }
 #base-character, .clothing-layer {
 position: absolute;
@@ -1198,7 +1199,7 @@ pointer-events: none;
 .dark-mode .game-content {
 padding: 16px;
 gap: 14px;
-background: radial-gradient(circle at 50% 40%, #ffffff 0%, #ffe9f6 45%, #ffd4ec 80%, #f6cfff 100%);
+background: #ffffff !important;
 position: relative;
 }
 
@@ -1402,7 +1403,7 @@ border: 1.5px solid #ffffff !important;
 box-shadow:
   0 8px 22px rgba(33, 150, 243, 0.35),
   inset 0 3px 6px rgba(255, 255, 255, 0.95),
-  inset 0 -4px 8px rgba(25, 118, 210, 0.2) !important;
+  inset 0 -4px 8px rgba(25금, 118, 210, 0.2) !important;
 }
 .dark-mode .clothing-win-box.blue-win:hover {
 box-shadow:
@@ -1441,22 +1442,97 @@ image-rendering: auto;
 transform-origin: center center;
 }
 
+/* [Part 2] 고급 사이버/포스터 그래픽 데코레이션 레이어 */
 .part2-decorations {
 display: none;
 position: absolute;
 top: 0; left: 0; width: 100%; height: 100%;
 pointer-events: none;
 z-index: 12;
+overflow: hidden;
 }
 .dark-mode .part2-decorations { display: block; }
-.p2-star {
+
+.p2-bg-grid-overlay {
 position: absolute;
-filter: drop-shadow(0 8px 16px rgba(220, 130, 200, 0.35));
-animation: p2Float 4.5s infinite ease-in-out alternate;
+top: 0; left: 0; width: 100%; height: 100%;
+background-image: 
+  linear-gradient(to right, rgba(255, 105, 180, 0.15) 1px, transparent 1px),
+  linear-gradient(to bottom, rgba(255, 105, 180, 0.15) 1px, transparent 1px);
+background-size: 32px 32px;
+opacity: 0.6;
 }
-@keyframes p2Float {
-0% { transform: translateY(0px) rotate(0deg); }
-100% { transform: translateY(-10px) rotate(6deg) scale(1.04); }
+
+/* 1. 좌상단: 3D 와이어프레임 하트 그리드 */
+.p2-wireframe-heart {
+position: absolute;
+top: 35px;
+left: 20px;
+width: 140px;
+height: 140px;
+opacity: 0.82;
+filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.6));
+animation: p2FloatPulse 6s infinite ease-in-out alternate;
+}
+
+/* 2. 좌하단: 사이버-매지컬 와이어프레임 & 레이더 그리드 */
+.p2-radar-grid {
+position: absolute;
+bottom: 25px;
+left: 15px;
+width: 175px;
+height: 175px;
+opacity: 0.85;
+filter: drop-shadow(0 0 8px rgba(255, 182, 217, 0.6));
+animation: p2RadarPulse 5s infinite ease-in-out alternate;
+}
+
+@keyframes p2RadarPulse {
+0% { transform: scale(0.96); opacity: 0.75; }
+100% { transform: scale(1.04); opacity: 0.95; }
+}
+
+/* 3. 중앙 배경: 은은한 핑크 레이더 블러 그라디언트 원 (비활성화) */
+.p2-radar-halo {
+display: none !important;
+}
+
+/* 4. 감각적인 타이포 & 좌표계 미니멀 태그 */
+.p2-tech-tag {
+position: absolute;
+font-family: 'Space Grotesk', sans-serif;
+font-weight: 700;
+font-size: 9.5px;
+letter-spacing: 1.5px;
+color: rgba(186, 68, 170, 0.75);
+text-transform: uppercase;
+display: flex;
+align-items: center;
+gap: 6px;
+}
+.p2-tech-tag::before {
+content: '';
+width: 5px;
+height: 5px;
+border-radius: 50%;
+background: #ff2a85;
+box-shadow: 0 0 6px #ff2a85;
+}
+
+.p2-tag-tl { top: 18px; left: 24px; }
+.p2-tag-br { bottom: 18px; right: 180px; }
+.p2-tag-mid { 
+  top: 48%; 
+  left: 28px; 
+  writing-mode: vertical-lr; 
+  letter-spacing: 3px; 
+  font-size: 8.5px; 
+  color: rgba(170, 50, 160, 0.55);
+}
+
+@keyframes p2FloatPulse {
+0% { transform: translateY(0px) scale(0.98); }
+100% { transform: translateY(-8px) scale(1.03); }
 }
 
 /* [Part 2] 기본 일반 아이템 설명창 (핑크/퍼플) */
@@ -1680,6 +1756,47 @@ box-shadow: 0 0 6px #ff66b2;
 </div>
 
 <div class="game-content">
+
+<!-- [Part 2 전용 세련된 그래픽 & 그리드 오버레이] -->
+<div class="part2-decorations">
+  <div class="p2-bg-grid-overlay"></div>
+  
+  <!-- 1. 좌상단: 3D 와이어프레임 하트 그리드 -->
+  <svg class="p2-wireframe-heart" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M100 180 C20 120 10 70 45 35 C75 5 100 45 100 45 C100 45 125 5 155 35 C190 70 180 120 100 180 Z" stroke="#ffffff" stroke-width="2.5" fill="rgba(255, 255, 255, 0.08)"/>
+    <path d="M100 45 V180" stroke="rgba(255,255,255,0.7)" stroke-width="1.2" stroke-dasharray="3 3"/>
+    <path d="M30 95 H170" stroke="rgba(255,255,255,0.7)" stroke-width="1.2" stroke-dasharray="3 3"/>
+    <path d="M48 65 C68 85 132 85 152 65" stroke="rgba(255,255,255,0.6)" stroke-width="1.2"/>
+    <path d="M35 120 C65 145 135 145 165 120" stroke="rgba(255,255,255,0.6)" stroke-width="1.2"/>
+    <path d="M70 40 C60 80 60 135 100 175" stroke="rgba(255,255,255,0.5)" stroke-width="1.2"/>
+    <path d="M130 40 C140 80 140 135 100 175" stroke="rgba(255,255,255,0.5)" stroke-width="1.2"/>
+    <circle cx="100" cy="95" r="3.5" fill="#ff007f"/>
+  </svg>
+
+  <!-- 2. 좌하단: 와이어프레임 하트 & 매지컬 레이더 좌표계 -->
+  <svg class="p2-radar-grid" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <line x1="100" y1="10" x2="100" y2="190" stroke="rgba(255, 255, 255, 0.7)" stroke-width="1.2" stroke-dasharray="3 3"/>
+    <line x1="10" y1="100" x2="190" y2="100" stroke="rgba(255, 255, 255, 0.7)" stroke-width="1.2" stroke-dasharray="3 3"/>
+    
+    <circle cx="100" cy="100" r="80" stroke="rgba(255, 255, 255, 0.35)" stroke-width="1" stroke-dasharray="2 4"/>
+    <circle cx="100" cy="100" r="45" stroke="rgba(255, 255, 255, 0.45)" stroke-width="1"/>
+    
+    <path d="M100 160 C35 110 25 70 55 42 C80 18 100 52 100 52 C100 52 120 18 145 42 C175 70 165 110 100 160 Z" 
+          stroke="#ffffff" stroke-width="1.8" fill="rgba(255, 255, 255, 0.05)"/>
+    <path d="M60 65 C75 80 125 80 140 65" stroke="rgba(255, 255, 255, 0.5)" stroke-width="1"/>
+    <path d="M48 105 C75 125 125 125 152 105" stroke="rgba(255, 255, 255, 0.5)" stroke-width="1"/>
+
+    <circle cx="100" cy="100" r="3" fill="#ffffff" filter="drop-shadow(0 0 4px #ff69b4)"/>
+    <circle cx="145" cy="42" r="2.5" fill="#ffffff"/>
+    <circle cx="55" cy="42" r="2.5" fill="#ffffff"/>
+    <path d="M165 30 L167 36 L173 38 L167 40 L165 46 L163 40 L157 38 L163 36 Z" fill="#ffffff" opacity="0.9"/>
+  </svg>
+
+  <!-- 테크니컬 메타 태그 & 좌표 타이포 -->
+  <div class="p2-tech-tag p2-tag-br">POS: [37.5665° N, 126.9780° E]</div>
+  <div class="p2-tech-tag p2-tag-mid">Part.1 &bull; Part.2</div>
+</div>
+
 <div class="item-info-overlay" id="itemOverlay">
 <div id="overlayTrendTag" class="trend-tag" style="display: none;">★ 재유행템 ★</div>
 <div id="overlayCode" style="font-size: 11px; opacity: 0.8; margin-bottom: 2px;">#0494832</div>
