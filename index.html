@@ -1086,22 +1086,201 @@ font-family: 'Space Grotesk', sans-serif;
 .dark-mode .deco-window-2,
 .dark-mode .bgm-player, .dark-mode .sparkle { display: none !important; }
 
-/* [Part 2] 파란색 테두리 선 완전 제거 */
+/* =========================================================
+   [Part 1 기본 스타일 복원: 레트로 각진 윈도우]
+========================================================= */
+.browser-window {
+  width: 1080px;
+  height: 680px;
+  background-color: #0055ea;
+  border-radius: 6px;
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.35), 0 20px 45px rgba(255, 0, 127, 0.35);
+  border: 3px solid #0055ea;
+  display: flex;
+  flex-direction: column;
+  overflow: visible !important;
+  position: relative;
+  z-index: 40;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.browser-header {
+  padding: 4px 6px 0 6px;
+  display: flex;
+  flex-direction: column;
+  background-color: #0055ea;
+}
+
+.tab-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  text-shadow: 1px 1px #002266;
+  padding: 2px 4px 4px 4px; /* 타이틀바 버튼 여백 */
+}
+
+/* Part 1 회색 주소창: 상하 패딩을 늘려 세로 길이를 확장 */
+.address-bar-container {
+  background-color: #ece9d8;
+  padding: 8px 12px; /* 상하 패딩 8px로 확장 */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 -6px 0 -6px; /* 좌우를 창 테두리 끝까지 확장 */
+  border-top: 1px solid #ffffff;
+  border-bottom: 2px solid #808080;
+  font-size: 11px;
+  color: #000;
+}
+
+/* 내부 흰색 검색창 인풋 박스 */
+.address-bar {
+  background-color: #ffffff;
+  border-radius: 0;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  padding: 3px 10px;
+  gap: 8px;
+  font-size: 11px;
+  color: #333;
+  border: 1px solid #7f9db9;
+  box-shadow: inset 1px 1px 1px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.game-content {
+  display: flex;
+  flex: 1;
+  padding: 14px;
+  gap: 14px;
+  justify-content: space-between;
+  align-items: stretch;
+  background: radial-gradient(circle, #fff5f8 0%, #ffd6e7 60%, #ffb3d9 100%);
+  position: relative;
+}
+
+/* =========================================================
+   [Part 2 스타일: 모던 라운드 글래스 창]
+========================================================= */
 .dark-mode .browser-window {
-border: none !important;
-box-shadow: 0 20px 45px rgba(255, 0, 127, 0.25), 0 8px 24px rgba(180, 90, 200, 0.35) !important;
+  width: 1080px !important;
+  height: 680px !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  border-radius: 20px !important;
+  overflow: hidden !important; /* Part 2는 라운드에 맞춰 내부 클리핑 */
+  box-shadow: 0 20px 45px rgba(255, 0, 127, 0.25), 0 8px 24px rgba(180, 90, 200, 0.35) !important;
 }
 
 .dark-mode .browser-header {
-background: linear-gradient(135deg, #ffc7e8 0%, #e2c0ff 100%);
-padding: 4px 8px 2px 8px;
-display: flex;
-flex-direction: column;
-gap: 4px;
-border-bottom: 2px solid #f4dbff;
+  background: linear-gradient(135deg, #ffc7e8 0%, #e2c0ff 100%) !important;
+  padding: 6px 14px 0 14px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  border-top-left-radius: 20px !important;
+  border-top-right-radius: 20px !important;
+  border-bottom: 1px solid #f4dbff !important;
 }
-.dark-mode .tab-bar { display: flex; align-items: center; gap: 8px; justify-content: flex-start; text-shadow: none; }
-.dark-mode .window-dots { display: flex; gap: 6px; }
+
+.dark-mode .tab-bar {
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: flex-start !important;
+  gap: 14px !important;
+  padding: 2px 4px 0 2px !important;
+  text-shadow: none !important;
+}
+
+.dark-mode .window-dots {
+  display: flex !important;
+  gap: 7px !important;
+  align-items: center !important;
+  padding-bottom: 6px !important;
+}
+
+.dark-mode .dot {
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+  border: none !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 8px !important;
+  line-height: 1 !important;
+  box-shadow: inset 0 -1px 2px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.1) !important;
+  transition: transform 0.1s ease !important;
+}
+.dark-mode .dot:hover { transform: scale(1.1) !important; }
+.dark-mode .dot::before { content: '' !important; display: flex; align-items: center; justify-content: center; }
+
+.dark-mode .dot-red { background: #ff5f56 !important; }
+.dark-mode .dot-yellow { background: #ffbd2e !important; }
+.dark-mode .dot-green { background: #27c93f !important; }
+
+.dark-mode .dot-red:hover::before { content: '✕' !important; color: #5c0000 !important; font-size: 7px !important; font-weight: bold !important; }
+.dark-mode .dot-yellow:hover::before { content: '—' !important; color: #5c3b00 !important; font-size: 8px !important; font-weight: bold !important; transform: translateY(-1px) !important; }
+.dark-mode .dot-green:hover::before { content: '⛶' !important; color: #003b14 !important; font-size: 6px !important; font-weight: bold !important; }
+
+.dark-mode .tab {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  background-color: #ffffff !important;
+  padding: 5px 12px !important;
+  border-radius: 10px 10px 0 0 !important;
+  font-size: 11.5px !important;
+  color: #6a3a78 !important;
+  font-weight: 700 !important;
+  border: 1.5px solid #ecd5ff !important;
+  border-bottom: none !important;
+  box-shadow: 0 -2px 6px rgba(200, 150, 220, 0.15) !important;
+  margin-bottom: -1px !important;
+  z-index: 2 !important;
+  font-family: 'Space Grotesk', sans-serif !important;
+}
+
+.dark-mode .tab span { text-shadow: none !important; color: #6a3a78 !important; }
+
+.dark-mode .tab .tab-close {
+  font-size: 10px !important;
+  cursor: pointer !important;
+  padding: 1px 4px !important;
+  border-radius: 50% !important;
+  color: #9c6fa8 !important;
+  transition: all 0.15s !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.dark-mode .tab .tab-close:hover { background-color: #ffd1e8 !important; color: #d80064 !important; }
+
+.dark-mode .address-bar-container {
+  background: transparent !important;
+  padding: 4px 0 6px 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin: 0 !important;
+  border: none !important;
+}
+
+.dark-mode .game-content {
+  padding: 14px !important;
+  gap: 14px !important;
+  background: #ffffff !important;
+  position: relative !important;
+  border-bottom-left-radius: 20px !important;
+  border-bottom-right-radius: 20px !important;
+  flex: 1 !important;
+}
 
 .dark-mode .dot {
 width: 13px;
