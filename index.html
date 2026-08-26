@@ -3,185 +3,367 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>archiving trends.com - Y2K Dress Up Game</title>
+<title>Part 2 is the new Part 1 - Archiving Trends</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&family=Space+Grotesk:wght@400;600;700;800&family=VT323&family=Galmuri9&family=NeoDunggeunmo&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&family=Space+Grotesk:ital,wght@0,400;0,600;0,700;0,800;1,700;1,800&family=VT323&family=Galmuri9&family=NeoDunggeunmo&display=swap" rel="stylesheet">
 <style>
 * {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
-user-select: none;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
 }
+
 /* =========================================================
-[PART 1: 2000년대 CRT 윈도우 미니홈피 데스크톱 감성]
+   [INTRO SCREEN: 진(Zine) 표지 감성 시작 화면]
+========================================================= */
+#intro-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff;
+  background-image: url('background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1), transform 0.55s ease;
+}
+
+#intro-screen.hide {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.04);
+}
+
+.intro-container {
+  width: 100%;
+  max-width: 1050px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 45px 30px;
+  text-align: center;
+  position: relative;
+}
+
+.intro-title-group {
+  margin-top: auto;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Space Grotesk', sans-serif;
+  font-style: italic;
+  font-weight: 800;
+  line-height: 0.96;
+  letter-spacing: -2px;
+  overflow: visible;
+  width: 100%;
+}
+
+.intro-title-part2 {
+  font-size: 105px;
+  background: linear-gradient(135deg, #d80073 0%, #0099ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transform: skewX(-5deg);
+  padding: 0 45px 0 15px;
+  overflow: visible;
+  display: inline-block;
+}
+
+.intro-title-isthenew {
+  font-size: 82px;
+  background: linear-gradient(135deg, #0099ff 0%, #d80073 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 6px 0;
+  transform: skewX(-5deg);
+  padding: 0 45px 0 15px;
+  overflow: visible;
+  display: inline-block;
+}
+
+.intro-title-part1 {
+  font-size: 105px;
+  background: linear-gradient(135deg, #d80073 0%, #0099ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transform: skewX(-5deg);
+  padding: 0 45px 0 15px;
+  overflow: visible;
+  display: inline-block;
+}
+
+.intro-code-box {
+  margin-bottom: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 10;
+}
+
+.intro-guide-text {
+  font-family: 'NeoDunggeunmo', 'Galmuri9', monospace;
+  font-size: 13.5px;
+  font-weight: bold;
+  color: #ff007f;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1.5px dashed #ff66b2;
+  box-shadow: 0 2px 8px rgba(255, 0, 127, 0.15);
+  letter-spacing: 0.5px;
+}
+
+.code-input-wrapper {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 3px solid #ff007f;
+  border-radius: 40px;
+  padding: 6px 8px 6px 22px;
+  box-shadow: 0 0 20px rgba(255, 0, 127, 0.25), 4px 4px 0px rgba(0,0,0,0.1);
+  transition: all 0.2s;
+}
+
+.code-input-wrapper:focus-within {
+  box-shadow: 0 0 22px rgba(255, 0, 127, 0.45), 4px 4px 0px #ff007f;
+}
+
+.code-input-wrapper input {
+  border: none;
+  outline: none;
+  font-family: 'Space Grotesk', 'NeoDunggeunmo', monospace;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  width: 140px;
+  color: #333;
+  text-align: center;
+  background: transparent;
+}
+
+.code-submit-btn {
+  background: linear-gradient(135deg, #ff007f, #0099ff);
+  color: #ffffff;
+  border: none;
+  outline: none;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 10px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  transition: transform 0.15s, filter 0.15s;
+}
+
+.code-submit-btn:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+.intro-error-msg {
+  font-size: 12px;
+  color: #d80000;
+  font-weight: bold;
+  height: 18px;
+}
+
+.intro-footer-text {
+  font-size: 11.5px;
+  line-height: 1.65;
+  color: #333;
+  word-break: keep-all;
+  max-width: 800px;
+  font-family: 'Space Grotesk', 'Noto Serif KR', sans-serif;
+}
+
+/* =========================================================
+   [PART 1: 2000년대 CRT 윈도우 미니홈피 데스크톱 감성]
 ========================================================= */
 body {
-display: flex;
-justify-content: center;
-align-items: center;
-width: 100vw;
-height: 100vh;
-background-color: #ff3385;
-background-image:
-radial-gradient(#80edd0 26%, transparent 26%),
-radial-gradient(#a0d8ef 26%, transparent 26%),
-radial-gradient(#ffb3da 26%, transparent 26%);
-background-size: 52px 52px;
-background-position: 0 0, 26px 26px, 26px 0;
-font-family: 'NeoDunggeunmo', 'Galmuri9', monospace;
-color: #222;
-position: relative;
-transition: all 0.4s ease;
-overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ff3385;
+  background-image:
+    radial-gradient(#80edd0 26%, transparent 26%),
+    radial-gradient(#a0d8ef 26%, transparent 26%),
+    radial-gradient(#ffb3da 26%, transparent 26%);
+  background-size: 52px 52px;
+  background-position: 0 0, 26px 26px, 26px 0;
+  font-family: 'NeoDunggeunmo', 'Galmuri9', monospace;
+  color: #222;
+  position: relative;
+  transition: all 0.4s ease;
+  overflow: hidden;
 }
 
 #app-scaler {
-width: 1160px;
-height: 730px;
-position: relative;
-flex-shrink: 0;
-display: flex;
-justify-content: center;
-align-items: center;
-transform-origin: center center;
+  width: 1160px;
+  height: 730px;
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-origin: center center;
 }
 
 .crt-overlay {
-position: absolute;
-top: 0; left: 0; width: 100%; height: 100%;
-background:
-linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%),
-radial-gradient(ellipse at center, rgba(0,0,0,0) 60%, rgba(0,0,0,0.3) 100%);
-background-size: 100% 3px, 100% 100%;
-pointer-events: none;
-z-index: 1000;
-opacity: 0.4;
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background:
+    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%),
+    radial-gradient(ellipse at center, rgba(0,0,0,0) 60%, rgba(0,0,0,0.3) 100%);
+  background-size: 100% 3px, 100% 100%;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.4;
 }
 .part1-deco {
-position: absolute;
-pointer-events: none;
-z-index: 20;
-animation: part1Float 4s infinite ease-in-out;
+  position: absolute;
+  pointer-events: none;
+  z-index: 20;
+  animation: part1Float 4s infinite ease-in-out;
 }
 @keyframes part1Float {
-0% { transform: translateY(0px) rotate(0deg); }
-50% { transform: translateY(-8px) rotate(6deg); }
-100% { transform: translateY(0px) rotate(0deg); }
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(6deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
 }
 .p1-retro-logo {
-position: absolute;
-bottom: 20px;
-right: 25px;
-font-family: 'Brush Script MT', 'Comic Sans MS', cursive, sans-serif;
-font-size: 30px;
-color: #ffffff;
-text-shadow: 2px 2px 0px #b30059;
-transform: rotate(-8deg);
-z-index: 5;
+  position: absolute;
+  bottom: 20px;
+  right: 25px;
+  font-family: 'Brush Script MT', 'Comic Sans MS', cursive, sans-serif;
+  font-size: 30px;
+  color: #ffffff;
+  text-shadow: 2px 2px 0px #b30059;
+  transform: rotate(-8deg);
+  z-index: 5;
 }
 
-/* 브라우저 창 z-index를 데코창(30)보다 높은 40으로 올려 설명창이 데코창 위에 오도록 설정 */
 .browser-window {
-width: 1080px;
-height: 680px;
-background-color: #0055ea;
-border-radius: 6px;
-box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.35), 0 20px 45px rgba(255, 0, 127, 0.35);
-border: 3px solid #0055ea;
-display: flex;
-flex-direction: column;
-overflow: visible !important;
-position: relative;
-z-index: 40;
-transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  width: 1080px;
+  height: 680px;
+  background-color: #0055ea;
+  border-radius: 6px;
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.35), 0 20px 45px rgba(255, 0, 127, 0.35);
+  border: 3px solid #0055ea;
+  display: flex;
+  flex-direction: column;
+  overflow: visible !important;
+  position: relative;
+  z-index: 40;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.browser-header {
+  padding: 4px 6px 0 6px;
+  display: flex;
+  flex-direction: column;
+  background-color: #0055ea;
 }
 
 .browser-window.closing {
-transform: scale(0.1) rotate(-10deg);
-opacity: 0;
-pointer-events: none;
+  transform: scale(0.1) rotate(-10deg);
+  opacity: 0;
+  pointer-events: none;
 }
 .browser-window.closed { display: none !important; }
 .browser-window.minimized { height: 42px !important; overflow: hidden !important; }
 .browser-window.maximized { width: 98% !important; height: 95% !important; border-radius: 6px; }
 
-/* 젤리슈즈 창 */
 .deco-window-1 {
-position: absolute;
-bottom: 12px;
-left: -61px;
-width: 250px;
-background: #ece9d8;
-border: 2px solid #ffffff;
-border-right: 2px solid #404040;
-border-bottom: 2px solid #404040;
-box-shadow: 4px 4px 0px rgba(0,0,0,0.3);
-font-size: 10.5px;
-z-index: 30;
-transform: rotate(-2deg);
+  position: absolute;
+  bottom: 12px;
+  left: -61px;
+  width: 250px;
+  background: #ece9d8;
+  border: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+  box-shadow: 4px 4px 0px rgba(0,0,0,0.3);
+  font-size: 10.5px;
+  z-index: 30;
+  transform: rotate(-2deg);
 }
 .deco-window-1 .title, .deco-window-2 .title {
-background: linear-gradient(90deg, #0058ee, #3593ff);
-color: white;
-padding: 3px 6px;
-font-weight: bold;
-font-size: 11px;
-display: flex;
-justify-content: space-between;
+  background: linear-gradient(90deg, #0058ee, #3593ff);
+  color: white;
+  padding: 3px 6px;
+  font-weight: bold;
+  font-size: 11px;
+  display: flex;
+  justify-content: space-between;
 }
 .deco-window-1 .body, .deco-window-2 .body {
-padding: 8px;
-text-align: left;
-color: #333;
-line-height: 1.45;
-font-size: 10.5px;
+  padding: 8px;
+  text-align: left;
+  color: #333;
+  line-height: 1.45;
+  font-size: 10.5px;
 }
 
-/* 줄이어폰 창 */
 .deco-window-2 {
-position: absolute;
-top: 15px;
-right: -60px;
-width: 250px;
-background: #ece9d8;
-border: 2px solid #ffffff;
-border-right: 2px solid #404040;
-border-bottom: 2px solid #404040;
-box-shadow: 4px 4px 0px rgba(0,0,0,0.3);
-font-size: 10.5px;
-z-index: 5;
-transform: rotate(2.5deg);
+  position: absolute;
+  top: 15px;
+  right: -60px;
+  width: 250px;
+  background: #ece9d8;
+  border: 2px solid #ffffff;
+  border-right: 2px solid #404040;
+  border-bottom: 2px solid #404040;
+  box-shadow: 4px 4px 0px rgba(0,0,0,0.3);
+  font-size: 10.5px;
+  z-index: 5;
+  transform: rotate(2.5deg);
 }
 .deco-window-2 .title {
-background: linear-gradient(90deg, #ff007f, #ff66cc);
-color: white;
-padding: 3px 6px;
-font-weight: bold;
-font-size: 11px;
-display: flex;
-justify-content: space-between;
+  background: linear-gradient(90deg, #ff007f, #ff66cc);
+  color: white;
+  padding: 3px 6px;
+  font-weight: bold;
+  font-size: 11px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .tab-bar { display: flex; align-items: center; justify-content: space-between; color: white; font-size: 12px; font-weight: bold; text-shadow: 1px 1px #002266; }
 .window-dots { display: flex; gap: 4px; }
 
 .dot {
-width: 16px;
-height: 16px;
-border-radius: 0;
-background: #ece9d8;
-border: 1px solid #fff;
-border-right-color: #707070;
-border-bottom-color: #707070;
-cursor: pointer;
-display: flex;
-justify-content: center;
-align-items: center;
-font-weight: bold;
-font-size: 10px;
-color: #333;
+  width: 16px;
+  height: 16px;
+  border-radius: 0;
+  background: #ece9d8;
+  border: 1px solid #fff;
+  border-right-color: #707070;
+  border-bottom-color: #707070;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 10px;
+  color: #333;
 }
 .dot-red { background: linear-gradient(180deg, #e0836e 0%, #ba2b0f 100%); color: #fff; }
 .dot-yellow, .dot-green { background: linear-gradient(180deg, #ece9d8 0%, #d8d4c4 100%); color: #333; }
@@ -190,453 +372,442 @@ color: #333;
 .dot-green::before { content: '🗖'; font-size: 8px; }
 .tab { display: none; }
 
+/* Part 1 회색 주소창: 좌우 여백 잘림 현상 방지 및 완벽 정렬 */
 .address-bar-container {
-background-color: #ece9d8;
-padding: 5px 12px;
-display: flex;
-align-items: center;
-gap: 12px;
-margin: 0 -8px -4px -8px;
-border-top: 1px solid #fff;
-font-size: 11px;
-color: #000;
+  background-color: #ece9d8;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  width: 100%;
+  border-top: 1px solid #ffffff;
+  border-bottom: 2px solid #808080;
+  font-size: 11px;
+  color: #000;
 }
 .address-bar {
-background-color: #ffffff;
-border-radius: 0;
-flex-grow: 1;
-display: flex;
-align-items: center;
-padding: 2px 10px;
-gap: 8px;
-font-size: 11px;
-color: #333;
-border: 1px solid #7f9db9;
-box-shadow: inset 1px 1px 1px rgba(0,0,0,0.1);
-position: relative;
+  background-color: #ffffff;
+  border-radius: 0;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  padding: 3px 10px;
+  gap: 8px;
+  font-size: 11px;
+  color: #333;
+  border: 1px solid #7f9db9;
+  box-shadow: inset 1px 1px 1px rgba(0,0,0,0.1);
+  position: relative;
 }
 .address-bar input {
-border: none;
-outline: none;
-width: 100%;
-font-size: 11px;
-color: #333;
-font-family: inherit;
-background: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 11px;
+  color: #333;
+  font-family: inherit;
+  background: transparent;
 }
 
 .star-btn {
-cursor: pointer;
-display: flex;
-align-items: center;
-justify-content: center;
-width: 22px;
-height: 22px;
-transition: transform 0.15s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  transition: transform 0.15s ease;
 }
 .star-btn:active { transform: scale(0.85); }
 
 .star-btn .jelly-star-svg .star-outer {
-fill: rgba(230, 238, 245, 0.85);
-stroke: #777;
-stroke-width: 2.5;
-transition: all 0.25s ease;
+  fill: rgba(230, 238, 245, 0.85);
+  stroke: #777;
+  stroke-width: 2.5;
+  transition: all 0.25s ease;
 }
 .star-btn .jelly-star-svg .star-inner {
-fill: rgba(255, 255, 255, 0.6);
-transition: all 0.25s ease;
+  fill: rgba(255, 255, 255, 0.6);
+  transition: all 0.25s ease;
 }
 
 .star-btn.starred .jelly-star-svg .star-outer {
-fill: url(#starGlassGrad);
-stroke: #ffffff;
-stroke-width: 3;
-filter: drop-shadow(0 0 6px rgba(255, 130, 180, 0.8));
+  fill: url(#starGlassGrad);
+  stroke: #ffffff;
+  stroke-width: 3;
+  filter: drop-shadow(0 0 6px rgba(255, 130, 180, 0.8));
 }
 .star-btn.starred .jelly-star-svg .star-inner {
-fill: url(#starPinkGrad);
+  fill: url(#starPinkGrad);
 }
 
 .browser-actions {
-display: flex;
-align-items: center;
-gap: 14px;
-padding-right: 4px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-right: 4px;
 }
 
 .more-dots-btn {
-display: flex;
-flex-direction: column;
-gap: 3.5px;
-cursor: pointer;
-padding: 4px 2px;
-align-items: center;
-justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5px;
+  cursor: pointer;
+  padding: 4px 2px;
+  align-items: center;
+  justify-content: center;
 }
 .more-dots-btn span {
-width: 4px;
-height: 4px;
-background: #444;
-border-radius: 50%;
-display: block;
+  width: 4px;
+  height: 4px;
+  background: #444;
+  border-radius: 50%;
+  display: block;
 }
 
 .p1-toolbar-btns { display: flex; align-items: center; }
 .p2-action-group { display: none; align-items: center; gap: 14px; }
 .profile-avatar-circle {
-width: 28px;
-height: 28px;
-border-radius: 50%;
-background: #0096c7;
-display: flex;
-align-items: center;
-justify-content: center;
-cursor: pointer;
-border: 2px solid #ffffff;
-box-shadow: 0 2px 8px rgba(0, 150, 200, 0.4);
-transition: transform 0.15s;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #0096c7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 150, 200, 0.4);
+  transition: transform 0.15s;
 }
 .profile-avatar-circle:hover { transform: scale(1.08); }
 .profile-avatar-circle svg { width: 15px; height: 15px; fill: #ffffff; }
 
 .theme-toggle-btn {
-background: linear-gradient(180deg, #ff99cc 0%, #ff3385 100%);
-border: 2px outset #ffffff;
-border-radius: 3px;
-padding: 3px 10px;
-font-size: 11px;
-cursor: pointer;
-display: flex;
-align-items: center;
-justify-content: center;
-gap: 4px;
-color: #fff;
-font-weight: bold;
-box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
-transition: all 0.1s;
+  background: linear-gradient(180deg, #ff99cc 0%, #ff3385 100%);
+  border: 2px outset #ffffff;
+  border-radius: 3px;
+  padding: 3px 10px;
+  font-size: 11px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #fff;
+  font-weight: bold;
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+  transition: all 0.1s;
 }
 .theme-toggle-btn:active { border-style: inset; transform: translate(1px, 1px); }
 
 .game-content {
-display: flex;
-flex: 1;
-padding: 14px;
-gap: 14px;
-justify-content: space-between;
-align-items: stretch;
-background: radial-gradient(circle, #fff5f8 0%, #ffd6e7 60%, #ffb3d9 100%);
-position: relative;
+  display: flex;
+  flex: 1;
+  padding: 14px;
+  gap: 14px;
+  justify-content: space-between;
+  align-items: stretch;
+  background: radial-gradient(circle, #fff5f8 0%, #ffd6e7 60%, #ffb3d9 100%);
+  position: relative;
 }
 .sparkle {
-position: absolute;
-pointer-events: none;
-font-size: 18px;
-animation: float 3s infinite ease-in-out alternate;
+  position: absolute;
+  pointer-events: none;
+  font-size: 18px;
+  animation: float 3s infinite ease-in-out alternate;
 }
 @keyframes float {
-0% { transform: translateY(0px) rotate(0deg); }
-100% { transform: translateY(-8px) rotate(10deg); }
+  0% { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(-8px) rotate(10deg); }
 }
 
 .item-info-overlay {
-position: absolute;
-top: 80%;
-left: 130px;
-transform: translateY(-50%);
-background: rgba(255, 105, 180, 0.35);
-border: 2px solid rgba(255, 255, 255, 0.95);
-box-shadow: 0 8px 25px rgba(255, 0, 127, 0.4);
-backdrop-filter: blur(8px);
--webkit-backdrop-filter: blur(8px);
-padding: 14px 18px;
-border-radius: 10px;
-color: #d80064;
-font-family: 'NeoDunggeunmo', 'Galmuri9', monospace;
-font-size: 13px;
-line-height: 1.5;
-letter-spacing: 0px;
-min-width: 210px;
-max-width: 250px;
-z-index: 5000 !important;
-display: none;
-pointer-events: none;
-text-align: center;
-text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8);
-transition: all 0.2s ease;
+  position: absolute;
+  top: 80%;
+  left: 130px;
+  transform: translateY(-50%);
+  background: rgba(255, 105, 180, 0.35);
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 25px rgba(255, 0, 127, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 14px 18px;
+  border-radius: 10px;
+  color: #d80064;
+  font-family: 'NeoDunggeunmo', 'Galmuri9', monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: 0px;
+  min-width: 210px;
+  max-width: 250px;
+  z-index: 5000 !important;
+  display: none;
+  pointer-events: none;
+  text-align: center;
+  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.8);
+  transition: all 0.2s ease;
 }
 
 .item-info-overlay.trend-active {
-background: rgba(0, 180, 255, 0.5);
-border: 2px solid #00d2ff;
-box-shadow: 0 0 25px rgba(0, 210, 255, 0.7), 0 8px 25px rgba(0, 150, 255, 0.4);
-color: #002277;
-animation: trendPulse 0.4s ease;
+  background: rgba(0, 180, 255, 0.5);
+  border: 2px solid #00d2ff;
+  box-shadow: 0 0 25px rgba(0, 210, 255, 0.7), 0 8px 25px rgba(0, 150, 255, 0.4);
+  color: #002277;
+  animation: trendPulse 0.4s ease;
 }
 @keyframes trendPulse {
-0% { transform: translateY(-50%) scale(0.9); }
-50% { transform: translateY(-50%) scale(1.08); }
-100% { transform: translateY(-50%) scale(1); }
+  0% { transform: translateY(-50%) scale(0.9); }
+  50% { transform: translateY(-50%) scale(1.08); }
+  100% { transform: translateY(-50%) scale(1); }
 }
 .trend-tag {
-display: inline-block;
-background: linear-gradient(90deg, #0058ee, #00c6ff, #ff007f);
-color: #ffffff;
-font-size: 12px;
-font-weight: 900;
-padding: 4px 10px;
-border-radius: 6px;
-margin-bottom: 6px;
-border: 1px solid #ffffff;
-text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
-box-shadow: 0 3px 8px rgba(0, 88, 238, 0.4);
-letter-spacing: 0.5px;
-animation: trendShine 1.5s infinite alternate;
+  display: inline-block;
+  background: linear-gradient(90deg, #0058ee, #00c6ff, #ff007f);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 900;
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  border: 1px solid #ffffff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 3px 8px rgba(0, 88, 238, 0.4);
+  letter-spacing: 0.5px;
+  animation: trendShine 1.5s infinite alternate;
 }
 @keyframes trendShine {
-0% { filter: brightness(1); }
-100% { filter: brightness(1.25); }
+  0% { filter: brightness(1); }
+  100% { filter: brightness(1.25); }
 }
 
 .info-line {
-position: absolute;
-width: 2px;
-background: #ff007f;
-box-shadow: 0 0 5px #ff007f;
-z-index: 4999 !important;
-pointer-events: none;
-transform-origin: top left;
-display: none;
+  position: absolute;
+  width: 2px;
+  background: #ff007f;
+  box-shadow: 0 0 5px #ff007f;
+  z-index: 4999 !important;
+  pointer-events: none;
+  transform-origin: top left;
+  display: none;
 }
 .left-panel {
-width: 285px;
-display: flex;
-flex-direction: column;
-gap: 8px;
-z-index: 3;
+  width: 285px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 3;
 }
 .win-window {
-background: #ece9d8;
-border: 2px solid;
-border-color: #ffffff #808080 #808080 #ffffff;
-box-shadow: 3px 3px 0px rgba(0,0,0,0.3);
-padding: 2px;
+  background: #ece9d8;
+  border: 2px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  box-shadow: 3px 3px 0px rgba(0,0,0,0.3);
+  padding: 2px;
 }
 .left-panel .win-window:first-child {
-transform: rotate(-1.2deg) translateY(-2px);
-z-index: 6;
-position: relative;
+  transform: rotate(-1.2deg) translateY(-2px);
+  z-index: 6;
+  position: relative;
 }
 .win-titlebar {
-background: linear-gradient(90deg, #ff007f, #ff66cc);
-color: white;
-padding: 3px 6px;
-font-size: 11px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-font-weight: bold;
+  background: linear-gradient(90deg, #ff007f, #ff66cc);
+  color: white;
+  padding: 3px 6px;
+  font-size: 11px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
 }
 .win-buttons { display: flex; gap: 2px; }
 .win-btn {
-width: 14px;
-height: 14px;
-background: #ece9d8;
-border: 1px solid;
-border-color: #ffffff #808080 #808080 #ffffff;
-font-size: 9px;
-line-height: 12px;
-text-align: center;
-cursor: pointer;
-color: black;
+  width: 14px;
+  height: 14px;
+  background: #ece9d8;
+  border: 1px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  font-size: 9px;
+  line-height: 12px;
+  text-align: center;
+  cursor: pointer;
+  color: black;
 }
 .win-body {
-padding: 8px;
-background: #fff;
-border: 2px solid;
-border-color: #808080 #ffffff #ffffff #808080;
+  padding: 8px;
+  background: #fff;
+  border: 2px solid;
+  border-color: #808080 #ffffff #ffffff #808080;
 }
 
 .p1-profile-body {
-font-size: 10.5px;
-line-height: 1.55;
-color: #333;
-word-break: keep-all;
+  font-size: 10.5px;
+  line-height: 1.55;
+  color: #333;
+  word-break: keep-all;
 }
 .p1-profile-body h4 {
-color: #d81b60;
-font-size: 12px;
-margin-bottom: 5px;
-border-bottom: 1px dashed #ff66cc;
-padding-bottom: 2px;
+  color: #d81b60;
+  font-size: 12px;
+  margin-bottom: 5px;
+  border-bottom: 1px dashed #ff66cc;
+  padding-bottom: 2px;
 }
 
 .p2-profile-card {
-display: none;
-flex-direction: column;
-gap: 5px;
-font-family: 'Space Grotesk', 'Sandoll Gothic Neo1', sans-serif;
-padding: 4px;
-line-height: 1.55;
-word-break: keep-all;
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  font-family: 'Space Grotesk', 'Sandoll Gothic Neo1', sans-serif;
+  padding: 4px;
+  line-height: 1.55;
+  word-break: keep-all;
 }
 .p2-profile-card h4 {
-color: #7b2cbf;
-font-size: 13px;
-font-weight: 800;
-margin-bottom: 5px;
-border-bottom: 1.5px dashed #cfa8ff;
-padding-bottom: 3px;
+  color: #7b2cbf;
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 5px;
+  border-bottom: 1.5px dashed #cfa8ff;
+  padding-bottom: 3px;
 }
 .p2-profile-card p {
-font-size: 11px;
-color: #4b1a6d;
-line-height: 1.5;
+  font-size: 11px;
+  color: #4b1a6d;
+  line-height: 1.5;
 }
 
 .bgm-player {
-background: #ece9d8;
-border: 2px solid;
-border-color: #ffffff #808080 #808080 #ffffff;
-box-shadow: 2px 2px 0px rgba(0,0,0,0.25);
-padding: 2px;
-width: 82%;
-margin-top: -24px;
-margin-left: 28px;
-margin-right: -10px;
-z-index: 1;
-position: relative;
-transform: rotate(1.5deg);
-opacity: 0.98;
+  background: #ece9d8;
+  border: 2px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.25);
+  padding: 2px;
+  width: 82%;
+  margin-top: -24px;
+  margin-left: 28px;
+  margin-right: -10px;
+  z-index: 1;
+  position: relative;
+  transform: rotate(1.5deg);
+  opacity: 0.98;
 }
 .bgm-player .win-titlebar {
-background: linear-gradient(90deg, #00b359, #33cc66);
-color: white;
-padding: 2px 4px;
-font-size: 9.5px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-font-weight: bold;
+  background: linear-gradient(90deg, #00b359, #33cc66);
+  color: white;
+  padding: 2px 4px;
+  font-size: 9.5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
 }
 .bgm-player .win-buttons .win-btn {
-width: 11px;
-height: 11px;
-font-size: 7.5px;
-line-height: 9px;
+  width: 11px;
+  height: 11px;
+  font-size: 7.5px;
+  line-height: 9px;
 }
 .bgm-player .win-body {
-padding: 4px 6px;
-background: #fff;
-border: 2px solid;
-border-color: #808080 #ffffff #ffffff #808080;
-text-align: center;
+  padding: 4px 6px;
+  background: #fff;
+  border: 2px solid;
+  border-color: #808080 #ffffff #ffffff #808080;
+  text-align: center;
 }
 .bgm-player .song-title {
-font-size: 9.5px;
-color: #008040;
-font-weight: bold;
-margin-bottom: 4px;
+  font-size: 9.5px;
+  color: #008040;
+  font-weight: bold;
+  margin-bottom: 4px;
 }
 .bgm-player .controls {
-display: flex;
-justify-content: center;
-gap: 8px;
-color: #333;
-font-size: 8.5px;
-cursor: pointer;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  color: #333;
+  font-size: 8.5px;
+  cursor: pointer;
 }
 .center-panel {
-flex: 1;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: flex-end;
-position: relative;
-padding-bottom: 12px;
-z-index: 15 !important;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  padding-bottom: 12px;
+  z-index: 15 !important;
 }
 .character-canvas {
-position: relative;
-width: 270px;
-height: 480px;
-z-index: 15 !important;
+  position: relative;
+  width: 270px;
+  height: 480px;
+  z-index: 15 !important;
+  cursor: default;
 }
 #base-character, .clothing-layer {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-object-fit: contain;
-image-rendering: pixelated;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
 }
 
-/* ================= [레이어 위계 규칙] =================
-   1. 베이스(1)
-   2. 메이크업(20)
-   3. dynamicLayersContainer (일반 옷/악세사리, z-index: 35~799)
-   4. layer-hair (헤어, z-index: 800)
-   5. overHairLayersContainer (뉴스보이캡, 헤드셋, 뉴에라, z-index: 910~999)
-   ==================================================== */
-#base-character { z-index: 1 !important; }
+#base-character { z-index: 1 !important; pointer-events: none; }
 #layer-makeup { z-index: 20 !important; transform-origin: center top; pointer-events: none !important; }
 
 #dynamicLayersContainer {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-pointer-events: none;
-z-index: 35;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 35;
 }
 #dynamicLayersContainer .clothing-layer {
-pointer-events: auto;
-cursor: grab;
-position: absolute;
+  pointer-events: none;
+  position: absolute;
 }
-#dynamicLayersContainer .clothing-layer:active { cursor: grabbing; }
 
 #layer-hair { z-index: 800 !important; transform-origin: center top; pointer-events: none !important; }
 
 #overHairLayersContainer {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-pointer-events: none;
-z-index: 910;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 910;
 }
 #overHairLayersContainer .clothing-layer {
-pointer-events: auto;
-cursor: grab;
-position: absolute;
+  pointer-events: none;
+  position: absolute;
 }
-#overHairLayersContainer .clothing-layer:active { cursor: grabbing; }
 
 .clothing-layer {
-cursor: grab;
-transform-origin: center center;
-pointer-events: auto !important;
+  transform-origin: center center;
 }
-.clothing-layer:active { cursor: grabbing; }
 
 img:not([src]), img[src=""], img[src="about:blank"] { display: none !important; }
 
 .pedestal {
-width: 250px;
-height: 75px;
-background: linear-gradient(180deg, #ff007f 0%, #c71585 100%);
-border-radius: 120px / 35px;
-margin-top: -30px;
-margin-bottom: 10px;
-z-index: 1;
-border: 3px solid #ff99cc;
-box-shadow: 0 10px 20px rgba(255, 0, 127, 0.4), inset 0 2px 5px rgba(255, 255, 255, 0.7);
+  width: 250px;
+  height: 75px;
+  background: linear-gradient(180deg, #ff007f 0%, #c71585 100%);
+  border-radius: 120px / 35px;
+  margin-top: -30px;
+  margin-bottom: 10px;
+  z-index: 1;
+  border: 3px solid #ff99cc;
+  box-shadow: 0 10px 20px rgba(255, 0, 127, 0.4), inset 0 2px 5px rgba(255, 255, 255, 0.7);
 }
 
-/* 말풍선 본체 크기 1.2배 확대 조정 */
 .speech-bubble {
   position: absolute;
   top: 10px;
@@ -655,7 +826,6 @@ box-shadow: 0 10px 20px rgba(255, 0, 127, 0.4), inset 0 2px 5px rgba(255, 255, 2
   gap: 2.5px;
 }
 
-/* 말풍선 꼬리 크기 조절 */
 .speech-bubble::after {
   content: '';
   position: absolute;
@@ -680,7 +850,6 @@ box-shadow: 0 10px 20px rgba(255, 0, 127, 0.4), inset 0 2px 5px rgba(255, 255, 2
   z-index: 1;
 }
 
-/* CLICK / DRAG 뱃지 크기 */
 .action-badge {
   display: inline-block;
   padding: 1px 5px;
@@ -692,139 +861,137 @@ box-shadow: 0 10px 20px rgba(255, 0, 127, 0.4), inset 0 2px 5px rgba(255, 255, 2
   letter-spacing: 0.4px;
 }
 .badge-click {
-background: linear-gradient(180deg, #ffff55 0%, #ffcc00 100%);
-color: #b30059;
-border: 1px solid #e6b800;
-text-shadow: 0 0 1px #fff;
+  background: linear-gradient(180deg, #ffff55 0%, #ffcc00 100%);
+  color: #b30059;
+  border: 1px solid #e6b800;
+  text-shadow: 0 0 1px #fff;
 }
 .badge-drag {
-background: linear-gradient(180deg, #ff66b2 0%, #ff007f 100%);
-color: #ffffff;
-border: 1px solid #cc0066;
-text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+  background: linear-gradient(180deg, #ff66b2 0%, #ff007f 100%);
+  color: #ffffff;
+  border: 1px solid #cc0066;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
 }
 
 .right-panel {
-width: 325px;
-display: flex;
-flex-direction: column;
-gap: 8px;
-z-index: 3;
+  width: 325px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 3;
 }
 .category-tabs {
-display: grid;
-grid-template-columns: repeat(4, 1fr);
-gap: 4px;
-background: #ece9d8;
-padding: 4px;
-border: 2px solid;
-border-color: #ffffff #808080 #808080 #ffffff;
-box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  background: #ece9d8;
+  padding: 4px;
+  border: 2px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
 }
 .category-btn {
-background: linear-gradient(180deg, #ffffff 0%, #ece9d8 100%);
-border: 2px outset #ffffff;
-padding: 6px 2px;
-cursor: pointer;
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 3px;
-font-size: 11px;
-color: #333;
-font-weight: bold;
-font-family: inherit;
+  background: linear-gradient(180deg, #ffffff 0%, #ece9d8 100%);
+  border: 2px outset #ffffff;
+  padding: 6px 2px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+  color: #333;
+  font-weight: bold;
+  font-family: inherit;
 }
 .category-btn:hover, .category-btn.active {
-background: linear-gradient(180deg, #ff66aa 0%, #ff007f 100%);
-color: #ffffff;
-border: 2px inset #ff99cc;
+  background: linear-gradient(180deg, #ff66aa 0%, #ff007f 100%);
+  color: #ffffff;
+  border: 2px inset #ff99cc;
 }
 .category-btn .icon { font-size: 16px; height: 20px; display: flex; align-items: center; justify-content: center; }
 .category-btn .icon svg { fill: currentColor; width: auto; height: 100%; }
 .item-grid-container {
-flex: 1;
-background: #ece9d8;
-border: 2px solid;
-border-color: #808080 #ffffff #ffffff #808080;
-padding: 8px;
-overflow-y: auto;
-max-height: 420px;
+  flex: 1;
+  background: #ece9d8;
+  border: 2px solid;
+  border-color: #808080 #ffffff #ffffff #808080;
+  padding: 8px;
+  overflow-y: auto;
+  max-height: 420px;
 }
 .clothing-win-box {
-background: #ece9d8;
-border: 2px solid;
-border-color: #ffffff #808080 #808080 #ffffff;
-box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
-cursor: grab;
-transition: transform 0.1s;
-display: flex;
-flex-direction: column;
-position: relative;
+  background: #ece9d8;
+  border: 2px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+  cursor: grab;
+  transition: transform 0.1s;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 .clothing-win-box:active { cursor: grabbing; border-color: #808080 #ffffff #ffffff #808080; }
 .clothing-win-box:hover { transform: scale(1.02); }
 .clothing-win-box.in-use {
-opacity: 0.65;
-filter: grayscale(0.2);
+  opacity: 0.95;
+  border-color: #ff007f #808080 #808080 #ff007f;
 }
 .clothing-win-box .win-titlebar {
-font-size: 10px;
-padding: 2px 4px;
-background: linear-gradient(90deg, #ff007f, #ff66cc);
+  font-size: 10px;
+  padding: 2px 4px;
+  background: linear-gradient(90deg, #ff007f, #ff66cc);
 }
 
-/* [Part 1] 재유행 아이템 파란색 창 */
 .clothing-win-box.blue-win .win-titlebar {
-background: linear-gradient(90deg, #33ccff, #99ddff);
+  background: linear-gradient(90deg, #33ccff, #99ddff);
 }
 .clothing-win-box .win-buttons .win-btn {
-pointer-events: auto !important;
-cursor: pointer;
+  pointer-events: auto !important;
+  cursor: pointer;
 }
 
 .clothing-win-box .win-btn-close.active-remove {
-background: linear-gradient(180deg, #ff4d4d 0%, #d80000 100%) !important;
-color: #ffffff !important;
-font-weight: 900;
-border: 1px solid #ffffff;
-box-shadow: 0 0 3px #ff0000;
-animation: pulseClose 1.2s infinite alternate;
+  background: linear-gradient(180deg, #ff4d4d 0%, #d80000 100%) !important;
+  color: #ffffff !important;
+  font-weight: 900;
+  border: 1px solid #ffffff;
+  box-shadow: 0 0 3px #ff0000;
+  animation: pulseClose 1.2s infinite alternate;
 }
 @keyframes pulseClose {
-0% { transform: scale(1); filter: brightness(1); }
-100% { transform: scale(1.15); filter: brightness(1.2); }
+  0% { transform: scale(1); filter: brightness(1); }
+  100% { transform: scale(1.15); filter: brightness(1.2); }
 }
 
 .clothing-win-box .win-body {
-padding: 4px;
-height: 105px;
-display: flex;
-justify-content: center;
-align-items: center;
-background: #ffffff;
-border: 1px solid #808080;
-margin: 2px;
-overflow: hidden;
-position: relative;
+  padding: 4px;
+  height: 105px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #808080;
+  margin: 2px;
+  overflow: hidden;
+  position: relative;
 }
 
 .clothing-win-box img {
-width: 100%;
-height: 100%;
-object-fit: contain;
-image-rendering: pixelated;
-pointer-events: none;
-transition: transform 0.2s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  pointer-events: none;
+  transition: transform 0.2s ease;
 }
 
-/* [Part 1] 옷장 아이템 개별 크기 / 위치 조절 */
 .clothing-win-box img.wardrobe-tops { max-height: 85px; }
 .clothing-win-box img.wardrobe-bottoms { max-height: 90px; }
 .clothing-win-box img.wardrobe-shoes { max-height: 70px; }
 .clothing-win-box img.wardrobe-acc { max-height: 75px; }
 
-.clothing-win-box img[alt="LINGERIE DRESS"] { transform: scale(1.0); }
+.clothing-win-box img[alt="LINGERIE TOP"] { transform: scale(1.0); }
 .clothing-win-box img[alt="NUPTSE"] { transform: scale(1.0); }
 .clothing-win-box img[alt="PINK CROP SHIRT"] { transform: scale(1.0); }
 .clothing-win-box img[alt="FIELD JACKET"] { transform: scale(2.3) translateY(10px); }
@@ -838,30 +1005,29 @@ transition: transform 0.2s ease;
 .clothing-win-box img[alt="CAPRI BROWN"] { transform: scale(1.0); }
 .clothing-win-box img[alt="SUSPENDERS"] { transform: scale(1.0); }
 .clothing-win-box img[alt="COLOR SKINNY JEANS"] { transform: scale(1.0); }
-.clothing-win-box img[alt="LOW-RISE"] { transform: scale(1.0); }
+.clothing-win-box img[alt="LOW-RISE JEAN"] { transform: scale(1.0); }
 .clothing-win-box img[alt="TENNIS SKIRT"] { transform: scale(0.75); }
 
 .clothing-win-box img[alt="JELLY SHOES"] { transform: scale(0.7); }
-.clothing-win-box img[alt="MARY JANE"] { transform: scale(0.7); }
+.clothing-win-box img[alt="MARY JANE SHOES"] { transform: scale(0.7); }
 .clothing-win-box img[alt="ADIDAS SUPERSTAR"] { transform: scale(0.7); }
 .clothing-win-box img[alt="HEELYS"] { transform: scale(0.7); }
 .clothing-win-box img[alt="STILETTO HEEL"] { transform: scale(0.7); }
 .clothing-win-box img[alt="PLATFORM FLIP-FLOP"] { transform: scale(0.7); }
 
 .clothing-win-box img[alt="COLOR STOCKINGS"] { transform: scale(1.15); }
-.clothing-win-box img[alt="EARPHONES"] { transform: scale(1.0); }
+.clothing-win-box img[alt="WIRED EARPHONES"] { transform: scale(1.0); }
 .clothing-win-box img[alt="BIG FRAME SUNGLASSES"] { transform: scale(0.6) !important; }
 .clothing-win-box img[alt="HEADSET"] { transform: scale(0.76) !important; }
 .clothing-win-box img[alt="RIMLESS GLASSES"] { transform: scale(0.71) !important; }
 .clothing-win-box img[alt="NEWSBOY CAP"] { transform: scale(0.67) !important; }
 
-/* [Part 2] 옷장 아이템 개별 크기 / 위치 조절 */
 .dark-mode .clothing-win-box img.wardrobe-tops { transform: scale(3.12) translateY(20%); }
 .dark-mode .clothing-win-box img.wardrobe-bottoms { transform: scale(2.73) translateY(-6%); }
 .dark-mode .clothing-win-box img.wardrobe-shoes { transform: scale(3.25) translateY(-32%); }
 .dark-mode .clothing-win-box img.wardrobe-acc { transform: scale(2.86) translateY(0%); }
 
-.dark-mode .clothing-win-box img[alt="LINGERIE DRESS"] { transform: scale(3.9) translateY(5%) !important; }
+.dark-mode .clothing-win-box img[alt="LINGERIE TOP"] { transform: scale(3.9) translateY(5%) !important; }
 .dark-mode .clothing-win-box img[alt="LEOPARD TANK"] { transform: scale(4.82) translateY(12%) !important; }
 .dark-mode .clothing-win-box img[alt="ADIDAS CROP TOP"] { transform: scale(4.32) translateY(12%) !important; }
 .dark-mode .clothing-win-box img[alt="PINK T-SHIRT"] { transform: scale(5.1) translateY(16%) !important; }
@@ -923,164 +1089,164 @@ transition: transform 0.2s ease;
 }
 
 .action-buttons-group {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 6px;
-margin-bottom: 2px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 2px;
 }
 .remove-card-box {
-background: linear-gradient(180deg, #ff4d88 0%, #d8004f 100%);
-color: white;
-border: 2px outset #ff99cc;
-padding: 6px 4px;
-text-align: center;
-cursor: pointer;
-font-weight: bold;
-font-size: 11px;
-box-shadow: 2px 2px 0px rgba(0,0,0,0.3);
-font-family: inherit;
+  background: linear-gradient(180deg, #ff4d88 0%, #d8004f 100%);
+  color: white;
+  border: 2px outset #ff99cc;
+  padding: 6px 4px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 11px;
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+  font-family: inherit;
 }
 .remove-card-box:active { border-style: inset; transform: translate(1px, 1px); }
 
 .save-card-box {
-background: linear-gradient(180deg, #00c6ff 0%, #0072ff 100%);
-color: white;
-border: 2px outset #99e6ff;
-padding: 6px 4px;
-text-align: center;
-cursor: pointer;
-font-weight: bold;
-font-size: 11px;
-box-shadow: 2px 2px 0px rgba(0,0,0,0.3);
-font-family: inherit;
+  background: linear-gradient(180deg, #00c6ff 0%, #0072ff 100%);
+  color: white;
+  border: 2px outset #99e6ff;
+  padding: 6px 4px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 11px;
+  box-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+  font-family: inherit;
 }
 .save-card-box:active { border-style: inset; transform: translate(1px, 1px); }
 
 .item-grid {
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-gap: 10px;
-flex-grow: 1;
-overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  flex-grow: 1;
+  overflow-y: auto;
 }
 
 .lookbook-modal-overlay {
-position: absolute;
-top: 0; left: 0; width: 100%; height: 100%;
-background: rgba(0, 0, 0, 0.45);
-backdrop-filter: blur(3px);
-z-index: 2000;
-display: none;
-justify-content: center;
-align-items: center;
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(3px);
+  z-index: 2000;
+  display: none;
+  justify-content: center;
+  align-items: center;
 }
 .lookbook-window {
-width: 580px;
-height: 480px;
-background: #ece9d8;
-border: 3px solid #ffffff;
-border-right-color: #404040;
-border-bottom-color: #404040;
-box-shadow: 6px 6px 0px rgba(0,0,0,0.4);
-display: flex;
-flex-direction: column;
-font-family: 'NeoDunggeunmo', 'Galmuri9', monospace;
-animation: modalPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  width: 580px;
+  height: 480px;
+  background: #ece9d8;
+  border: 3px solid #ffffff;
+  border-right-color: #404040;
+  border-bottom-color: #404040;
+  box-shadow: 6px 6px 0px rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+  font-family: 'NeoDunggeunmo', 'Galmuri9', monospace;
+  animation: modalPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 @keyframes modalPop {
-0% { transform: scale(0.8); opacity: 0; }
-100% { transform: scale(1); opacity: 1; }
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }
 .lookbook-titlebar {
-background: linear-gradient(90deg, #0058ee, #3593ff);
-color: white;
-padding: 4px 8px;
-font-size: 12px;
-font-weight: bold;
-display: flex;
-justify-content: space-between;
-align-items: center;
+  background: linear-gradient(90deg, #0058ee, #3593ff);
+  color: white;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .lookbook-content {
-flex: 1;
-padding: 10px;
-overflow-y: auto;
-background: #ffffff;
-margin: 6px;
-border: 2px inset #d9d9d9;
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
-gap: 12px;
-align-content: flex-start;
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background: #ffffff;
+  margin: 6px;
+  border: 2px inset #d9d9d9;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
+  gap: 12px;
+  align-content: flex-start;
 }
 .saved-look-card {
-background: #fdfdfd;
-border: 2px solid #e0e0e0;
-border-radius: 4px;
-padding: 6px;
-display: flex;
-flex-direction: column;
-align-items: center;
-box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-position: relative;
-transition: transform 0.15s;
+  background: #fdfdfd;
+  border: 2px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  position: relative;
+  transition: transform 0.15s;
 }
 .saved-look-card:hover {
-transform: translateY(-2px);
-border-color: #ff007f;
+  transform: translateY(-2px);
+  border-color: #ff007f;
 }
 .saved-look-card img {
-width: 90px;
-height: 160px;
-object-fit: contain;
-background: radial-gradient(circle, #fff5f8 0%, #ffd6e7 100%);
-border: 1px solid #ddd;
-border-radius: 2px;
-image-rendering: pixelated;
+  width: 90px;
+  height: 160px;
+  object-fit: contain;
+  background: radial-gradient(circle, #fff5f8 0%, #ffd6e7 100%);
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  image-rendering: pixelated;
 }
 .saved-look-card .look-time {
-font-size: 9.5px;
-color: #666;
-margin-top: 4px;
+  font-size: 9.5px;
+  color: #666;
+  margin-top: 4px;
 }
 .saved-look-card .delete-look-btn {
-position: absolute;
-top: 2px;
-right: 2px;
-width: 16px;
-height: 16px;
-background: #ff4d4d;
-color: #fff;
-font-size: 9px;
-display: flex;
-align-items: center;
-justify-content: center;
-border: 1px solid #fff;
-cursor: pointer;
-border-radius: 2px;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 16px;
+  height: 16px;
+  background: #ff4d4d;
+  color: #fff;
+  font-size: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #fff;
+  cursor: pointer;
+  border-radius: 2px;
 }
 .lookbook-empty-msg {
-grid-column: 1 / -1;
-text-align: center;
-color: #888;
-font-size: 13px;
-padding-top: 80px;
-line-height: 1.6;
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #888;
+  font-size: 13px;
+  padding-top: 80px;
+  line-height: 1.6;
 }
 .lookbook-footer {
-padding: 6px 10px 8px 10px;
-display: flex;
-justify-content: flex-end;
-align-items: center;
-background: #ece9d8;
+  padding: 6px 10px 8px 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background: #ece9d8;
 }
 
 body.dark-mode {
-background-color: #ffbfe0;
-background-image: radial-gradient(rgba(255, 255, 255, 0.7) 22%, transparent 22%);
-background-size: 20px 20px;
-color: #5a3a5f;
-font-family: 'Space Grotesk', sans-serif;
+  background-color: #ffbfe0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.7) 22%, transparent 22%);
+  background-size: 20px 20px;
+  color: #5a3a5f;
+  font-family: 'Space Grotesk', sans-serif;
 }
 
 .dark-mode .crt-overlay,
@@ -1090,86 +1256,6 @@ font-family: 'Space Grotesk', sans-serif;
 .dark-mode .deco-window-2,
 .dark-mode .bgm-player, .dark-mode .sparkle { display: none !important; }
 
-/* =========================================================
-   [Part 1 기본 스타일 복원: 레트로 각진 윈도우]
-========================================================= */
-.browser-window {
-  width: 1080px;
-  height: 680px;
-  background-color: #0055ea;
-  border-radius: 6px;
-  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.35), 0 20px 45px rgba(255, 0, 127, 0.35);
-  border: 3px solid #0055ea;
-  display: flex;
-  flex-direction: column;
-  overflow: visible !important;
-  position: relative;
-  z-index: 40;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.browser-header {
-  padding: 4px 6px 0 6px;
-  display: flex;
-  flex-direction: column;
-  background-color: #0055ea;
-}
-
-.tab-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-  text-shadow: 1px 1px #002266;
-  padding: 2px 4px 4px 4px; /* 타이틀바 버튼 여백 */
-}
-
-/* Part 1 회색 주소창: 상하 패딩을 늘려 세로 길이를 확장 */
-.address-bar-container {
-  background-color: #ece9d8;
-  padding: 8px 12px; /* 상하 패딩 8px로 확장 */
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 0 -6px 0 -6px; /* 좌우를 창 테두리 끝까지 확장 */
-  border-top: 1px solid #ffffff;
-  border-bottom: 2px solid #808080;
-  font-size: 11px;
-  color: #000;
-}
-
-/* 내부 흰색 검색창 인풋 박스 */
-.address-bar {
-  background-color: #ffffff;
-  border-radius: 0;
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  padding: 3px 10px;
-  gap: 8px;
-  font-size: 11px;
-  color: #333;
-  border: 1px solid #7f9db9;
-  box-shadow: inset 1px 1px 1px rgba(0,0,0,0.1);
-  position: relative;
-}
-
-.game-content {
-  display: flex;
-  flex: 1;
-  padding: 14px;
-  gap: 14px;
-  justify-content: space-between;
-  align-items: stretch;
-  background: radial-gradient(circle, #fff5f8 0%, #ffd6e7 60%, #ffb3d9 100%);
-  position: relative;
-}
-
-/* =========================================================
-   [Part 2 스타일: 모던 라운드 글래스 창]
-========================================================= */
 .dark-mode .browser-window {
   width: 1080px !important;
   height: 680px !important;
@@ -1177,7 +1263,7 @@ font-family: 'Space Grotesk', sans-serif;
   border: none !important;
   outline: none !important;
   border-radius: 20px !important;
-  overflow: hidden !important; /* Part 2는 라운드에 맞춰 내부 클리핑 */
+  overflow: hidden !important;
   box-shadow: 0 20px 45px rgba(255, 0, 127, 0.25), 0 8px 24px rgba(180, 90, 200, 0.35) !important;
 }
 
@@ -1267,7 +1353,7 @@ font-family: 'Space Grotesk', sans-serif;
 .dark-mode .tab .tab-close:hover { background-color: #ffd1e8 !important; color: #d80064 !important; }
 
 .dark-mode .address-bar-container {
-  background: transparent !important;
+  background: linear-gradient(135deg, #ffc7e8 0%, #e2c0ff 100%) !important;
   padding: 4px 0 6px 0 !important;
   display: flex !important;
   align-items: center !important;
@@ -1276,77 +1362,21 @@ font-family: 'Space Grotesk', sans-serif;
   border: none !important;
 }
 
-.dark-mode .game-content {
-  padding: 14px !important;
-  gap: 14px !important;
-  background: #ffffff !important;
-  position: relative !important;
-  border-bottom-left-radius: 20px !important;
-  border-bottom-right-radius: 20px !important;
-  flex: 1 !important;
-}
-
-.dark-mode .dot {
-width: 13px;
-height: 13px;
-border-radius: 50%;
-border: none;
-box-shadow: inset 0 -1px 2px rgba(0,0,0,0.25), 0 1px 2px rgba(0,0,0,0.15);
-cursor: pointer;
-display: flex;
-justify-content: center;
-align-items: center;
-font-weight: bold;
-font-size: 7px;
-color: transparent;
-}
-.dark-mode .dot-red { background: #ff5f56 !important; }
-.dark-mode .dot-yellow { background: #ffbd2e !important; }
-.dark-mode .dot-green { background: #27c93f !important; }
-.dark-mode .dot-red:hover::before { content: '✕'; color: #660000; }
-.dark-mode .dot-yellow:hover::before { content: '—'; color: #7a5200; line-height: 6px; }
-.dark-mode .dot-green:hover::before { content: '⛶'; color: #004d1a; font-size: 6px; }
-
-.dark-mode .tab {
-display: flex;
-background-color: #ffffff;
-padding: 2px 12px;
-border-radius: 10px 10px 0 0;
-font-size: 11px;
-color: #7a4d8c;
-font-weight: 600;
-align-items: center;
-gap: 5px;
-border: 2px solid #ecd5ff;
-border-bottom: none;
-font-family: 'Space Grotesk', sans-serif;
-}
-.dark-mode .address-bar-container {
-background: linear-gradient(135deg, #ffc7e8 0%, #e2c0ff 100%);
-padding: 3px 6px;
-display: flex;
-align-items: center;
-gap: 14px;
-margin: 0 -8px -2px -8px;
-border-top: 1px solid #f4dbff;
-border-left: none;
-border-right: none;
-}
 .dark-mode .address-bar {
-background-color: #ffffff;
-border-radius: 18px;
-border: 1.5px solid #ecd5ff;
-color: #7a4d8c;
-box-shadow: 0 2px 8px rgba(200, 150, 220, 0.2);
-padding: 3px 12px;
+  background-color: #ffffff;
+  border-radius: 18px;
+  border: 1.5px solid #ecd5ff;
+  color: #7a4d8c;
+  box-shadow: 0 2px 8px rgba(200, 150, 220, 0.2);
+  padding: 3px 12px;
 }
 .dark-mode .address-bar input { color: #7a4d8c; background: transparent; font-family: 'Space Grotesk', sans-serif; font-size: 11px; }
 
 .dark-mode .star-btn { color: #555; }
 .dark-mode .profile-avatar-circle {
-background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);
-border: 1.5px solid #ffffff;
-box-shadow: 0 2px 6px rgba(0, 180, 216, 0.4);
+  background: linear-gradient(135deg, #00b4d8 0%, #0077b6 100%);
+  border: 1.5px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 180, 216, 0.4);
 }
 .dark-mode .more-dots-btn span { background: #5a3a5f; }
 
@@ -1354,36 +1384,39 @@ box-shadow: 0 2px 6px rgba(0, 180, 216, 0.4);
 .dark-mode .p2-action-group { display: flex !important; }
 
 .dark-mode .theme-toggle-btn {
-background: radial-gradient(circle at 32% 26%, #ffffff 0%, #fde4ff 22%, #e5b8ff 55%, #c88aff 100%);
-color: #581d87;
-border: 2px solid #ffffff;
-border-radius: 24px;
-box-shadow:
-0 4px 12px rgba(170, 90, 230, 0.4),
-inset 0 3px 5px rgba(255,255,255,0.9),
-inset 0 -5px 8px rgba(140, 50, 200, 0.25);
-font-family: 'Space Grotesk', sans-serif;
-font-weight: 800;
-position: relative;
-overflow: hidden;
+  background: radial-gradient(circle at 32% 26%, #ffffff 0%, #fde4ff 22%, #e5b8ff 55%, #c88aff 100%);
+  color: #581d87;
+  border: 2px solid #ffffff;
+  border-radius: 24px;
+  box-shadow:
+    0 4px 12px rgba(170, 90, 230, 0.4),
+    inset 0 3px 5px rgba(255,255,255,0.9),
+    inset 0 -5px 8px rgba(140, 50, 200, 0.25);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  position: relative;
+  overflow: hidden;
 }
 .dark-mode .theme-toggle-btn::before {
-content: '';
-position: absolute;
-top: 10%; left: 12%;
-width: 36%; height: 40%;
-background: rgba(255,255,255,0.95);
-border-radius: 50%;
-filter: blur(2px);
-transform: rotate(-25deg);
-pointer-events: none;
+  content: '';
+  position: absolute;
+  top: 10%; left: 12%;
+  width: 36%; height: 40%;
+  background: rgba(255,255,255,0.95);
+  border-radius: 50%;
+  filter: blur(2px);
+  transform: rotate(-25deg);
+  pointer-events: none;
 }
 
 .dark-mode .game-content {
-padding: 16px;
-gap: 14px;
-background: #ffffff !important;
-position: relative;
+  padding: 16px;
+  gap: 14px;
+  background: #ffffff !important;
+  position: relative;
+  border-bottom-left-radius: 20px !important;
+  border-bottom-right-radius: 20px !important;
+  flex: 1 !important;
 }
 
 .dark-mode .left-panel,
@@ -1391,315 +1424,305 @@ position: relative;
 .dark-mode .left-panel .win-window:first-child,
 .dark-mode .left-panel .win-window:nth-child(2),
 .dark-mode .beauty-tool-window {
-transform: none !important;
+  transform: none !important;
 }
 
 .dark-mode .left-panel { width: 285px; gap: 12px; }
 .dark-mode .right-panel { width: 325px; }
 
 .dark-mode .left-panel .win-window:first-child {
-background: rgba(255, 255, 255, 0.85);
-border: 2px solid #f2d4ff;
-box-shadow: 0 6px 18px rgba(200, 140, 220, 0.25);
-border-radius: 16px;
-overflow: hidden;
-padding: 0;
-backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 0.85);
+  border: 2px solid #f2d4ff;
+  box-shadow: 0 6px 18px rgba(200, 140, 220, 0.25);
+  border-radius: 16px;
+  overflow: hidden;
+  padding: 0;
+  backdrop-filter: blur(6px);
 }
 .dark-mode .left-panel .win-window:first-child .win-titlebar {
-background: linear-gradient(90deg, #ffc8e8, #dcbaff);
-color: #552277;
-font-family: 'Space Grotesk', sans-serif;
-padding: 5px 10px;
-border-bottom: 1px solid #eed7ff;
+  background: linear-gradient(90deg, #ffc8e8, #dcbaff);
+  color: #552277;
+  font-family: 'Space Grotesk', sans-serif;
+  padding: 5px 10px;
+  border-bottom: 1px solid #eed7ff;
 }
 .dark-mode .left-panel .win-window:first-child .win-body {
-background: transparent;
-border: none;
-padding: 8px 10px;
+  background: transparent;
+  border: none;
+  padding: 8px 10px;
 }
 .dark-mode .p1-profile-body { display: none; }
 .dark-mode .p2-profile-card { display: flex; }
 
 .dark-mode .beauty-tool-window {
-margin-top: 4px;
-background: rgba(255, 255, 255, 0.85);
-border: 2px solid #f2d4ff;
-box-shadow: 0 6px 18px rgba(200, 140, 220, 0.25);
-border-radius: 16px;
-overflow: hidden;
-padding: 0;
-backdrop-filter: blur(6px);
+  margin-top: 4px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 2px solid #f2d4ff;
+  box-shadow: 0 6px 18px rgba(200, 140, 220, 0.25);
+  border-radius: 16px;
+  overflow: hidden;
+  padding: 0;
+  backdrop-filter: blur(6px);
 }
 .dark-mode .beauty-tool-window .win-titlebar {
-background: linear-gradient(90deg, #ffbfe0, #cfa8ff);
-color: #4b1a6d;
-font-family: 'Space Grotesk', sans-serif;
-padding: 5px 10px;
-border-bottom: 1px solid #eed7ff;
-text-shadow: none;
-animation: none;
+  background: linear-gradient(90deg, #ffbfe0, #cfa8ff);
+  color: #4b1a6d;
+  font-family: 'Space Grotesk', sans-serif;
+  padding: 5px 10px;
+  border-bottom: 1px solid #eed7ff;
+  text-shadow: none;
+  animation: none;
 }
 .dark-mode .beauty-tool-window .win-body {
-background: transparent;
-border: none;
-padding: 8px;
+  background: transparent;
+  border: none;
+  padding: 8px;
 }
 .dark-mode .beauty-category-tabs {
-background: rgba(240, 220, 255, 0.5);
-border: 1px solid #edd5ff;
-border-radius: 12px;
-padding: 3px;
-gap: 4px;
+  background: rgba(240, 220, 255, 0.5);
+  border: 1px solid #edd5ff;
+  border-radius: 12px;
+  padding: 3px;
+  gap: 4px;
 }
 .dark-mode .beauty-tab-btn {
-background: rgba(255, 255, 255, 0.7);
-border: 1px solid #ffffff;
-border-radius: 8px;
-color: #7a4d8c;
-font-family: 'Space Grotesk', sans-serif;
-font-size: 10.5px;
-box-shadow: none;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  color: #7a4d8c;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10.5px;
+  box-shadow: none;
 }
 .dark-mode .beauty-tab-btn.active {
-background: linear-gradient(135deg, #ffc7e8 0%, #e2c0ff 100%);
-color: #551d75;
-border: 1px solid #ffffff;
-box-shadow: 0 2px 6px rgba(180, 120, 220, 0.3);
-text-shadow: none;
+  background: linear-gradient(135deg, #ffc7e8 0%, #e2c0ff 100%);
+  color: #551d75;
+  border: 1px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(180, 120, 220, 0.3);
+  text-shadow: none;
 }
 .dark-mode .beauty-options-panel {
-background: rgba(255, 255, 255, 0.6);
-border: 1.5px solid #edd5ff;
-border-radius: 12px;
-margin-top: 4px;
-padding: 6px 8px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1.5px solid #edd5ff;
+  border-radius: 12px;
+  margin-top: 4px;
+  padding: 6px 8px;
 }
 .dark-mode .beauty-reset-btn {
-background: linear-gradient(135deg, #ffeef8, #f5e8ff);
-border: 1px solid #ffffff;
-border-radius: 8px;
-color: #8c2957;
-box-shadow: 0 2px 5px rgba(200, 140, 220, 0.2);
-font-family: 'Space Grotesk', sans-serif;
+  background: linear-gradient(135deg, #ffeef8, #f5e8ff);
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  color: #8c2957;
+  box-shadow: 0 2px 5px rgba(200, 140, 220, 0.2);
+  font-family: 'Space Grotesk', sans-serif;
 }
 
 .dark-mode .speech-bubble {
-background: linear-gradient(135deg, #ffe0f0, #eed7ff);
-color: #652a78;
-border: 2px solid #f2d4ff;
-box-shadow: 0 4px 12px rgba(200, 140, 220, 0.3);
-border-radius: 16px;
-font-weight: bold;
-font-family: 'Space Grotesk', sans-serif;
+  background: linear-gradient(135deg, #ffe0f0, #eed7ff);
+  color: #652a78;
+  border: 2px solid #f2d4ff;
+  box-shadow: 0 4px 12px rgba(200, 140, 220, 0.3);
+  border-radius: 16px;
+  font-weight: bold;
+  font-family: 'Space Grotesk', sans-serif;
 }
 .dark-mode .speech-bubble::after { border-top-color: #eed7ff; }
 
 .dark-mode .pedestal {
-width: 210px;
-height: 58px;
-background: radial-gradient(ellipse at 50% 25%, #ffffff 0%, #ffcbe8 40%, #f3b6ff 75%, #d896ff 100%);
-border: 3px solid #ffffff;
-box-shadow:
-0 4px 0 #f9b8e6,
-0 8px 0 #ea9ee0,
-0 12px 0 #da86d5,
-0 18px 22px rgba(180, 90, 200, 0.4);
-border-radius: 105px / 28px;
-margin-top: -24px;
-margin-bottom: 12px;
-align-self: center;
+  width: 210px;
+  height: 58px;
+  background: radial-gradient(ellipse at 50% 25%, #ffffff 0%, #ffcbe8 40%, #f3b6ff 75%, #d896ff 100%);
+  border: 3px solid #ffffff;
+  box-shadow:
+    0 4px 0 #f9b8e6,
+    0 8px 0 #ea9ee0,
+    0 12px 0 #da86d5,
+    0 18px 22px rgba(180, 90, 200, 0.4);
+  border-radius: 105px / 28px;
+  margin-top: -24px;
+  margin-bottom: 12px;
+  align-self: center;
 }
 
 .dark-mode .category-tabs {
-background: rgba(255, 255, 255, 0.85);
-border: 2px solid #f2d4ff;
-box-shadow: 0 4px 12px rgba(200, 140, 220, 0.2);
-border-radius: 16px;
-padding: 5px;
-gap: 5px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 2px solid #f2d4ff;
+  box-shadow: 0 4px 12px rgba(200, 140, 220, 0.2);
+  border-radius: 16px;
+  padding: 5px;
+  gap: 5px;
 }
 .dark-mode .category-btn {
-background: radial-gradient(circle at 32% 26%, #ffffff 0%, #f9edff 20%, #e9d5ff 55%, #d8baff 100%);
-color: #6a3d7a;
-border: 1px solid #ffffff;
-border-radius: 12px;
-box-shadow:
-0 3px 8px rgba(180, 130, 220, 0.25),
-inset 0 2px 4px rgba(255,255,255,0.9);
-font-family: 'Space Grotesk', sans-serif;
+  background: radial-gradient(circle at 32% 26%, #ffffff 0%, #f9edff 20%, #e9d5ff 55%, #d8baff 100%);
+  color: #6a3d7a;
+  border: 1px solid #ffffff;
+  border-radius: 12px;
+  box-shadow:
+    0 3px 8px rgba(180, 130, 220, 0.25),
+    inset 0 2px 4px rgba(255,255,255,0.9);
+  font-family: 'Space Grotesk', sans-serif;
 }
 .dark-mode .category-btn.active {
-background: radial-gradient(circle at 32% 26%, #ffffff 0%, #fff2dc 20%, #ffdfad 55%, #ffc785 100%);
-color: #8c5310;
-box-shadow: 0 3px 8px rgba(230, 160, 90, 0.3), inset 0 2px 4px rgba(255,255,255,0.95);
+  background: radial-gradient(circle at 32% 26%, #ffffff 0%, #fff2dc 20%, #ffdfad 55%, #ffc785 100%);
+  color: #8c5310;
+  box-shadow: 0 3px 8px rgba(230, 160, 90, 0.3), inset 0 2px 4px rgba(255,255,255,0.95);
 }
 
 .dark-mode .item-grid-container {
-background: rgba(255, 255, 255, 0.7);
-border: 2px solid #f2d4ff;
-box-shadow: 0 6px 16px rgba(200, 140, 220, 0.2);
-border-radius: 16px;
-padding: 10px;
-max-height: 420px;
-backdrop-filter: blur(4px);
+  background: rgba(255, 255, 255, 0.7);
+  border: 2px solid #f2d4ff;
+  box-shadow: 0 6px 16px rgba(200, 140, 220, 0.2);
+  border-radius: 16px;
+  padding: 10px;
+  max-height: 420px;
+  backdrop-filter: blur(4px);
 }
 
 .dark-mode .clothing-win-box {
-border-radius: 20px;
-border: none !important;
-background: radial-gradient(circle at 35% 25%, #ffffff 0%, #fbebf5 50%, #f5d1e8 100%) !important;
-box-shadow:
-  0 8px 20px rgba(210, 140, 220, 0.3),
-  inset 0 3px 6px rgba(255, 255, 255, 0.95),
-  inset 0 -4px 8px rgba(200, 100, 180, 0.15);
-overflow: hidden;
-transition: all 0.25s ease;
+  border-radius: 20px;
+  border: none !important;
+  background: radial-gradient(circle at 35% 25%, #ffffff 0%, #fbebf5 50%, #f5d1e8 100%) !important;
+  box-shadow:
+    0 8px 20px rgba(210, 140, 220, 0.3),
+    inset 0 3px 6px rgba(255, 255, 255, 0.95),
+    inset 0 -4px 8px rgba(200, 100, 180, 0.15);
+  overflow: hidden;
+  transition: all 0.25s ease;
 }
 .dark-mode .clothing-win-box:hover {
-transform: translateY(-3px) scale(1.03);
-box-shadow:
-  0 12px 26px rgba(200, 110, 210, 0.4),
-  inset 0 4px 8px rgba(255, 255, 255, 1),
-  inset 0 -5px 10px rgba(200, 100, 180, 0.2);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow:
+    0 12px 26px rgba(200, 110, 210, 0.4),
+    inset 0 4px 8px rgba(255, 255, 255, 1),
+    inset 0 -5px 10px rgba(200, 100, 180, 0.2);
 }
 .dark-mode .clothing-win-box .win-titlebar {
-background: transparent !important;
-border-bottom: none !important;
-color: #8b439c;
-font-family: 'Space Grotesk', sans-serif;
-font-size: 10px;
-font-weight: 700;
-padding: 6px 8px;
+  background: transparent !important;
+  border-bottom: none !important;
+  color: #8b439c;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 6px 8px;
 }
 .dark-mode .clothing-win-box .win-body {
-background: transparent !important;
-border: none !important;
-height: 105px;
-padding: 4px;
+  background: transparent !important;
+  border: none !important;
+  height: 105px;
+  padding: 4px;
 }
 
-/* [Part 2] 옷장 재유행 아이템 파란색 박스 */
 .dark-mode .clothing-win-box.blue-win {
-background: radial-gradient(circle at 35% 25%, #ffffff 0%, #e3f2fd 45%, #bbdefb 75%, #90caf9 100%) !important;
-border: 1.5px solid #ffffff !important;
-box-shadow:
-  0 8px 22px rgba(33, 150, 243, 0.35),
-  inset 0 3px 6px rgba(255, 255, 255, 0.95),
-  inset 0 -4px 8px rgba(25금, 118, 210, 0.2) !important;
+  background: radial-gradient(circle at 35% 25%, #ffffff 0%, #e3f2fd 45%, #bbdefb 75%, #90caf9 100%) !important;
+  border: 1.5px solid #ffffff !important;
+  box-shadow:
+    0 8px 22px rgba(33, 150, 243, 0.35),
+    inset 0 3px 6px rgba(255, 255, 255, 0.95),
+    inset 0 -4px 8px rgba(25, 118, 210, 0.2) !important;
 }
 .dark-mode .clothing-win-box.blue-win:hover {
-box-shadow:
-  0 12px 28px rgba(33, 150, 243, 0.45),
-  inset 0 4px 8px rgba(255, 255, 255, 1),
-  inset 0 -5px 10px rgba(25, 118, 210, 0.25) !important;
+  box-shadow:
+    0 12px 28px rgba(33, 150, 243, 0.45),
+    inset 0 4px 8px rgba(255, 255, 255, 1),
+    inset 0 -5px 10px rgba(25, 118, 210, 0.25) !important;
 }
 .dark-mode .clothing-win-box.blue-win .win-titlebar {
-color: #0d47a1 !important;
-font-weight: 800;
+  color: #0d47a1 !important;
+  font-weight: 800;
 }
 
 .dark-mode .remove-card-box {
-background: radial-gradient(circle at 30% 22%, #ffffff 0%, #ffe2ef 25%, #ffb1d3 60%, #ff8db9 100%);
-color: #8c2957;
-border: 2px solid #ffffff;
-border-radius: 18px;
-box-shadow: 0 6px 14px rgba(220, 100, 160, 0.35);
-font-family: 'Space Grotesk', sans-serif;
-letter-spacing: 1px;
+  background: radial-gradient(circle at 30% 22%, #ffffff 0%, #ffe2ef 25%, #ffb1d3 60%, #ff8db9 100%);
+  color: #8c2957;
+  border: 2px solid #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 6px 14px rgba(220, 100, 160, 0.35);
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: 1px;
 }
 
 .dark-mode .save-card-box {
-background: radial-gradient(circle at 30% 22%, #ffffff 0%, #e0f2fe 25%, #bae6fd 60%, #38bdf8 100%);
-color: #0369a1;
-border: 2px solid #ffffff;
-border-radius: 18px;
-box-shadow: 0 6px 14px rgba(120, 200, 240, 0.35);
-font-family: 'Space Grotesk', sans-serif;
-letter-spacing: 1px;
+  background: radial-gradient(circle at 30% 22%, #ffffff 0%, #e0f2fe 25%, #bae6fd 60%, #38bdf8 100%);
+  color: #0369a1;
+  border: 2px solid #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 6px 14px rgba(120, 200, 240, 0.35);
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: 1px;
 }
 
 .dark-mode #base-character {
-transform: scale(1.32) translateY(-2.5px);
-image-rendering: auto;
-transform-origin: center center;
+  transform: scale(1.32) translateY(-2.5px);
+  image-rendering: auto;
+  transform-origin: center center;
 }
 
-/* [Part 2] 고급 사이버/포스터 그래픽 데코레이션 레이어 */
 .part2-decorations {
-display: none;
-position: absolute;
-top: 0; left: 0; width: 100%; height: 100%;
-pointer-events: none;
-z-index: 12;
-overflow: hidden;
+  display: none;
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 12;
+  overflow: hidden;
 }
 .dark-mode .part2-decorations { display: block; }
 
 .p2-bg-grid-overlay {
-position: absolute;
-top: 0; left: 0; width: 100%; height: 100%;
-background-image: 
-  linear-gradient(to right, rgba(255, 105, 180, 0.15) 1px, transparent 1px),
-  linear-gradient(to bottom, rgba(255, 105, 180, 0.15) 1px, transparent 1px);
-background-size: 32px 32px;
-opacity: 0.6;
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-image: 
+    linear-gradient(to right, rgba(255, 105, 180, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 105, 180, 0.15) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.6;
 }
 
-/* 1. 좌상단: 3D 와이어프레임 하트 그리드 */
 .p2-wireframe-heart {
-position: absolute;
-top: 35px;
-left: 20px;
-width: 140px;
-height: 140px;
-opacity: 0.82;
-filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.6));
-animation: p2FloatPulse 6s infinite ease-in-out alternate;
+  position: absolute;
+  top: 35px;
+  left: 20px;
+  width: 140px;
+  height: 140px;
+  opacity: 0.82;
+  filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.6));
+  animation: p2FloatPulse 6s infinite ease-in-out alternate;
 }
 
-/* 2. 좌하단: 사이버-매지컬 와이어프레임 & 레이더 그리드 */
 .p2-radar-grid {
-position: absolute;
-bottom: 25px;
-left: 15px;
-width: 175px;
-height: 175px;
-opacity: 0.85;
-filter: drop-shadow(0 0 8px rgba(255, 182, 217, 0.6));
-animation: p2RadarPulse 5s infinite ease-in-out alternate;
+  position: absolute;
+  bottom: 25px;
+  left: 15px;
+  width: 175px;
+  height: 175px;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 8px rgba(255, 182, 217, 0.6));
+  animation: p2RadarPulse 5s infinite ease-in-out alternate;
 }
 
 @keyframes p2RadarPulse {
-0% { transform: scale(0.96); opacity: 0.75; }
-100% { transform: scale(1.04); opacity: 0.95; }
+  0% { transform: scale(0.96); opacity: 0.75; }
+  100% { transform: scale(1.04); opacity: 0.95; }
 }
 
-/* 3. 중앙 배경: 은은한 핑크 레이더 블러 그라디언트 원 (비활성화) */
-.p2-radar-halo {
-display: none !important;
-}
-
-/* 4. 감각적인 타이포 & 좌표계 미니멀 태그 */
 .p2-tech-tag {
-position: absolute;
-font-family: 'Space Grotesk', sans-serif;
-font-weight: 700;
-font-size: 9.5px;
-letter-spacing: 1.5px;
-color: rgba(186, 68, 170, 0.75);
-text-transform: uppercase;
-display: flex;
-align-items: center;
-gap: 6px;
+  position: absolute;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 9.5px;
+  letter-spacing: 1.5px;
+  color: rgba(186, 68, 170, 0.75);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 .p2-tech-tag::before {
-content: '';
-width: 5px;
-height: 5px;
-border-radius: 50%;
-background: #ff2a85;
-box-shadow: 0 0 6px #ff2a85;
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ff2a85;
+  box-shadow: 0 0 6px #ff2a85;
 }
 
 .p2-tag-tl { top: 18px; left: 24px; }
@@ -1714,439 +1737,460 @@ box-shadow: 0 0 6px #ff2a85;
 }
 
 @keyframes p2FloatPulse {
-0% { transform: translateY(0px) scale(0.98); }
-100% { transform: translateY(-8px) scale(1.03); }
+  0% { transform: translateY(0px) scale(0.98); }
+  100% { transform: translateY(-8px) scale(1.03); }
 }
 
-/* [Part 2] 기본 일반 아이템 설명창 (핑크/퍼플) */
 .dark-mode .item-info-overlay {
-background: rgba(255, 235, 248, 0.65);
-border: 2.5px solid #ffffff;
-color: #7b2cbf;
-box-shadow: 0 10px 30px rgba(190, 120, 220, 0.35), 0 0 15px rgba(255, 180, 230, 0.5);
-backdrop-filter: blur(12px);
--webkit-backdrop-filter: blur(12px);
-border-radius: 20px;
+  background: rgba(255, 235, 248, 0.65);
+  border: 2.5px solid #ffffff;
+  color: #7b2cbf;
+  box-shadow: 0 10px 30px rgba(190, 120, 220, 0.35), 0 0 15px rgba(255, 180, 230, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
 }
 .dark-mode .item-info-overlay #overlayDesc {
-color: #552277 !important;
+  color: #552277 !important;
 }
 
-/* [Part 2] 재유행템 클릭 시 파란색(Blue) 설명창 */
 .dark-mode .item-info-overlay.trend-active {
-background: rgba(224, 242, 254, 0.75) !important;
-border: 2.5px solid #38bdf8 !important;
-color: #0369a1 !important;
-box-shadow: 0 12px 35px rgba(56, 189, 248, 0.45), 0 0 25px rgba(14, 165, 233, 0.35) !important;
+  background: rgba(224, 242, 254, 0.75) !important;
+  border: 2.5px solid #38bdf8 !important;
+  color: #0369a1 !important;
+  box-shadow: 0 12px 35px rgba(56, 189, 248, 0.45), 0 0 25px rgba(14, 165, 233, 0.35) !important;
 }
 .dark-mode .item-info-overlay.trend-active #overlayDesc {
-color: #0c4a6e !important;
+  color: #0c4a6e !important;
 }
 
 .beauty-tool-window {
-margin-top: 18px;
-border: 2px solid #ff99cc;
-box-shadow: 3px 3px 0px rgba(0,0,0,0.3), 0 0 10px rgba(255, 133, 192, 0.35);
-position: relative;
+  margin-top: 18px;
+  border: 2px solid #ff99cc;
+  box-shadow: 3px 3px 0px rgba(0,0,0,0.3), 0 0 10px rgba(255, 133, 192, 0.35);
+  position: relative;
 }
 .beauty-tool-window .win-titlebar {
-background: linear-gradient(90deg, #ff85c0, #dda0dd, #ffb6c1, #ff85c0);
-background-size: 300% 300%;
-color: #ffffff;
-text-shadow: 1px 1px 1px rgba(179, 0, 89, 0.6);
-animation: beautyTitleGlow 4s linear infinite;
+  background: linear-gradient(90deg, #ff85c0, #dda0dd, #ffb6c1, #ff85c0);
+  background-size: 300% 300%;
+  color: #ffffff;
+  text-shadow: 1px 1px 1px rgba(179, 0, 89, 0.6);
+  animation: beautyTitleGlow 4s linear infinite;
 }
 @keyframes beautyTitleGlow {
-0% { background-position: 0% 50%; }
-50% { background-position: 100% 50%; }
-100% { background-position: 0% 50%; }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 .beauty-badge {
-background: #ffff66;
-color: #b30059;
-font-size: 8.5px;
-font-weight: 900;
-padding: 1px 4px;
-border-radius: 2px;
-margin-left: 4px;
-box-shadow: 1px 1px 0px rgba(0,0,0,0.3);
-letter-spacing: 0px;
-text-shadow: none;
+  background: #ffff66;
+  color: #b30059;
+  font-size: 8.5px;
+  font-weight: 900;
+  padding: 1px 4px;
+  border-radius: 2px;
+  margin-left: 4px;
+  box-shadow: 1px 1px 0px rgba(0,0,0,0.3);
+  letter-spacing: 0px;
+  text-shadow: none;
 }
 .beauty-tool-container { display: flex; flex-direction: column; gap: 6px; }
 .beauty-category-tabs {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 3px;
-background: #ecdcd9;
-padding: 3px;
-border: 1px inset #fff;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  background: #ecdcd9;
+  padding: 3px;
+  border: 1px inset #fff;
 }
 .beauty-tab-btn {
-background: linear-gradient(180deg, #ffffff 0%, #f7edf2 100%);
-border: 2px outset #ffffff;
-font-size: 10.5px;
-font-weight: bold;
-padding: 5px 2px;
-cursor: pointer;
-text-align: center;
-display: flex;
-align-items: center;
-justify-content: center;
-color: #553344;
-transition: all 0.1s ease;
-font-family: inherit;
+  background: linear-gradient(180deg, #ffffff 0%, #f7edf2 100%);
+  border: 2px outset #ffffff;
+  font-size: 10.5px;
+  font-weight: bold;
+  padding: 5px 2px;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #553344;
+  transition: all 0.1s ease;
+  font-family: inherit;
 }
 .beauty-tab-btn:hover { background: #fff; color: #ff007f; }
 .beauty-tab-btn.active {
-background: linear-gradient(180deg, #ff66b2 0%, #e60073 100%);
-border: 2px inset #ffb3d9;
-color: #ffffff;
-text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+  background: linear-gradient(180deg, #ff66b2 0%, #e60073 100%);
+  border: 2px inset #ffb3d9;
+  color: #ffffff;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
 }
 .beauty-options-panel {
-display: flex;
-gap: 6px;
-flex-wrap: wrap;
-padding: 8px 6px;
-min-height: 42px;
-align-items: center;
-background: #fff8fb;
-border: 2px inset #d9b3c7;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 8px 6px;
+  min-height: 42px;
+  align-items: center;
+  background: #fff8fb;
+  border: 2px inset #d9b3c7;
 }
 .beauty-reset-btn {
-background: #ece9d8;
-border: 2px outset #ffffff;
-box-shadow: 1px 1px 0px rgba(0,0,0,0.2);
-font-size: 9px;
-font-weight: bold;
-padding: 4px 6px;
-cursor: pointer;
-color: #b30059;
-margin-left: auto;
-font-family: inherit;
+  background: #ece9d8;
+  border: 2px outset #ffffff;
+  box-shadow: 1px 1px 0px rgba(0,0,0,0.2);
+  font-size: 9px;
+  font-weight: bold;
+  padding: 4px 6px;
+  cursor: pointer;
+  color: #b30059;
+  margin-left: auto;
+  font-family: inherit;
 }
 .beauty-reset-btn:active {
-border: 2px inset #808080;
-transform: translate(1px, 1px);
+  border: 2px inset #808080;
+  transform: translate(1px, 1px);
 }
 .custom-btn {
-width: 22px;
-height: 22px;
-border-radius: 50%;
-border: 2px solid #fff;
-box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-cursor: pointer;
-transition: transform 0.15s ease, box-shadow 0.15s ease;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 .custom-btn:hover {
-transform: scale(1.22);
-box-shadow: 0 0 6px #ff66b2;
+  transform: scale(1.22);
+  box-shadow: 0 0 6px #ff66b2;
 }
 </style>
 </head>
 <body>
 
-<div id="app-scaler">
-<div class="crt-overlay"></div>
-<div class="p1-retro-logo">LANEIGE girl</div>
-
-<div class="deco-window-1" id="decoWindow1">
-<div class="title">
-<span>jellyshoes_mood.txt</span>
-<span>▲ ✕</span>
-</div>
-<div class="body">
-비가 오면... 난 젤리슈즈를 신는ㄷr...<br>
-젖는 것을 두려워하지 않는 건...<br>
-내 눈물에 투명한 고무 신발이 익숙해졌기 때문일까...?<br>
-반짝이는 펄이 살짝 들어간 신발을 신고 웅덩이를 밟을 때마다...<br>
-내 안의 슬픔도 함께 튀어 나간다...
-</div>
-</div>
-
-<div class="deco-window-2" id="decoWindow2">
-<div class="title">
-<span>earphone_mood.txt</span>
-<span>▲ ✕</span>
-</div>
-<div class="body">
-๐ㅔꙕ팟을 잃네မㅓયૃ 뻔㉭Ł 경험을 ࿁ㅕ㉣ㅓ번 ṑトヱ しビ 후 줄๐ㅣøł폰을 샀⊂ㅏ.<br>
-ㅇㅔꙕ팟࿁ㅔ 익숙ぁĦ져 불편할 줄 알았는㉢ㅔ ユ냥 휴㈂H폰⊙ㅔ 둘둘 감㉧ㅏ ⊂ㅏᏞㅣ면 돼ᨈㅓ ꖶ<b></b>ㅣ౽ㅕ 편했⊂ㅏ.
-</div>
-</div>
-
-<div class="browser-window" id="browserWindow">
-<div class="browser-header">
-<div class="tab-bar">
-<div class="window-dots">
-<div class="dot dot-red" onclick="triggerCloseWindow()" title="창 닫기"></div>
-<div class="dot dot-yellow" onclick="minimizeWindow()" title="최소화"></div>
-<div class="dot dot-green" onclick="maximizeWindow()" title="최대화"></div>
-</div>
-<div class="tab">
-<span>archiving trends.com</span>
-<span class="tab-close" onclick="triggerCloseWindow()">✕</span>
-</div>
-</div>
-
-<div class="address-bar-container">
-<div class="address-bar">
-🔍 <input type="text" id="addressInput" value="http://www.cyworld.com/anya_y2k_room" readonly>
-<div class="star-btn" id="starBtn" onclick="toggleStar(this)" title="즐겨찾기 추가/해제">
-<svg class="jelly-star-svg" width="22" height="22" viewBox="0 0 100 100">
-<defs>
-<radialGradient id="starGlassGrad" cx="40%" cy="35%" r="65%">
-<stop offset="0%" stop-color="#ffffff"/>
-<stop offset="40%" stop-color="#ffe6f2"/>
-<stop offset="80%" stop-color="#ffb8de"/>
-<stop offset="100%" stop-color="#ff7eb9"/>
-</radialGradient>
-<radialGradient id="starPinkGrad" cx="35%" cy="30%" r="70%">
-<stop offset="0%" stop-color="#fff0f5"/>
-<stop offset="30%" stop-color="#ffb8de"/>
-<stop offset="70%" stop-color="#f28bbb"/>
-<stop offset="100%" stop-color="#d6498b"/>
-</radialGradient>
-</defs>
-<path class="star-outer" d="M50 7 C55 27, 65 30, 86 36 C70 49, 68 59, 74 81 C55 70, 45 70, 26 81 C32 59, 30 49, 14 36 C35 30, 45 27, 50 7 Z"/>
-<path class="star-inner" d="M50 17 C54 31, 61 33, 76 38 C65 47, 63 54, 68 70 C54 62, 46 62, 32 70 C37 54, 35 47, 24 38 C39 33, 46 31, 50 17 Z"/>
-</svg>
-</div>
-</div>
-
-<div class="p1-toolbar-btns">
-<div class="more-dots-btn" title="설정">
-<span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-
-<div class="p2-action-group">
-<div class="profile-avatar-circle" title="ANYA Profile">
-<svg viewBox="0 0 24 24">
-<path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-</svg>
-</div>
-<div class="more-dots-btn" title="설정">
-<span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-</div>
-</div>
-
-<div class="game-content">
-
-<!-- [Part 2 전용 세련된 그래픽 & 그리드 오버레이] -->
-<div class="part2-decorations">
-  <div class="p2-bg-grid-overlay"></div>
-  
-  <!-- 1. 좌상단: 3D 와이어프레임 하트 그리드 -->
-  <svg class="p2-wireframe-heart" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M100 180 C20 120 10 70 45 35 C75 5 100 45 100 45 C100 45 125 5 155 35 C190 70 180 120 100 180 Z" stroke="#ffffff" stroke-width="2.5" fill="rgba(255, 255, 255, 0.08)"/>
-    <path d="M100 45 V180" stroke="rgba(255,255,255,0.7)" stroke-width="1.2" stroke-dasharray="3 3"/>
-    <path d="M30 95 H170" stroke="rgba(255,255,255,0.7)" stroke-width="1.2" stroke-dasharray="3 3"/>
-    <path d="M48 65 C68 85 132 85 152 65" stroke="rgba(255,255,255,0.6)" stroke-width="1.2"/>
-    <path d="M35 120 C65 145 135 145 165 120" stroke="rgba(255,255,255,0.6)" stroke-width="1.2"/>
-    <path d="M70 40 C60 80 60 135 100 175" stroke="rgba(255,255,255,0.5)" stroke-width="1.2"/>
-    <path d="M130 40 C140 80 140 135 100 175" stroke="rgba(255,255,255,0.5)" stroke-width="1.2"/>
-    <circle cx="100" cy="95" r="3.5" fill="#ff007f"/>
-  </svg>
-
-  <!-- 2. 좌하단: 와이어프레임 하트 & 매지컬 레이더 좌표계 -->
-  <svg class="p2-radar-grid" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <line x1="100" y1="10" x2="100" y2="190" stroke="rgba(255, 255, 255, 0.7)" stroke-width="1.2" stroke-dasharray="3 3"/>
-    <line x1="10" y1="100" x2="190" y2="100" stroke="rgba(255, 255, 255, 0.7)" stroke-width="1.2" stroke-dasharray="3 3"/>
-    
-    <circle cx="100" cy="100" r="80" stroke="rgba(255, 255, 255, 0.35)" stroke-width="1" stroke-dasharray="2 4"/>
-    <circle cx="100" cy="100" r="45" stroke="rgba(255, 255, 255, 0.45)" stroke-width="1"/>
-    
-    <path d="M100 160 C35 110 25 70 55 42 C80 18 100 52 100 52 C100 52 120 18 145 42 C175 70 165 110 100 160 Z" 
-          stroke="#ffffff" stroke-width="1.8" fill="rgba(255, 255, 255, 0.05)"/>
-    <path d="M60 65 C75 80 125 80 140 65" stroke="rgba(255, 255, 255, 0.5)" stroke-width="1"/>
-    <path d="M48 105 C75 125 125 125 152 105" stroke="rgba(255, 255, 255, 0.5)" stroke-width="1"/>
-
-    <circle cx="100" cy="100" r="3" fill="#ffffff" filter="drop-shadow(0 0 4px #ff69b4)"/>
-    <circle cx="145" cy="42" r="2.5" fill="#ffffff"/>
-    <circle cx="55" cy="42" r="2.5" fill="#ffffff"/>
-    <path d="M165 30 L167 36 L173 38 L167 40 L165 46 L163 40 L157 38 L163 36 Z" fill="#ffffff" opacity="0.9"/>
-  </svg>
-
-  <!-- 테크니컬 메타 태그 & 좌표 타이포 -->
-  <div class="p2-tech-tag p2-tag-br">POS: [37.5665° N, 126.9780° E]</div>
-  <div class="p2-tech-tag p2-tag-mid">Part.1 &bull; Part.2</div>
-</div>
-
-<div class="item-info-overlay" id="itemOverlay">
-<div id="overlayTrendTag" class="trend-tag" style="display: none;">★ 재유행템 ★</div>
-<div id="overlayCode" style="font-size: 11px; opacity: 0.8; margin-bottom: 2px;">#0494832</div>
-<div id="overlayName" style="font-weight: bold; font-size: 14px; margin-bottom: 4px;">HEADSET</div>
-<div id="overlayDesc" style="font-size: 11px; color: #555; line-height: 1.3;"></div>
-</div>
-
-<div class="info-line" id="infoLine"></div>
-
-<!-- [좌측 패널] -->
-<div class="left-panel">
-<div class="win-window">
-<div class="win-titlebar" id="profileTitlebar">
-<span id="profileTitleText">페이지_소개.txt</span>
-<div class="win-buttons">
-<div class="win-btn">_</div>
-<div class="win-btn">✕</div>
-</div>
-</div>
-<div class="win-body">
-<div class="p1-profile-body">
-<h4><b style="color: #ff007f;">Part 2 is the New Part 1</b></h4>
-<p>
-ㅎŁ 번 スıㄴr간 유행은 정말 끝난 걸ㄲト?<br>
-10년 전의 패션๐ㅣ ㄷrᨈㅣ 돌ටㅏ왔ㄷr.<br>
-익숙ṑト스ıㅁビ Ꙕ딘フГ 달ㄹr진 모습으로.<br>
-우ય는 ユ 변호r와 ユ ㅇビનાᨈㅓ 만난 두 H의 ๐ㅣ࿁ㅑᥐㅣ를 ᥐㅣ록했ㄷr.
-</p>
-</div>
-<div class="p2-profile-card">
-<h4><b>Part 2 is the New Part 1</b></h4>
-<p>
-한 번 지나간 유행은 정말 끝난 걸까?<br>
-10년 전의 패션이 다시 돌아왔다.<br>
-익숙하지만 어딘가 달라진 모습으로.<br>
-우리는 그 변화와 그 안에서 만난 두 H의 이야기를 기록했다.
-</p>
-</div>
-</div>
-</div>
-
-<div class="bgm-player">
-<div class="win-titlebar">
-<span>BGM_Player.exe</span>
-<div class="win-buttons">
-<div class="win-btn">_</div>
-<div class="win-btn">✕</div>
-</div>
-</div>
-<div class="win-body">
-<div class="song-title">Kara - Pretty Girl</div>
-<div class="controls">
-<span>◀◀</span>
-<span>❚❚</span>
-<span>▶▶</span>
-</div>
-</div>
-</div>
-
-<div class="win-window beauty-tool-window">
-<div class="win-titlebar">
-<span>뷰티_꾸미기.exe <span class="beauty-badge">CUSTOM</span></span>
-<div class="win-buttons">
-<div class="win-btn">_</div>
-<div class="win-btn">✕</div>
-</div>
-</div>
-<div class="win-body" style="padding: 6px;">
-<div class="beauty-tool-container">
-<div class="beauty-category-tabs">
-<button class="beauty-tab-btn active" onclick="switchBeautyTab('hairs', this)">헤어</button>
-<button class="beauty-tab-btn" onclick="switchBeautyTab('skins', this)">피부색</button>
-<button class="beauty-tab-btn" onclick="switchBeautyTab('makeups', this)">메이크업</button>
-</div>
-<div class="beauty-options-panel" id="beautyOptionsPanel">
-</div>
-</div>
-</div>
-</div>
-</div>
-
-<!-- [중앙 패널] -->
-<div class="center-panel">
-<div class="speech-bubble">
-<div>궁금한 아이템은 <span class="action-badge badge-click">CLICK!</span></div>
-<div>입어보고 싶다면 <span class="action-badge badge-drag">DRAG!</span></div>
-</div>
-<div class="character-canvas" id="characterCanvas" style="position: relative;">
-<img id="base-character" src="p1-avatar.png" alt="Part 1 캐릭터 베이스" style="top: 18px;">
-<img id="layer-makeup" class="clothing-layer" alt="" style="left:0; top:18px;">
-<!-- 헤어 아래 들어가는 옷/악세사리 컨테이너 -->
-<div id="dynamicLayersContainer" style="top: 18px; position: absolute; width: 100%; height: 100%;"></div>
-<img id="layer-hair" class="clothing-layer" alt="" style="left:0; top:18px;">
-<!-- 헤어 위로 올라가는 전용 모자/헤드셋 컨테이너 -->
-<div id="overHairLayersContainer" style="top: 18px; position: absolute; width: 100%; height: 100%;"></div>
-</div>
-<div class="pedestal"></div>
-</div>
-
-<!-- [우측 패널] -->
-<div class="right-panel">
-<div class="category-tabs">
-<button class="category-btn active" onclick="showCategory('tops', this)">
-<span class="icon">
-<svg viewBox="0 0 100 85"><path d="M 30,5 C 38,15 62,15 70,5 L 98,28 C 94,36 86,42 78,40 L 78,80 C 78,83 75,85 70,85 L 30,85 C 25,85 22,83 22,80 L 22,40 C 14,42 6,36 2,28 Z"/></svg>
-</span>
-</button>
-<button class="category-btn" onclick="showCategory('bottoms', this)">
-<span class="icon">
-<svg viewBox="0 0 100 85"><path d="M 10,5 L 90,5 C 93,5 98,20 95,75 C 93,82 78,85 55,80 L 50,45 L 45,80 C 22,85 7,82 5,75 C 2,20 7,5 10,5 Z"/></svg>
-</span>
-</button>
-<button class="category-btn" onclick="showCategory('shoes', this)" style="padding: 6px 0;">
-<span class="icon">
-<svg viewBox="10 0 85 100"><path d="M25 8C15 19 8 32 11 48c2 11 8 25 9.2 38.5.3 1.2 1.8 1.2 2.1 0 1.2-18 5-31.5 9.7-37.5 4.5 1 9.5 12 12.5 23 3 11 10 20 23.5 19 14-1 22-7 27-7-9-7-22-13-28-15-12-5-19-16-27-35C33 18 28 10 25 8z"/></svg>
-</span>
-</button>
-<button class="category-btn" onclick="showCategory('acc', this)">
-<span class="icon">
-<svg viewBox="0 0 100 48">
-<path d="M 12,18 C 30,16 42,18 47,20 C 48.5,21.5 51.5,21.5 53,20 C 58,18 70,16 88,18 C 86,28 82,42 68,42 C 54,42 52,34 50,28 C 48,34 46,42 32,42 C 18,42 14,28 12,18 Z"/>
-</svg>
-</span>
-</button>
-</div>
-
-<div class="item-grid-container">
-<div id="item-grid" class="item-grid">
-</div>
-</div>
-
-<div class="action-buttons-group">
-  <div class="remove-card-box" onclick="resetAllItems()">RESET ALL</div>
-  <div class="save-card-box" onclick="saveCurrentLook()">SAVE LOOK 💾</div>
-</div>
-
-<button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn" style="width: 100%; padding: 12px; font-size: 15px; font-weight: 800; letter-spacing: 1px; justify-content: center; margin-top: 2px;">
-<span id="themeText" style="font-size: 16px;">Part. 1</span>
-</button>
-</div>
-</div>
-</div>
-
-<!-- LOOKBOOK 모달 -->
-<div class="lookbook-modal-overlay" id="lookbookModal">
-  <div class="lookbook-window">
-    <div class="lookbook-titlebar">
-      <span>📸 코디_사진첩.exe (LOOKBOOK)</span>
-      <div class="win-buttons">
-        <div class="win-btn" onclick="closeLookbook()">✕</div>
-      </div>
+<!-- ================= 1. 첫 접속 인트로 화면 ================= -->
+<div id="intro-screen">
+  <div class="intro-container">
+    <div class="intro-title-group">
+      <div class="intro-title-part2">Part 2</div>
+      <div class="intro-title-isthenew">is the new</div>
+      <div class="intro-title-part1">Part 1</div>
     </div>
-    <div class="lookbook-content" id="lookbookList">
-      <div class="lookbook-empty-msg">
-        아직 저장된 코디가 없습니다.<br>
-        [SAVE LOOK 💾] 버튼을 눌러 나만의 코디를 기록해보세요!
+
+    <div class="intro-code-box">
+      <div class="intro-guide-text">★ 진에서 코드를 찾아보세요! ★</div>
+      <div class="code-input-wrapper">
+        <input type="text" id="zineCodeInput" maxlength="5" placeholder="CODE" autofocus onkeypress="if(event.key==='Enter') verifyCode()">
+        <button class="code-submit-btn" onclick="verifyCode()">ENTER ↵</button>
       </div>
+      <div class="intro-error-msg" id="introErrorMsg"></div>
     </div>
-    <div class="lookbook-footer">
-      <button class="win-btn" style="width: auto; padding: 2px 14px; height: 22px; font-weight: bold;" onclick="closeLookbook()">닫기</button>
+
+    <div class="intro-footer-text">
+      패션은 돌고 돈다. 10년 전에 유행했던 아이템이 다시 돌아왔다. 그러나 다시 마주한 모습은 10년 전과 같으면서 다르다.<br>
+      이 책에서는 다시 돌아온 패션 아이템이 어떤 모습으로 변화했는지를 기록하고, 그 과정에서 마주한 아이템에 대한 두 H의 이야기를 함께 담았다.
     </div>
   </div>
 </div>
 
+<!-- ================= 2. 게임 메인 데스크톱 ================= -->
+<div id="app-scaler">
+  <div class="crt-overlay"></div>
+  <div class="p1-retro-logo">LANEIGE girl</div>
+
+  <div class="deco-window-1" id="decoWindow1">
+    <div class="title">
+      <span>jellyshoes_mood.txt</span>
+      <span>▲ ✕</span>
+    </div>
+    <div class="body">
+      비가 오면... 난 젤리슈즈를 신는ㄷr...<br>
+      젖는 것을 두려워하지 않는 건...<br>
+      내 눈물에 투명한 고무 신발이 익숙해졌기 때문일까...?<br>
+      반짝이는 펄이 살짝 들어간 신발을 신고 웅덩이를 밟을 때마다...<br>
+      내 안의 슬픔도 함께 튀어 나간다...
+    </div>
+  </div>
+
+  <div class="deco-window-2" id="decoWindow2">
+    <div class="title">
+      <span>earphone_mood.txt</span>
+      <span>▲ ✕</span>
+    </div>
+    <div class="body">
+      ๐ㅔꙕ팟을 잃네မㅓયૃ 뻔㉭Ł 경험을 ࿁ㅕ㉣ㅓ번 ṑトヱ しビ 후 줄๐ㅣøł폰을 샀⊂ㅏ.<br>
+      ㅇㅔꙕ팟࿁ㅔ 익숙ぁĦ져 불편할 줄 알았는㉢ㅔ ユ냥 휴㈂H폰⊙ㅔ 둘둘 감㉧ㅏ ⊂ㅏᏞㅣ면 돼ᨈㅓ ꖶ<b></b>ㅣ౽ㅕ 편했⊂ㅏ.
+    </div>
+  </div>
+
+  <div class="browser-window" id="browserWindow">
+    <div class="browser-header">
+      <div class="tab-bar">
+        <div class="window-dots">
+          <div class="dot dot-red" onclick="returnToIntro()" title="홈으로 돌아가기"></div>
+          <div class="dot dot-yellow" onclick="minimizeWindow()" title="최소화"></div>
+          <div class="dot dot-green" onclick="maximizeWindow()" title="최대화"></div>
+        </div>
+        <div class="tab">
+          <span>archiving trends.com</span>
+          <span class="tab-close" onclick="returnToIntro()">✕</span>
+        </div>
+      </div>
+
+      <div class="address-bar-container">
+        <div class="address-bar">
+          🔍 <input type="text" id="addressInput" value="http://www.cyworld.com/anya_y2k_room" readonly>
+          <div class="star-btn" id="starBtn" onclick="toggleStar(this)" title="즐겨찾기 추가/해제">
+            <svg class="jelly-star-svg" width="22" height="22" viewBox="0 0 100 100">
+              <defs>
+                <radialGradient id="starGlassGrad" cx="40%" cy="35%" r="65%">
+                  <stop offset="0%" stop-color="#ffffff"/>
+                  <stop offset="40%" stop-color="#ffe6f2"/>
+                  <stop offset="80%" stop-color="#ffb8de"/>
+                  <stop offset="100%" stop-color="#ff7eb9"/>
+                </radialGradient>
+                <radialGradient id="starPinkGrad" cx="35%" cy="30%" r="70%">
+                  <stop offset="0%" stop-color="#fff0f5"/>
+                  <stop offset="30%" stop-color="#ffb8de"/>
+                  <stop offset="70%" stop-color="#f28bbb"/>
+                  <stop offset="100%" stop-color="#d6498b"/>
+                </radialGradient>
+              </defs>
+              <path class="star-outer" d="M50 7 C55 27, 65 30, 86 36 C70 49, 68 59, 74 81 C55 70, 45 70, 26 81 C32 59, 30 49, 14 36 C35 30, 45 27, 50 7 Z"/>
+              <path class="star-inner" d="M50 17 C54 31, 61 33, 76 38 C65 47, 63 54, 68 70 C54 62, 46 62, 32 70 C37 54, 35 47, 24 38 C39 33, 46 31, 50 17 Z"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="p1-toolbar-btns">
+          <div class="more-dots-btn" title="설정">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+
+        <div class="p2-action-group">
+          <div class="profile-avatar-circle" title="ANYA Profile">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+          </div>
+          <div class="more-dots-btn" title="설정">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="game-content">
+      <div class="part2-decorations">
+        <div class="p2-bg-grid-overlay"></div>
+
+        <svg class="p2-wireframe-heart" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M100 180 C20 120 10 70 45 35 C75 5 100 45 100 45 C100 45 125 5 155 35 C190 70 180 120 100 180 Z" stroke="#ffffff" stroke-width="2.5" fill="rgba(255, 255, 255, 0.08)"/>
+          <path d="M100 45 V180" stroke="rgba(255,255,255,0.7)" stroke-width="1.2" stroke-dasharray="3 3"/>
+          <path d="M30 95 H170" stroke="rgba(255,255,255,0.7)" stroke-width="1.2" stroke-dasharray="3 3"/>
+          <path d="M48 65 C68 85 132 85 152 65" stroke="rgba(255,255,255,0.6)" stroke-width="1.2"/>
+          <path d="M35 120 C65 145 135 145 165 120" stroke="rgba(255,255,255,0.6)" stroke-width="1.2"/>
+          <path d="M70 40 C60 80 60 135 100 175" stroke="rgba(255,255,255,0.5)" stroke-width="1.2"/>
+          <path d="M130 40 C140 80 140 135 100 175" stroke="rgba(255,255,255,0.5)" stroke-width="1.2"/>
+          <circle cx="100" cy="95" r="3.5" fill="#ff007f"/>
+        </svg>
+
+        <svg class="p2-radar-grid" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="100" y1="10" x2="100" y2="190" stroke="rgba(255, 255, 255, 0.7)" stroke-width="1.2" stroke-dasharray="3 3"/>
+          <line x1="10" y1="100" x2="190" y2="100" stroke="rgba(255, 255, 255, 0.7)" stroke-width="1.2" stroke-dasharray="3 3"/>
+          <circle cx="100" cy="100" r="80" stroke="rgba(255, 255, 255, 0.35)" stroke-width="1" stroke-dasharray="2 4"/>
+          <circle cx="100" cy="100" r="45" stroke="rgba(255, 255, 255, 0.45)" stroke-width="1"/>
+          <path d="M100 160 C35 110 25 70 55 42 C80 18 100 52 100 52 C100 52 120 18 145 42 C175 70 165 110 100 160 Z" stroke="#ffffff" stroke-width="1.8" fill="rgba(255, 255, 255, 0.05)"/>
+          <path d="M60 65 C75 80 125 80 140 65" stroke="rgba(255, 255, 255, 0.5)" stroke-width="1"/>
+          <path d="M48 105 C75 125 125 125 152 105" stroke="rgba(255, 255, 255, 0.5)" stroke-width="1"/>
+          <circle cx="100" cy="100" r="3" fill="#ffffff" filter="drop-shadow(0 0 4px #ff69b4)"/>
+          <circle cx="145" cy="42" r="2.5" fill="#ffffff"/>
+          <circle cx="55" cy="42" r="2.5" fill="#ffffff"/>
+          <path d="M165 30 L167 36 L173 38 L167 40 L165 46 L163 40 L157 38 L163 36 Z" fill="#ffffff" opacity="0.9"/>
+        </svg>
+
+        <div class="p2-tech-tag p2-tag-br">POS: [37.5665° N, 126.9780° E]</div>
+        <div class="p2-tech-tag p2-tag-mid">Part.1 &bull; Part.2</div>
+      </div>
+
+      <div class="item-info-overlay" id="itemOverlay">
+        <div id="overlayTrendTag" class="trend-tag" style="display: none;">★ 재유행템 ★</div>
+        <div id="overlayCode" style="font-size: 11px; opacity: 0.8; margin-bottom: 2px;">#0494832</div>
+        <div id="overlayName" style="font-weight: bold; font-size: 14px; margin-bottom: 4px;">HEADSET</div>
+        <div id="overlayDesc" style="font-size: 11px; color: #555; line-height: 1.3;"></div>
+      </div>
+
+      <div class="info-line" id="infoLine"></div>
+
+      <!-- [좌측 패널] -->
+      <div class="left-panel">
+        <div class="win-window">
+          <div class="win-titlebar" id="profileTitlebar">
+            <span id="profileTitleText">페이지_소개.txt</span>
+            <div class="win-buttons">
+              <div class="win-btn">_</div>
+              <div class="win-btn">✕</div>
+            </div>
+          </div>
+          <div class="win-body">
+            <div class="p1-profile-body">
+              <h4><b style="color: #ff007f;">Part 2 is the New Part 1</b></h4>
+              <p>
+                ㅎŁ 번 スıㄴr간 유행은 정말 끝난 걸ㄲト?<br>
+                10년 전의 패션๐ㅣ ㄷrᨈㅣ 돌ටㅏ왔ㄷr.<br>
+                익숙ṑト스ıㅁビ Ꙕ딘フГ 달ㄹr진 모습으로.<br>
+                우ય는 ユ 변호r와 ユ ㅇビનાᨈㅓ 만난 두 H의 ๐ㅣ࿁ㅑᥐㅣ를 ᥐㅣ록했ㄷr.
+              </p>
+            </div>
+            <div class="p2-profile-card">
+              <h4><b>Part 2 is the New Part 1</b></h4>
+              <p>
+                한 번 지나간 유행은 정말 끝난 걸까?<br>
+                10년 전의 패션이 다시 돌아왔다.<br>
+                익숙하지만 어딘가 달라진 모습으로.<br>
+                우리는 그 변화와 그 안에서 만난 두 H의 이야기를 기록했다.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bgm-player">
+          <div class="win-titlebar">
+            <span>BGM_Player.exe</span>
+            <div class="win-buttons">
+              <div class="win-btn">_</div>
+              <div class="win-btn">✕</div>
+            </div>
+          </div>
+          <div class="win-body">
+            <div class="song-title">Kara - Pretty Girl</div>
+            <div class="controls">
+              <span>◀◀</span>
+              <span>❚❚</span>
+              <span>▶▶</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="win-window beauty-tool-window">
+          <div class="win-titlebar">
+            <span>뷰티_꾸미기.exe <span class="beauty-badge">CUSTOM</span></span>
+            <div class="win-buttons">
+              <div class="win-btn">_</div>
+              <div class="win-btn">✕</div>
+            </div>
+          </div>
+          <div class="win-body" style="padding: 6px;">
+            <div class="beauty-tool-container">
+              <div class="beauty-category-tabs">
+                <button class="beauty-tab-btn active" onclick="switchBeautyTab('hairs', this)">헤어</button>
+                <button class="beauty-tab-btn" onclick="switchBeautyTab('skins', this)">피부색</button>
+                <button class="beauty-tab-btn" onclick="switchBeautyTab('makeups', this)">메이크업</button>
+              </div>
+              <div class="beauty-options-panel" id="beautyOptionsPanel"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- [중앙 패널] -->
+      <div class="center-panel">
+        <div class="speech-bubble">
+          <div>궁금한 아이템은 <span class="action-badge badge-click">CLICK!</span></div>
+          <div>입어보고 싶다면 <span class="action-badge badge-drag">DRAG!</span></div>
+        </div>
+        <div class="character-canvas" id="characterCanvas" style="position: relative;">
+          <img id="base-character" src="p1-avatar.png" alt="캐릭터 베이스" style="top: 18px;">
+          <img id="layer-makeup" class="clothing-layer" alt="" style="left:0; top:18px;">
+          <div id="dynamicLayersContainer" style="top: 18px; position: absolute; width: 100%; height: 100%;"></div>
+          <img id="layer-hair" class="clothing-layer" alt="" style="left:0; top:18px;">
+          <div id="overHairLayersContainer" style="top: 18px; position: absolute; width: 100%; height: 100%;"></div>
+        </div>
+        <div class="pedestal"></div>
+      </div>
+
+      <!-- [우측 패널] -->
+      <div class="right-panel">
+        <div class="category-tabs">
+          <button class="category-btn active" onclick="showCategory('tops', this)">
+            <span class="icon"><svg viewBox="0 0 100 85"><path d="M 30,5 C 38,15 62,15 70,5 L 98,28 C 94,36 86,42 78,40 L 78,80 C 78,83 75,85 70,85 L 30,85 C 25,85 22,83 22,80 L 22,40 C 14,42 6,36 2,28 Z"/></svg></span>
+          </button>
+          <button class="category-btn" onclick="showCategory('bottoms', this)">
+            <span class="icon"><svg viewBox="0 0 100 85"><path d="M 10,5 L 90,5 C 93,5 98,20 95,75 C 93,82 78,85 55,80 L 50,45 L 45,80 C 22,85 7,82 5,75 C 2,20 7,5 10,5 Z"/></svg></span>
+          </button>
+          <button class="category-btn" onclick="showCategory('shoes', this)" style="padding: 6px 0;">
+            <span class="icon"><svg viewBox="10 0 85 100"><path d="M25 8C15 19 8 32 11 48c2 11 8 25 9.2 38.5.3 1.2 1.8 1.2 2.1 0 1.2-18 5-31.5 9.7-37.5 4.5 1 9.5 12 12.5 23 3 11 10 20 23.5 19 14-1 22-7 27-7-9-7-22-13-28-15-12-5-19-16-27-35C33 18 28 10 25 8z"/></svg></span>
+          </button>
+          <button class="category-btn" onclick="showCategory('acc', this)">
+            <span class="icon"><svg viewBox="0 0 100 48"><path d="M 12,18 C 30,16 42,18 47,20 C 48.5,21.5 51.5,21.5 53,20 C 58,18 70,16 88,18 C 86,28 82,42 68,42 C 54,42 52,34 50,28 C 48,34 46,42 32,42 C 18,42 14,28 12,18 Z"/></svg></span>
+          </button>
+        </div>
+
+        <div class="item-grid-container">
+          <div id="item-grid" class="item-grid"></div>
+        </div>
+
+        <div class="action-buttons-group">
+          <div class="remove-card-box" onclick="resetAllItems()">RESET ALL</div>
+          <div class="save-card-box" onclick="saveCurrentLook()">SAVE LOOK 💾</div>
+        </div>
+
+        <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn" style="width: 100%; padding: 12px; font-size: 15px; font-weight: 800; letter-spacing: 1px; justify-content: center; margin-top: 2px;">
+          <span id="themeText" style="font-size: 16px;">Part. 1</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOOKBOOK 모달 -->
+  <div class="lookbook-modal-overlay" id="lookbookModal">
+    <div class="lookbook-window">
+      <div class="lookbook-titlebar">
+        <span>📸 코디_사진첩.exe (LOOKBOOK)</span>
+        <div class="win-buttons">
+          <div class="win-btn" onclick="closeLookbook()">✕</div>
+        </div>
+      </div>
+      <div class="lookbook-content" id="lookbookList">
+        <div class="lookbook-empty-msg">
+          아직 저장된 코디가 없습니다.<br>
+          [SAVE LOOK 💾] 버튼을 눌러 나만의 코디를 기록해보세요!
+        </div>
+      </div>
+      <div class="lookbook-footer">
+        <button class="win-btn" style="width: auto; padding: 2px 14px; height: 22px; font-weight: bold;" onclick="closeLookbook()">닫기</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
+/* =========================================================
+   [Zine 5자리 시크릿 코드 매핑 테이블]
+========================================================= */
+const CODE_BOOK = {
+  // Part 1 코드
+  '34677': { part: 1, category: 'tops', id: 'LINGERIE' },
+  '53790': { part: 1, category: 'bottoms', id: 'CAPRI DENIM' },
+  '84520': { part: 1, category: 'bottoms', id: 'LOW-RISE' },
+  '56325': { part: 1, category: 'shoes', id: 'MARY JANE' },
+  '82913': { part: 1, category: 'shoes', id: 'JELLY SHOES' },
+  '74302': { part: 1, category: 'makeups', id: 'smokey' },
+  '59783': { part: 1, category: 'acc', id: 'RIMLESS GLASSES' },
+  '75083': { part: 1, category: 'acc', id: 'EARPHONES' },
+
+  // Part 2 코드
+  '75868': { part: 2, category: 'tops', id: 'P2_LINGERIE' },
+  '45918': { part: 2, category: 'bottoms', id: 'P2_CAPRI_JEAN' },
+  '13698': { part: 2, category: 'bottoms', id: 'P2_LOWRISE' },
+  '26538': { part: 2, category: 'shoes', id: 'P2_MARYJANE' },
+  '54978': { part: 2, category: 'shoes', id: 'P2_JELLYSHOES' },
+  '40862': { part: 2, category: 'makeups', id: 'p2-pink-makeup' },
+  '29761': { part: 2, category: 'acc', id: 'P2_RIMLESS_GLASSES' },
+  '69931': { part: 2, category: 'acc', id: 'P2_WIRED_EARPHONE' }
+};
+
 let clothesZIndexCounter = 35;
 let overHairZIndexCounter = 910;
 const usedItemIds = new Set();
@@ -2155,7 +2199,6 @@ let currentBeautyCategory = 'hairs';
 const savedLooks = [];
 let currentScale = 1;
 
-/* 머리카락 위 레이어에 위치해야 하는 악세사리 3종 */
 const OVER_HAIR_ITEMS = new Set(['NEWSBOY CAP', 'HEADSET', 'NEWERA CAP']);
 
 function getNextItemZIndex(codeName) {
@@ -2165,18 +2208,21 @@ function getNextItemZIndex(codeName) {
     return overHairZIndexCounter;
   }
   clothesZIndexCounter++;
-  if (clothesZIndexCounter >= 800) {
-    clothesZIndexCounter = 35;
-  }
+  if (clothesZIndexCounter >= 800) clothesZIndexCounter = 35;
   return clothesZIndexCounter;
+}
+
+function bringItemToFront(itemId, codeName) {
+  const layer = document.getElementById(`placed-item-${itemId}`);
+  if (layer) {
+    layer.style.zIndex = getNextItemZIndex(codeName);
+  }
 }
 
 function resizeApp() {
   const scaler = document.getElementById('app-scaler');
   if (!scaler) return;
-  const baseWidth = 1160;
-  const baseHeight = 730;
-  currentScale = Math.min(window.innerWidth / baseWidth, window.innerHeight / baseHeight);
+  currentScale = Math.min(window.innerWidth / 1160, window.innerHeight / 730);
   scaler.style.transform = `scale(${currentScale})`;
 }
 window.addEventListener('resize', resizeApp);
@@ -2185,94 +2231,96 @@ function toggleStar(starElem) {
   starElem.classList.toggle('starred');
 }
 
+/* ================= 전체 아이템 데이터 ================= */
 const wardrobeData = {
-/* ================= Part 1 아이템 ================= */
+/* Part 1 의류 */
 tops: [
-{ id: 'LINGERIE', code: '#0102938', codeName: 'LINGERIE DRESS', name: '란제리 원피스', image: 'p1-lingerie.png', blueWin: true, koreanDesc: '고ト감ㅎŁ ㅍr격, ⊂よ⊂よㅎŁ ㅈr신감의 상징.' },
-{ id: 'NUPTSE', code: '#0102931', codeName: 'NUPTSE', name: '눕시 패딩', image: 'p1-northface.png' },
-{ id: 'PINK CROP SHIRT', code: '#0102932', codeName: 'PINK CROP SHIRT', name: '핑크 크롭 셔츠', image: 'p1-pink crop top.png' },
-{ id: 'FIELD JACKET', code: '#0102933', codeName: 'FIELD JACKET', name: '야상 점퍼', image: 'p1-field jacket.png' },
-{ id: 'PINK STRIPED TOP', code: '#0102934', codeName: 'PINK STRIPED TOP', name: '핑크 스트라이프 탑', image: 'p1-pink striped top.png' },
-{ id: 'ADIDAS JERSEY', code: '#0102935', codeName: 'ADIDAS JERSEY', name: '아디다스 져지', image: 'p1-adidas jacket.png' },
-{ id: 'BABY T-SHIRT', code: '#0102937', codeName: 'BABY T-SHIRT', name: '베이비 티셔츠', image: 'p1-baby t-shirt.png' },
-{ id: 'WHITE T-SHIRT', code: '#0102936', codeName: 'WHITE T-SHIRT', name: '기본 긴팔', image: 'p1-white t-shirt.png' }
+  { id: 'LINGERIE', code: '#0102938', codeName: 'LINGERIE TOP', name: '란제리 탑', image: 'p1-lingerie.png', blueWin: true, koreanDesc: '고ト감ㅎŁ ㅍr격, ⊂よ⊂よㅎŁ ㅈr신감의 상징.' },
+  { id: 'NUPTSE', code: '#0102931', codeName: 'NUPTSE', name: '눕시 패딩', image: 'p1-northface.png' },
+  { id: 'PINK CROP SHIRT', code: '#0102932', codeName: 'PINK CROP SHIRT', name: '핑크 크롭 셔츠', image: 'p1-pink crop top.png' },
+  { id: 'FIELD JACKET', code: '#0102933', codeName: 'FIELD JACKET', name: '야상 점퍼', image: 'p1-field jacket.png' },
+  { id: 'PINK STRIPED TOP', code: '#0102934', codeName: 'PINK STRIPED TOP', name: '핑크 스트라이프 탑', image: 'p1-pink striped top.png' },
+  { id: 'ADIDAS JERSEY', code: '#0102935', codeName: 'ADIDAS JERSEY', name: '아디다스 져지', image: 'p1-adidas jacket.png' },
+  { id: 'BABY T-SHIRT', code: '#0102937', codeName: 'BABY T-SHIRT', name: '베이비 티셔츠', image: 'p1-baby t-shirt.png' },
+  { id: 'WHITE T-SHIRT', code: '#0102936', codeName: 'WHITE T-SHIRT', name: '기본 긴팔', image: 'p1-white t-shirt.png' }
 ],
 bottoms: [
-{ id: 'SHORTS', code: '#0203844', codeName: 'SHORTS', name: '핫팬츠', image: 'p1-shorts.png' },
-{ id: 'CAPRI DENIM', code: '#0203847', codeName: 'CAPRI DENIM', name: '데님 카프리 팬츠', image: 'p1-capri.jean.png', blueWin: true, koreanDesc: '⋌ㅔ련된 도ᨈㅣㄴㅕ의 로일ય 필수템.' },
-{ id: 'CAPRI BROWN', code: '#0203848', codeName: 'CAPRI BROWN', name: '카프리 브라운 팬츠', image: 'p1-capri brown.png', blueWin: true, koreanDesc: '⋌ㅔ련된 도ᨈㅣㄴㅕ의 로일ય 필수템.' },
-{ id: 'SUSPENDERS', code: '#0203842', codeName: 'SUSPENDERS', name: '멜빵 바지', image: 'p1-suspenders.png' },
-{ id: 'COLOR SKINNY JEANS', code: '#0203843', codeName: 'COLOR SKINNY JEANS', name: '컬러 스키니진', image: 'p1-color skinny jean.png' },
-{ id: 'LOW-RISE', code: '#0203846', codeName: 'LOW-RISE', name: '로우라이즈 팬츠', image: 'p1-lowrise.png', blueWin: true, koreanDesc: '골ㅂĿના 걸친 speed아슬아슬 멋짐.' },
-{ id: 'TENNIS SKIRT', code: '#0203845', codeName: 'TENNIS SKIRT', name: '테니스 스커트', image: 'p1-tennis skirt.png' }
+  { id: 'SHORTS', code: '#0203844', codeName: 'SHORTS', name: '핫팬츠', image: 'p1-shorts.png' },
+  { id: 'CAPRI DENIM', code: '#0203847', codeName: 'CAPRI DENIM', name: '카프리 데님 팬츠', image: 'p1-capri.jean.png', blueWin: true, koreanDesc: '⋌ㅔ련된 도ᨈㅣㄴㅕ의 로일ય 필수템.' },
+  { id: 'CAPRI BROWN', code: '#0203848', codeName: 'CAPRI BROWN', name: '카프리 브라운 팬츠', image: 'p1-capri brown.png', blueWin: true, koreanDesc: '⋌ㅔ련된 도ᨈㅣㄴㅕ의 로일ય 필수템.' },
+  { id: 'SUSPENDERS', code: '#0203842', codeName: 'SUSPENDERS', name: '멜빵 바지', image: 'p1-suspenders.png' },
+  { id: 'COLOR SKINNY JEANS', code: '#0203843', codeName: 'COLOR SKINNY JEANS', name: '컬러 스키니진', image: 'p1-color skinny jean.png' },
+  { id: 'LOW-RISE', code: '#0203846', codeName: 'LOW-RISE JEAN', name: '로우라이즈 진', image: 'p1-lowrise.png', blueWin: true, koreanDesc: '골ㅂĿના 걸친 speed아슬아슬 멋짐.' },
+  { id: 'TENNIS SKIRT', code: '#0203845', codeName: 'TENNIS SKIRT', name: '테니스 스커트', image: 'p1-tennis skirt.png' }
 ],
 shoes: [
-{ id: 'JELLY SHOES', code: '#0304761', codeName: 'JELLY SHOES', name: '젤리슈즈', image: 'p1-jellyshoes.png', blueWin: true, koreanDesc: '말ㄹ6말ㄹ6 통통 튀는 ࿁ㅕ름의 추억' },
-{ id: 'MARY JANE', code: '#0304762', codeName: 'MARY JANE', name: '메리제인 슈즈', image: 'p1-maryjane.png', blueWin: true, koreanDesc: '소ㄴㅕ 감성 듬뿍, ⋌トㄹ6스સ운 발끝.' },
-{ id: 'ADIDAS SUPERSTAR', code: '#0304763', codeName: 'ADIDAS SUPERSTAR', name: '아디다스 슈퍼스타', image: 'p1-adidas superstar.png' },
-{ id: 'HEELYS', code: '#0304751', codeName: 'HEELYS', name: '힐리스', image: 'p1-heelys.png' },
-{ id: 'STILETTO HEEL', code: '#0304752', codeName: 'STILETTO HEEL', name: '뾰족 구두', image: 'p1-stiletto heel.png' },
-{ id: 'PLATFORM FLIP-FLOP', code: '#0304754', codeName: 'PLATFORM FLIP-FLOP', name: '통굽 쪼리', image: 'p1-platform flip-flop.png' }
+  { id: 'JELLY SHOES', code: '#0304761', codeName: 'JELLY SHOES', name: '젤리슈즈', image: 'p1-jellyshoes.png', blueWin: true, koreanDesc: '말ㄹ6말ㄹ6 통통 튀는 ࿁ㅕ름의 추억' },
+  { id: 'MARY JANE', code: '#0304762', codeName: 'MARY JANE SHOES', name: '메리제인 슈즈', image: 'p1-maryjane.png', blueWin: true, koreanDesc: '소ㄴㅕ 감성 듬뿍, ⋌トㄹ6스સ운 발끝.' },
+  { id: 'ADIDAS SUPERSTAR', code: '#0304763', codeName: 'ADIDAS SUPERSTAR', name: '아디다스 슈퍼스타', image: 'p1-adidas superstar.png' },
+  { id: 'HEELYS', code: '#0304751', codeName: 'HEELYS', name: '힐리스', image: 'p1-heelys.png' },
+  { id: 'STILETTO HEEL', code: '#0304752', codeName: 'STILETTO HEEL', name: '뾰족 구두', image: 'p1-stiletto heel.png' },
+  { id: 'PLATFORM FLIP-FLOP', code: '#0304754', codeName: 'PLATFORM FLIP-FLOP', name: '통굽 쪼리', image: 'p1-platform flip-flop.png' }
 ],
 acc: [
-{ id: 'COLOR STOCKINGS', code: '#0494835', codeName: 'COLOR STOCKINGS', name: '컬러 스타킹', image: 'p1-color stockings.png' },
-{ id: 'EARPHONES', code: '#0494830', codeName: 'EARPHONES', name: '줄 이어폰', image: 'p1-earphones.png', blueWin: true, koreanDesc: '돌돌 감아 ⊂ㅏLㅣ는 レㅓ와 나만의 갬성.' },
-{ id: 'BIG FRAME SUNGLASSES', code: '#0494831', codeName: 'BIG FRAME SUNGLASSES', name: '빅프레임 선글라스', image: 'p1-bigframesunglasses.png' },
-{ id: 'HEADSET', code: '#0494832', codeName: 'HEADSET', name: '헤드셋', image: 'p1-headset.png' },
-{ id: 'RIMLESS GLASSES', code: '#0494833', codeName: 'RIMLESS GLASSES', name: '무테 안경', image: 'p1-rimless glasses.png', blueWin: true, koreanDesc: 'スı적인 분위ᥐㅣ를 완성ṑト는 ロド법.' },
-{ id: 'NEWSBOY CAP', code: '#0494836', codeName: 'NEWSBOY CAP', name: '뉴스보이 캡', image: 'p1-newsboy cap.png' }
+  { id: 'COLOR STOCKINGS', code: '#0494835', codeName: 'COLOR STOCKINGS', name: '컬러 스타킹', image: 'p1-color stockings.png' },
+  { id: 'EARPHONES', code: '#0494830', codeName: 'WIRED EARPHONES', name: '줄 이어폰', image: 'p1-earphones.png', blueWin: true, koreanDesc: '돌돌 감아 ⊂ㅏLㅣ는 レㅓ와 나만의 갬성.' },
+  { id: 'BIG FRAME SUNGLASSES', code: '#0494831', codeName: 'BIG FRAME SUNGLASSES', name: '빅프레임 선글라스', image: 'p1-bigframesunglasses.png' },
+  { id: 'HEADSET', code: '#0494832', codeName: 'HEADSET', name: '헤드셋', image: 'p1-headset.png' },
+  { id: 'RIMLESS GLASSES', code: '#0494833', codeName: 'RIMLESS GLASSES', name: '무테 안경', image: 'p1-rimless glasses.png', blueWin: true, koreanDesc: 'スı적인 분위ᥐㅣ를 완성ṑト는 ロド법.' },
+  { id: 'NEWSBOY CAP', code: '#0494836', codeName: 'NEWSBOY CAP', name: '뉴스보이 캡', image: 'p1-newsboy cap.png' }
 ],
 
-/* ================= Part 2 아이템 ================= */
+/* Part 2 의류 */
 p2_tops: [
-{ id: 'P2_LEOPARD_TANK', code: '#0102951', codeName: 'LEOPARD TANK', name: '레오파드 탱크 탑', image: 'p2-leopard tank top.png' },
-{ id: 'P2_ADIDAS_CROP', code: '#0102952', codeName: 'ADIDAS CROP TOP', name: '아디다스 크롭탑', image: 'p2-adidas crop top .png' },
-{ id: 'P2_LINGERIE', code: '#0102956', codeName: 'LINGERIE DRESS', name: '란제리 원피스', image: 'p2-lingerie.png', blueWin: true, koreanDesc: '과감하고 세련된 무드로 재해석된 모던 란제리룩.' },
-{ id: 'P2_PINK_TSHIRT', code: '#0102953', codeName: 'PINK T-SHIRT', name: '핑크 베이비 티', image: 'p2-pink t-shirt .png' },
-{ id: 'P2_CARDIGAN', code: '#0102954', codeName: 'CARDIGAN', name: '블랙 슬림 가디건', image: 'p2-cardigan.png' },
-{ id: 'P2_OFFSHOULDER', code: '#0102955', codeName: 'OFFSHOULDER TOP', name: '오프숄더 넘버링 탑', image: 'p2-offshoulder.png' },
-{ id: 'P2_ONESHOUDLER', code: '#0102946', codeName: 'ONE SHOULDER', name: '원숄더 넘버링 탑', image: 'p2-oneshoulder.png' },
-{ id: 'P2_WHITETOP', code: '#0102947', codeName: 'HALTER WHITE TOP', name: '화이트 홀터넥 탑', image: 'p2-whitetop.png' },
-{ id: 'P2_UNDERBOOB_HOOD', code: '#0102944', codeName: 'UNDERBOOB HOOD', name: '언더붑 볼레로 후드', image: 'p2-underboobhood.png' },
-{ id: 'P2_HOOD', code: '#0102945', codeName: 'CROP HOODIE', name: '블랙 크롭 후드집업', image: 'p2-hood.png' },
-{ id: 'P2_MINT_SLEEVELESS', code: '#0102941', codeName: 'MINT SLEEVELESS', name: '민트 크롭 나시', image: 'p2-mintsleevelessshirt.png' },
-{ id: 'P2_WHITE_SLEEVELESS', code: '#0102942', codeName: 'WHITE SLEEVELESS', name: '화이트 크롭 나시', image: 'p2-whitesleevelessshirt.png' },
-{ id: 'P2_SCHOOL_TOP', code: '#0102943', codeName: 'SAILOR TOP', name: '세일러 스쿨룩 탑', image: 'p2-schooluniformtop.png' }
+  { id: 'P2_LEOPARD_TANK', code: '#0102951', codeName: 'LEOPARD TANK', name: '레오파드 탱크 탑', image: 'p2-leopard tank top.png' },
+  { id: 'P2_ADIDAS_CROP', code: '#0102952', codeName: 'ADIDAS CROP TOP', name: '아디다스 크롭탑', image: 'p2-adidas crop top .png' },
+  { id: 'P2_LINGERIE', code: '#0102956', codeName: 'LINGERIE TOP', name: '란제리 탑', image: 'p2-lingerie.png', blueWin: true, koreanDesc: '과감하고 세련된 무드로 재해석된 모던 란제리룩.' },
+  { id: 'P2_PINK_TSHIRT', code: '#0102953', codeName: 'PINK T-SHIRT', name: '핑크 베이비 티', image: 'p2-pink t-shirt .png' },
+  { id: 'P2_CARDIGAN', code: '#0102954', codeName: 'CARDIGAN', name: '블랙 슬림 가디건', image: 'p2-cardigan.png' },
+  { id: 'P2_OFFSHOULDER', code: '#0102955', codeName: 'OFFSHOULDER TOP', name: '오프숄더 넘버링 탑', image: 'p2-offshoulder.png' },
+  { id: 'P2_ONESHOUDLER', code: '#0102946', codeName: 'ONE SHOULDER', name: '원숄더 넘버링 탑', image: 'p2-oneshoulder.png' },
+  { id: 'P2_WHITETOP', code: '#0102947', codeName: 'HALTER WHITE TOP', name: '화이트 홀터넥 탑', image: 'p2-whitetop.png' },
+  { id: 'P2_UNDERBOOB_HOOD', code: '#0102944', codeName: 'UNDERBOOB HOOD', name: '언더붑 볼레로 후드', image: 'p2-underboobhood.png' },
+  { id: 'P2_HOOD', code: '#0102945', codeName: 'CROP HOODIE', name: '블랙 크롭 후드집업', image: 'p2-hood.png' },
+  { id: 'P2_MINT_SLEEVELESS', code: '#0102941', codeName: 'MINT SLEEVELESS', name: '민트 크롭 나시', image: 'p2-mintsleevelessshirt.png' },
+  { id: 'P2_WHITE_SLEEVELESS', code: '#0102942', codeName: 'WHITE SLEEVELESS', name: '화이트 크롭 나시', image: 'p2-whitesleevelessshirt.png' },
+  { id: 'P2_SCHOOL_TOP', code: '#0102943', codeName: 'SAILOR TOP', name: '세일러 스쿨룩 탑', image: 'p2-schooluniformtop.png' }
 ],
 p2_bottoms: [
-{ id: 'P2_DOT_SKIRT', code: '#0203852', codeName: 'DOT SKIRT', name: '도트 스커트', image: 'p2-dotskirt.png' },
-{ id: 'P2_CAPRI_BROWN', code: '#0203848', codeName: 'CAPRI BROWN', name: '카프리 브라운 팬츠', image: 'p2-capri brown.png', blueWin: true, koreanDesc: '시크하고 세련된 무드의 브라운 슬림 카프리.' },
-{ id: 'P2_BALLOON_JEANS', code: '#0203862', codeName: 'BALLOON JEANS', name: '벌룬핏 와이드 진', image: 'p2-balloon-fit jeans.png' },
-{ id: 'P2_TIERED_SKIRT', code: '#0203863', codeName: 'TIERED SKIRT', name: '캉캉 티어드 스커트', image: 'p2-tiered skirt .png' },
-{ id: 'P2_LOWRISE', code: '#0203846', codeName: 'LOW-RISE JEAN', name: '로우라이즈 진', image: 'p2-lowrise.png', blueWin: true, koreanDesc: '골반 라인을 강조해 힙하게 돌아온 부츠컷 로우라이즈.' },
-{ id: 'P2_JEANS_HOTPANTS', code: '#0203853', codeName: 'DENIM HOTPANTS', name: '데님 숏팬츠', image: 'p2-jeans.png' },
-{ id: 'P2_CAPRI_JEAN', code: '#0203847', codeName: 'CAPRI DENIM', name: '카프리 데님 팬츠', image: 'p2-capri jean.png', blueWin: true, koreanDesc: '트렌디하게 돌아온 슬림 핏의 7부 카프리 진.' },
-{ id: 'P2_TRACKSUIT', code: '#0203854', codeName: 'TRACK PANTS', name: '스타 트랙 팬츠', image: 'p2-tracksuit.png' },
-{ id: 'P2_SCHOOL_SKIRT', code: '#0203851', codeName: 'PLEATED SKIRT', name: '플리츠 스커트', image: 'p2-schooluniformskirt.png' },
-{ id: 'P2_DENIM_SKIRT', code: '#0203861', codeName: 'DENIM SKIRT', name: '다크 데님 미니스커트', image: 'p2-denim skirt.png' }
+  { id: 'P2_DOT_SKIRT', code: '#0203852', codeName: 'DOT SKIRT', name: '도트 스커트', image: 'p2-dotskirt.png' },
+  { id: 'P2_CAPRI_BROWN', code: '#0203848', codeName: 'CAPRI BROWN', name: '카프리 브라운 팬츠', image: 'p2-capri brown.png', blueWin: true, koreanDesc: '시크하고 세련된 무드의 브라운 슬림 카프리.' },
+  { id: 'P2_BALLOON_JEANS', code: '#0203862', codeName: 'BALLOON JEANS', name: '벌룬핏 와이드 진', image: 'p2-balloon-fit jeans.png' },
+  { id: 'P2_TIERED_SKIRT', code: '#0203863', codeName: 'TIERED SKIRT', name: '캉캉 티어드 스커트', image: 'p2-tiered skirt .png' },
+  { id: 'P2_LOWRISE', code: '#0203846', codeName: 'LOW-RISE JEAN', name: '로우라이즈 진', image: 'p2-lowrise.png', blueWin: true, koreanDesc: '골반 라인을 강조해 힙하게 돌아온 부츠컷 로우라이즈.' },
+  { id: 'P2_JEANS_HOTPANTS', code: '#0203853', codeName: 'DENIM HOTPANTS', name: '데님 숏팬츠', image: 'p2-jeans.png' },
+  { id: 'P2_CAPRI_JEAN', code: '#0203847', codeName: 'CAPRI DENIM', name: '카프리 데님 팬츠', image: 'p2-capri jean.png', blueWin: true, koreanDesc: '트렌디하게 돌아온 슬림 핏의 7부 카프리 진.' },
+  { id: 'P2_TRACKSUIT', code: '#0203854', codeName: 'TRACK PANTS', name: '스타 트랙 팬츠', image: 'p2-tracksuit.png' },
+  { id: 'P2_SCHOOL_SKIRT', code: '#0203851', codeName: 'PLEATED SKIRT', name: '플리츠 스커트', image: 'p2-schooluniformskirt.png' },
+  { id: 'P2_DENIM_SKIRT', code: '#0203861', codeName: 'DENIM SKIRT', name: '다크 데님 미니스커트', image: 'p2-denim skirt.png' }
 ],
 p2_shoes: [
-{ id: 'P2_WHITE_FUR', code: '#0304781', codeName: 'WHITE FUR SHOES', name: '화이트 퍼 부츠', image: 'p2-white fur shoes.png' },
-{ id: 'P2_JELLYSHOES', code: '#0304776', codeName: 'JELLY SHOES', name: '핑크 젤리슈즈', image: 'p2-jellyshoes.png', blueWin: true, koreanDesc: '투명하고 영롱한 무드로 재탄생한 핑크 글리터 젤리슈즈.' },
-{ id: 'P2_BALLETCORE', code: '#0304777', codeName: 'BALLET CORE SHOES', name: '발레코어 슈즈', image: 'p2-balletcore.png' },
-{ id: 'P2_MARYJANE', code: '#0304774', codeName: 'MARY JANE SHOES', name: '메리제인 슈즈', image: 'p2-maryjane.png', blueWin: true, koreanDesc: '모던한 스트랩 디테일로 사랑받는 클래식 메리제인.' },
-{ id: 'P2_LONGBOOTS', code: '#0304775', codeName: 'LONG BOOTS', name: '블랙 플랫폼 롱부츠', image: 'p2-longboost.png' },
-{ id: 'P2_UGG', code: '#0304773', codeName: 'UGG BOOTS', name: '어그 부츠', image: 'p2-ugg.png' }
+  { id: 'P2_WHITE_FUR', code: '#0304781', codeName: 'WHITE FUR SHOES', name: '화이트 퍼 부츠', image: 'p2-white fur shoes.png' },
+  { id: 'P2_JELLYSHOES', code: '#0304776', codeName: 'JELLY SHOES', name: '젤리슈즈', image: 'p2-jellyshoes.png', blueWin: true, koreanDesc: '투명하고 영롱한 무드로 재탄생한 핑크 글리터 젤리슈즈.' },
+  { id: 'P2_BALLETCORE', code: '#0304777', codeName: 'BALLET CORE SHOES', name: '발레코어 슈즈', image: 'p2-balletcore.png' },
+  { id: 'P2_MARYJANE', code: '#0304774', codeName: 'MARY JANE SHOES', name: '메리제인 슈즈', image: 'p2-maryjane.png', blueWin: true, koreanDesc: '모던한 스트랩 디테일로 사랑받는 클래식 메리제인.' },
+  { id: 'P2_LONGBOOTS', code: '#0304775', codeName: 'LONG BOOTS', name: '블랙 플랫폼 롱부츠', image: 'p2-longboost.png' },
+  { id: 'P2_UGG', code: '#0304773', codeName: 'UGG BOOTS', name: '어그 부츠', image: 'p2-ugg.png' }
 ],
 p2_acc: [
-{ id: 'P2_KNEE_SOCKS', code: '#0494852', codeName: 'KNEE-HIGH SOCKS', name: '니하이 삭스', image: 'p2-knee-high Socks .png' },
-{ id: 'P2_LEOPARD_GLASSES', code: '#0494845', codeName: 'LEOPARD GLASSES', name: '레오파드 안경', image: 'p2-leopardglasses.png' },
-{ id: 'P2_WIRED_EARPHONE', code: '#0494851', codeName: 'WIRED EARPHONES', name: '클래식 줄이어폰', image: 'p2-wired earphones.png', blueWin: true, koreanDesc: '힙스터들의 필수품으로 다시 돌아온 아날로그 줄이어폰.' },
-{ id: 'P2_NEWERA', code: '#0494846', codeName: 'NEWERA CAP', name: '뉴에라 볼캡', image: 'p2-newera.png' },
-{ id: 'P2_MINT_SCRUNCHIE', code: '#0494842', codeName: 'MINT SCRUNCHIE', name: '민트 곱창 밴드', image: 'p2-mintscrunchie.png' },
-{ id: 'P2_BELT', code: '#0494844', codeName: 'Y2K BELT', name: '버클 벨트', image: 'p2-belt.png' },
-{ id: 'P2_BLACKSOCKS', code: '#0304771', codeName: 'BLACK SOCKS', name: '블랙 중양말', image: 'p2-blacksocks.png' },
-{ id: 'P2_WHITESOCKS', code: '#0304772', codeName: 'WHITE SOCKS', name: '화이트 무릎 양말', image: 'p2-whitesocks.png' },
-{ id: 'P2_APPLEWATCH', code: '#0494841', codeName: 'APPLE WATCH', name: '애플 워치', image: 'p2-applewatch.png' },
-{ id: 'P2_RIMLESS_GLASSES', code: '#0494847', codeName: 'RIMLESS GLASSES', name: '무테 안경', image: 'p2-rimlessglasses.png', blueWin: true, koreanDesc: '긱시크 무드를 완성하는 미니멀하고 쿨한 무테 안경.' },
-{ id: 'P2_BLACK_SCRUNCHIE', code: '#0494843', codeName: 'BLACK SCRUNCHIE', name: '블랙 곱창 밴드', image: 'p2-blackscrunchie.png' }
+  { id: 'P2_KNEE_SOCKS', code: '#0494852', codeName: 'KNEE-HIGH SOCKS', name: '니하이 삭스', image: 'p2-knee-high Socks .png' },
+  { id: 'P2_LEOPARD_GLASSES', code: '#0494845', codeName: 'LEOPARD GLASSES', name: '레오파드 안경', image: 'p2-leopardglasses.png' },
+  { id: 'P2_WIRED_EARPHONE', code: '#0494851', codeName: 'WIRED EARPHONES', name: '줄 이어폰', image: 'p2-wired earphones.png', blueWin: true, koreanDesc: '힙스터들의 필수품으로 다시 돌아온 아날로그 줄이어폰.' },
+  { id: 'P2_NEWERA', code: '#0494846', codeName: 'NEWERA CAP', name: '뉴에라 볼캡', image: 'p2-newera.png' },
+  { id: 'P2_MINT_SCRUNCHIE', code: '#0494842', codeName: 'MINT SCRUNCHIE', name: '민트 곱창 밴드', image: 'p2-mintscrunchie.png' },
+  { id: 'P2_BELT', code: '#0494844', codeName: 'Y2K BELT', name: '버클 벨트', image: 'p2-belt.png' },
+  { id: 'P2_BLACKSOCKS', code: '#0304771', codeName: 'BLACK SOCKS', name: '블랙 중양말', image: 'p2-blacksocks.png' },
+  { id: 'P2_WHITESOCKS', code: '#0304772', codeName: 'WHITE SOCKS', name: '화이트 무릎 양말', image: 'p2-whitesocks.png' },
+  { id: 'P2_APPLEWATCH', code: '#0494841', codeName: 'APPLE WATCH', name: '애플 워치', image: 'p2-applewatch.png' },
+  { id: 'P2_RIMLESS_GLASSES', code: '#0494847', codeName: 'RIMLESS GLASSES', name: '무테 안경', image: 'p2-rimlessglasses.png', blueWin: true, koreanDesc: '긱시크 무드를 완성하는 미니멀하고 쿨한 무테 안경.' },
+  { id: 'P2_BLACK_SCRUNCHIE', code: '#0494843', codeName: 'BLACK SCRUNCHIE', name: '블랙 곱창 밴드', image: 'p2-blackscrunchie.png' }
 ],
 
+/* 커스텀 뷰티 (피부 / 헤어 / 메이크업) */
 skins: [
   { id: 'skin1', name: '기본 (브라이트 피치)', color: '#fff2ea', image: 'p1-avatar.png' },
   { id: 'skin2', name: '웜 라이트 베이지', color: '#fcdbc1', image: 'p1-2-skin.png' },
@@ -2321,508 +2369,611 @@ let currentSelectedSkin = wardrobeData.skins[0];
 let currentSelectedP2Skin = wardrobeData.p2_skins[0];
 let overlayTimeout;
 
+/* ================= 픽셀 충돌 검사 ================= */
+const imgBitmapCache = new Map();
+function getLayerPixelAlpha(imgElem, canvasX, canvasY) {
+  if (!imgElem || !imgElem.naturalWidth || !imgElem.naturalHeight) return 0;
+  
+  let cached = imgBitmapCache.get(imgElem.src);
+  if (!cached) {
+    const cvs = document.createElement('canvas');
+    cvs.width = 270;
+    cvs.height = 480;
+    const c = cvs.getContext('2d', { willReadFrequently: true });
+    
+    const nw = imgElem.naturalWidth;
+    const nh = imgElem.naturalHeight;
+    const imgRatio = nw / nh;
+    const targetRatio = 270 / 480;
+    let rw, rh;
+    if (imgRatio > targetRatio) {
+      rw = 270;
+      rh = 270 / imgRatio;
+    } else {
+      rh = 480;
+      rw = 480 * imgRatio;
+    }
+    const rx = (270 - rw) / 2;
+    const ry = (480 - rh) / 2;
+    c.drawImage(imgElem, rx, ry, rw, rh);
+    cached = c;
+    imgBitmapCache.set(imgElem.src, cached);
+  }
+
+  const left = parseFloat(imgElem.style.left || '0');
+  const top = parseFloat(imgElem.style.top || '0');
+  
+  let scaleVal = 1;
+  const sMatch = (imgElem.style.transform || '').match(/scale\(([^)]+)\)/);
+  if (sMatch) scaleVal = parseFloat(sMatch[1]);
+
+  const centerX = left + 135;
+  const centerY = top + 240;
+
+  const origX = (canvasX - centerX) / scaleVal + 135;
+  const origY = (canvasY - centerY) / scaleVal + 240;
+
+  if (origX < 0 || origX >= 270 || origY < 0 || origY >= 480) return 0;
+
+  try {
+    const pixel = cached.getImageData(Math.floor(origX), Math.floor(origY), 1, 1).data;
+    return pixel[3];
+  } catch (e) {
+    return 255;
+  }
+}
+
+/* ================= Zine 코드 입력 & 페이지 전환 ================= */
+function verifyCode() {
+  const input = document.getElementById('zineCodeInput');
+  const code = (input.value || '').trim();
+  const errorMsg = document.getElementById('introErrorMsg');
+
+  if (!CODE_BOOK[code]) {
+    errorMsg.innerText = '올바른 5자리 Zine 코드를 입력해주세요!';
+    input.value = '';
+    return;
+  }
+
+  errorMsg.innerText = '';
+  const meta = CODE_BOOK[code];
+  launchGame(meta.part, meta.category, meta.id);
+}
+
+function launchGame(partNum, targetCategory, targetItemId) {
+  const isPart2 = (partNum === 2);
+  const body = document.body;
+
+  if (isPart2) {
+    body.classList.add('dark-mode');
+  } else {
+    body.classList.remove('dark-mode');
+  }
+
+  syncThemeUI(isPart2);
+  showCategory(targetCategory || 'tops');
+  
+  if (targetCategory && targetItemId) {
+    highlightAndFocusItem(targetCategory, targetItemId);
+  }
+
+  document.getElementById('intro-screen').classList.add('hide');
+}
+
+function returnToIntro() {
+  document.getElementById('intro-screen').classList.remove('hide');
+  document.getElementById('zineCodeInput').value = '';
+  document.getElementById('introErrorMsg').innerText = '';
+}
+
+function highlightAndFocusItem(category, itemId) {
+  setTimeout(() => {
+    const box = document.getElementById(`wardrobe-box-${itemId}`);
+    if (box) {
+      box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      box.click();
+    }
+  }, 300);
+}
+
+function syncThemeUI(isPart2) {
+  const themeText = document.getElementById('themeText');
+  const addressInput = document.getElementById('addressInput');
+  const baseCharacter = document.getElementById('base-character');
+  const profileTitleText = document.getElementById('profileTitleText');
+
+  if (isPart2) {
+    themeText.innerText = 'Part. 2';
+    addressInput.value = 'www.part2-is-the-new-part1.com';
+    baseCharacter.src = currentSelectedP2Skin.image || 'p2-avatar.png';
+    baseCharacter.alt = 'Part 2 캐릭터 베이스';
+    profileTitleText.innerText = '페이지_소개.txt';
+    if (wardrobeData.p2_hairs.length > 0) applyCustom('hairs', wardrobeData.p2_hairs[0]);
+  } else {
+    themeText.innerText = 'Part. 1';
+    addressInput.value = 'http://www.cyworld.com/anya_y2k_room';
+    baseCharacter.src = currentSelectedSkin.image || 'p1-avatar.png';
+    baseCharacter.alt = 'Part 1 캐릭터 베이스';
+    profileTitleText.innerText = '페이지_소개.txt';
+    if (wardrobeData.hairs.length > 0) applyCustom('hairs', wardrobeData.hairs[0]);
+  }
+  switchBeautyTab(currentBeautyCategory);
+}
+
+/* ================= 옷장 및 인터랙션 시스템 ================= */
 function showCategory(category, btnElement) {
-currentCategory = category;
-document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-if(btnElement) btnElement.classList.add('active');
+  currentCategory = category;
+  document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+  if (btnElement) {
+    btnElement.classList.add('active');
+  } else {
+    const catIndex = ['tops','bottoms','shoes','acc'].indexOf(category);
+    if (catIndex > -1) {
+      const targetBtn = document.querySelectorAll('.category-btn')[catIndex];
+      if (targetBtn) targetBtn.classList.add('active');
+    }
+  }
 
-const isDarkMode = document.body.classList.contains('dark-mode');
-const grid = document.getElementById('item-grid');
-grid.innerHTML = '';
+  const isDarkMode = document.body.classList.contains('dark-mode');
+  const grid = document.getElementById('item-grid');
+  grid.innerHTML = '';
 
-const activeDataKey = isDarkMode ? `p2_${category}` : category;
-const currentItems = wardrobeData[activeDataKey] || [];
+  const activeDataKey = isDarkMode ? `p2_${category}` : category;
+  const currentItems = wardrobeData[activeDataKey] || [];
 
-if (currentItems.length === 0) {
-  grid.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; color: #888; font-size: 11px; padding: 40px 0;">아이템이 없습니다.</div>`;
-  return;
-}
+  if (currentItems.length === 0) {
+    grid.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; color: #888; font-size: 11px; padding: 40px 0;">아이템이 없습니다.</div>`;
+    return;
+  }
 
-currentItems.forEach(item => {
-const box = document.createElement('div');
-const isUsed = usedItemIds.has(item.id);
-let boxClasses = item.blueWin ? 'clothing-win-box blue-win' : 'clothing-win-box';
-if (isUsed) boxClasses += ' in-use';
-box.className = boxClasses;
-box.id = `wardrobe-box-${item.id}`;
-box.setAttribute('draggable', isUsed ? 'false' : 'true');
+  currentItems.forEach(item => {
+    const box = document.createElement('div');
+    const isUsed = usedItemIds.has(item.id);
+    let boxClasses = item.blueWin ? 'clothing-win-box blue-win' : 'clothing-win-box';
+    if (isUsed) boxClasses += ' in-use';
+    box.className = boxClasses;
+    box.id = `wardrobe-box-${item.id}`;
+    box.setAttribute('draggable', isUsed ? 'false' : 'true');
 
-box.innerHTML = `
-<div class="win-titlebar">
-<span>${item.codeName}.exe</span>
-<div class="win-buttons">
-<div class="win-btn win-btn-close ${isUsed ? 'active-remove' : ''}" onclick="event.stopPropagation(); removeDynamicItemById('${item.id}');">✕</div>
-</div>
-</div>
-<div class="win-body">
-<img src="${item.image}" alt="${item.codeName}" class="wardrobe-${category}">
-</div>
-`;
+    box.innerHTML = `
+      <div class="win-titlebar">
+        <span>${item.codeName}.exe</span>
+        <div class="win-buttons">
+          <div class="win-btn win-btn-close ${isUsed ? 'active-remove' : ''}" onclick="event.stopPropagation(); removeDynamicItemById('${item.id}');">✕</div>
+        </div>
+      </div>
+      <div class="win-body">
+        <img src="${item.image}" alt="${item.codeName}" class="wardrobe-${category}">
+      </div>
+    `;
 
-box.onclick = (e) => {
-e.stopPropagation();
-showItemInfo(category, item);
-};
+    box.onclick = (e) => {
+      e.stopPropagation();
+      showItemInfo(category, item);
+      if (usedItemIds.has(item.id)) {
+        bringItemToFront(item.id, item.codeName);
+      }
+    };
 
-box.ondragstart = (e) => {
-if (usedItemIds.has(item.id)) {
-e.preventDefault();
-return;
-}
-e.dataTransfer.setData('text/plain', JSON.stringify({ category, item }));
-};
+    box.ondragstart = (e) => {
+      if (usedItemIds.has(item.id)) {
+        e.preventDefault();
+        return;
+      }
+      e.dataTransfer.setData('text/plain', JSON.stringify({ category, item }));
+    };
 
-grid.appendChild(box);
-});
+    grid.appendChild(box);
+  });
 }
 
 function showItemInfo(category, item) {
-const overlay = document.getElementById('itemOverlay');
-const overlayCode = document.getElementById('overlayCode');
-const overlayName = document.getElementById('overlayName');
-const overlayDesc = document.getElementById('overlayDesc');
-const overlayTrendTag = document.getElementById('overlayTrendTag');
+  const overlay = document.getElementById('itemOverlay');
+  const overlayCode = document.getElementById('overlayCode');
+  const overlayName = document.getElementById('overlayName');
+  const overlayDesc = document.getElementById('overlayDesc');
+  const overlayTrendTag = document.getElementById('overlayTrendTag');
 
-overlayCode.innerText = item.code || '';
-overlayName.innerText = item.name ? `${item.name} (${item.codeName})` : item.codeName;
+  overlayCode.innerText = item.code || '';
+  overlayName.innerText = item.name ? `${item.name} (${item.codeName})` : item.codeName;
 
-if (item.blueWin) {
-overlay.classList.add('trend-active');
-overlayTrendTag.style.display = 'inline-block';
-overlayTrendTag.innerText = document.body.classList.contains('dark-mode') ? '★ 재유행템 ★' : '★ 2000년대 유행템 ★';
-} else {
-overlay.classList.remove('trend-active');
-overlayTrendTag.style.display = 'none';
-}
+  if (item.blueWin) {
+    overlay.classList.add('trend-active');
+    overlayTrendTag.style.display = 'inline-block';
+    overlayTrendTag.innerText = document.body.classList.contains('dark-mode') ? '★ 재유행템 ★' : '★ 2000년대 유행템 ★';
+  } else {
+    overlay.classList.remove('trend-active');
+    overlayTrendTag.style.display = 'none';
+  }
 
-if (item.koreanDesc) {
-overlayDesc.innerText = item.koreanDesc;
-overlayDesc.style.display = 'block';
-} else {
-overlayDesc.innerText = '';
-overlayDesc.style.display = 'none';
-}
+  if (item.koreanDesc) {
+    overlayDesc.innerText = item.koreanDesc;
+    overlayDesc.style.display = 'block';
+  } else {
+    overlayDesc.innerText = '';
+    overlayDesc.style.display = 'none';
+  }
 
-overlay.style.display = 'block';
+  overlay.style.display = 'block';
 
-clearTimeout(overlayTimeout);
-overlayTimeout = setTimeout(() => {
-overlay.style.display = 'none';
-document.getElementById('infoLine').style.display = 'none';
-overlay.classList.remove('trend-active');
-}, 2800);
+  clearTimeout(overlayTimeout);
+  overlayTimeout = setTimeout(() => {
+    overlay.style.display = 'none';
+    document.getElementById('infoLine').style.display = 'none';
+    overlay.classList.remove('trend-active');
+  }, 2800);
 
-drawInfoLine(category);
+  drawInfoLine(category);
 }
 
 function switchBeautyTab(category, btnElement) {
-currentBeautyCategory = category;
+  currentBeautyCategory = category;
 
-document.querySelectorAll('.beauty-tab-btn').forEach(btn => btn.classList.remove('active'));
-if (btnElement) {
-  btnElement.classList.add('active');
-} else {
-  const targetIndex = category === 'hairs' ? 0 : (category === 'skins' ? 1 : 2);
-  const targetBtn = document.querySelectorAll('.beauty-tab-btn')[targetIndex];
-  if (targetBtn) targetBtn.classList.add('active');
-}
+  document.querySelectorAll('.beauty-tab-btn').forEach(btn => btn.classList.remove('active'));
+  if (btnElement) {
+    btnElement.classList.add('active');
+  } else {
+    const targetIndex = category === 'hairs' ? 0 : (category === 'skins' ? 1 : 2);
+    const targetBtn = document.querySelectorAll('.beauty-tab-btn')[targetIndex];
+    if (targetBtn) targetBtn.classList.add('active');
+  }
 
-const isDarkMode = document.body.classList.contains('dark-mode');
-const panel = document.getElementById('beautyOptionsPanel');
-panel.innerHTML = '';
+  const isDarkMode = document.body.classList.contains('dark-mode');
+  const panel = document.getElementById('beautyOptionsPanel');
+  panel.innerHTML = '';
 
-let activeList = [];
-if (isDarkMode) {
-  if (category === 'skins') activeList = wardrobeData.p2_skins;
-  else if (category === 'hairs') activeList = wardrobeData.p2_hairs;
-  else if (category === 'makeups') activeList = wardrobeData.p2_makeups;
-} else {
-  activeList = wardrobeData[category] || [];
-}
+  let activeList = [];
+  if (isDarkMode) {
+    if (category === 'skins') activeList = wardrobeData.p2_skins;
+    else if (category === 'hairs') activeList = wardrobeData.p2_hairs;
+    else if (category === 'makeups') activeList = wardrobeData.p2_makeups;
+  } else {
+    activeList = wardrobeData[category] || [];
+  }
 
-if (activeList.length > 0) {
-activeList.forEach(item => {
-const btn = document.createElement('button');
-btn.className = 'custom-btn';
-btn.style.background = item.color || '#fff';
-btn.title = item.name || item.id || category;
-btn.onclick = () => applyCustom(category, item);
-panel.appendChild(btn);
-});
+  if (activeList.length > 0) {
+    activeList.forEach(item => {
+      const btn = document.createElement('button');
+      btn.className = 'custom-btn';
+      btn.style.background = item.color || '#fff';
+      btn.title = item.name || item.id || category;
+      btn.onclick = () => applyCustom(category, item);
+      panel.appendChild(btn);
+    });
 
-const resetBtn = document.createElement('button');
-resetBtn.className = 'beauty-reset-btn';
-resetBtn.innerText = '초기화';
-if (category === 'skins') {
-resetBtn.onclick = () => applyCustom('skins', isDarkMode ? wardrobeData.p2_skins[0] : wardrobeData.skins[0]);
-} else if (category === 'hairs') {
-resetBtn.onclick = () => applyCustom('hairs', isDarkMode ? wardrobeData.p2_hairs[0] : wardrobeData.hairs[0]);
-} else if (category === 'makeups') {
-resetBtn.onclick = () => {
-const makeupLayer = document.getElementById('layer-makeup');
-if (makeupLayer) {
-makeupLayer.removeAttribute('src');
-makeupLayer.style.display = 'none';
-}
-};
-}
-panel.appendChild(resetBtn);
-} else {
-  panel.innerHTML = '<span style="font-size:10px; color:#888; margin:auto;">선택 가능한 옵션이 없습니다.</span>';
-}
+    const resetBtn = document.createElement('button');
+    resetBtn.className = 'beauty-reset-btn';
+    resetBtn.innerText = '초기화';
+    if (category === 'skins') {
+      resetBtn.onclick = () => applyCustom('skins', isDarkMode ? wardrobeData.p2_skins[0] : wardrobeData.skins[0]);
+    } else if (category === 'hairs') {
+      resetBtn.onclick = () => applyCustom('hairs', isDarkMode ? wardrobeData.p2_hairs[0] : wardrobeData.hairs[0]);
+    } else if (category === 'makeups') {
+      resetBtn.onclick = () => {
+        const makeupLayer = document.getElementById('layer-makeup');
+        if (makeupLayer) {
+          makeupLayer.removeAttribute('src');
+          makeupLayer.style.display = 'none';
+        }
+      };
+    }
+    panel.appendChild(resetBtn);
+  } else {
+    panel.innerHTML = '<span style="font-size:10px; color:#888; margin:auto;">선택 가능한 옵션이 없습니다.</span>';
+  }
 }
 
 function applyCustom(category, item) {
-const isDarkMode = document.body.classList.contains('dark-mode');
+  const isDarkMode = document.body.classList.contains('dark-mode');
 
-if (category === 'skins') {
-if (isDarkMode) currentSelectedP2Skin = item;
-else currentSelectedSkin = item;
+  if (category === 'skins') {
+    if (isDarkMode) currentSelectedP2Skin = item;
+    else currentSelectedSkin = item;
 
-const baseCharacter = document.getElementById('base-character');
-baseCharacter.style.filter = 'none';
-if (item.image) {
-baseCharacter.src = item.image;
-}
-} else if (category === 'hairs') {
-const layer = document.getElementById('layer-hair');
-if (layer) {
-layer.src = item.image;
-layer.style.display = 'block';
-
-if (isDarkMode) {
-  Object.assign(layer.style, { transform: 'scale(1.325) translateY(-60.8px) translateX(-0.1px)' });
-} else {
-  Object.assign(layer.style, { transform: 'scale(0.38) translateY(-82px) translateX(-1px)' });
-}
-}
-} else if (category === 'makeups') {
-const layer = document.getElementById('layer-makeup');
-if (layer) {
-layer.src = item.image;
-layer.style.display = 'block';
-if (isDarkMode) {
-Object.assign(layer.style, { transform: 'scale(1.32) translateY(-61px)' });
-} else {
-  /* Part 1 메이크업: 얼굴 크기 및 위치 조정 */
-  Object.assign(layer.style, { transform: 'scale(1.12) translateY(-8px)' });
-}
-
-}
-}
+    const baseCharacter = document.getElementById('base-character');
+    baseCharacter.style.filter = 'none';
+    if (item.image) baseCharacter.src = item.image;
+  } else if (category === 'hairs') {
+    const layer = document.getElementById('layer-hair');
+    if (layer) {
+      layer.src = item.image;
+      layer.style.display = 'block';
+      if (isDarkMode) {
+        Object.assign(layer.style, { transform: 'scale(1.325) translateY(-60.8px) translateX(-0.1px)' });
+      } else {
+        Object.assign(layer.style, { transform: 'scale(0.38) translateY(-82px) translateX(-1px)' });
+      }
+    }
+  } else if (category === 'makeups') {
+    const layer = document.getElementById('layer-makeup');
+    if (layer) {
+      layer.src = item.image;
+      layer.style.display = 'block';
+      if (isDarkMode) {
+        Object.assign(layer.style, { transform: 'scale(1.32) translateY(-61px)' });
+      } else {
+        Object.assign(layer.style, { transform: 'scale(1.12) translateY(-8px)' });
+      }
+    }
+  }
 }
 
 function removeDynamicItemById(itemId) {
-const target = document.getElementById(`placed-item-${itemId}`);
-if (target) target.remove();
-usedItemIds.delete(itemId);
-const wardrobeBox = document.getElementById(`wardrobe-box-${itemId}`);
-if (wardrobeBox) {
-wardrobeBox.classList.remove('in-use');
-wardrobeBox.setAttribute('draggable', 'true');
-const closeBtn = wardrobeBox.querySelector('.win-btn-close');
-if (closeBtn) closeBtn.classList.remove('active-remove');
-}
+  const target = document.getElementById(`placed-item-${itemId}`);
+  if (target) target.remove();
+  usedItemIds.delete(itemId);
+  const wardrobeBox = document.getElementById(`wardrobe-box-${itemId}`);
+  if (wardrobeBox) {
+    wardrobeBox.classList.remove('in-use');
+    wardrobeBox.setAttribute('draggable', 'true');
+    const closeBtn = wardrobeBox.querySelector('.win-btn-close');
+    if (closeBtn) closeBtn.classList.remove('active-remove');
+  }
 }
 
 function resetAllItems() {
-document.getElementById('dynamicLayersContainer').innerHTML = '';
-document.getElementById('overHairLayersContainer').innerHTML = '';
-usedItemIds.clear();
-document.querySelectorAll('.clothing-win-box').forEach(box => {
-box.classList.remove('in-use');
-box.setAttribute('draggable', 'true');
-const closeBtn = box.querySelector('.win-btn-close');
-if (closeBtn) closeBtn.classList.remove('active-remove');
-});
-const makeupLayer = document.getElementById('layer-makeup');
-if (makeupLayer) {
-makeupLayer.removeAttribute('src');
-makeupLayer.style.display = 'none';
-}
-clothesZIndexCounter = 35;
-overHairZIndexCounter = 910;
-const isDarkMode = document.body.classList.contains('dark-mode');
-if (!isDarkMode) {
-  if (wardrobeData.hairs.length > 0) applyCustom('hairs', wardrobeData.hairs[0]);
-  if (wardrobeData.skins.length > 0) applyCustom('skins', wardrobeData.skins[0]);
-} else {
-  if (wardrobeData.p2_hairs.length > 0) applyCustom('hairs', wardrobeData.p2_hairs[0]);
-  if (wardrobeData.p2_skins.length > 0) applyCustom('skins', wardrobeData.p2_skins[0]);
-}
-document.getElementById('itemOverlay').style.display = 'none';
-document.getElementById('infoLine').style.display = 'none';
+  document.getElementById('dynamicLayersContainer').innerHTML = '';
+  document.getElementById('overHairLayersContainer').innerHTML = '';
+  usedItemIds.clear();
+  document.querySelectorAll('.clothing-win-box').forEach(box => {
+    box.classList.remove('in-use');
+    box.setAttribute('draggable', 'true');
+    const closeBtn = box.querySelector('.win-btn-close');
+    if (closeBtn) closeBtn.classList.remove('active-remove');
+  });
+  const makeupLayer = document.getElementById('layer-makeup');
+  if (makeupLayer) {
+    makeupLayer.removeAttribute('src');
+    makeupLayer.style.display = 'none';
+  }
+  clothesZIndexCounter = 35;
+  overHairZIndexCounter = 910;
+  const isDarkMode = document.body.classList.contains('dark-mode');
+  if (!isDarkMode) {
+    if (wardrobeData.hairs.length > 0) applyCustom('hairs', wardrobeData.hairs[0]);
+    if (wardrobeData.skins.length > 0) applyCustom('skins', wardrobeData.skins[0]);
+  } else {
+    if (wardrobeData.p2_hairs.length > 0) applyCustom('hairs', wardrobeData.p2_hairs[0]);
+    if (wardrobeData.p2_skins.length > 0) applyCustom('skins', wardrobeData.p2_skins[0]);
+  }
+  document.getElementById('itemOverlay').style.display = 'none';
+  document.getElementById('infoLine').style.display = 'none';
 }
 
 function drawInfoLine(category) {
-const line = document.getElementById('infoLine');
-const overlay = document.getElementById('itemOverlay');
-const character = document.getElementById('base-character');
+  const line = document.getElementById('infoLine');
+  const overlay = document.getElementById('itemOverlay');
+  const character = document.getElementById('base-character');
 
-const startPoints = {
-'tops': { x: character.offsetLeft + 100, y: character.offsetTop + 150 },
-'bottoms': { x: character.offsetLeft + 100, y: character.offsetTop + 240 },
-'shoes': { x: character.offsetLeft + 100, y: character.offsetTop + 450 },
-'acc': { x: character.offsetLeft + 100, y: character.offsetTop + 80 }
-};
-const start = startPoints[category] || startPoints['acc'];
-const end = { x: overlay.offsetLeft + overlay.offsetWidth / 2, y: overlay.offsetTop + overlay.offsetHeight / 2 };
+  const startPoints = {
+    'tops': { x: character.offsetLeft + 100, y: character.offsetTop + 150 },
+    'bottoms': { x: character.offsetLeft + 100, y: character.offsetTop + 240 },
+    'shoes': { x: character.offsetLeft + 100, y: character.offsetTop + 450 },
+    'acc': { x: character.offsetLeft + 100, y: character.offsetTop + 80 }
+  };
+  const start = startPoints[category] || startPoints['acc'];
+  const end = { x: overlay.offsetLeft + overlay.offsetWidth / 2, y: overlay.offsetTop + overlay.offsetHeight / 2 };
 
-const dx = end.x - start.x;
-const dy = end.y - start.y;
-const length = Math.sqrt(dx * dx + dy * dy);
-const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+  const dx = end.x - start.x;
+  const dy = end.y - start.y;
+  const length = Math.sqrt(dx * dx + dy * dy);
+  const angle = Math.atan2(dy, dx) * 180 / Math.PI;
 
-line.style.width = `${length}px`;
-line.style.transform = `translate(${start.x}px, ${start.y}px) rotate(${angle}deg)`;
-line.style.display = 'block';
+  line.style.width = `${length}px`;
+  line.style.transform = `translate(${start.x}px, ${start.y}px) rotate(${angle}deg)`;
+  line.style.display = 'block';
 }
 
+/* ================= 캔버스 정밀 픽셀 히트테스트 & 터치/드래그 ================= */
 const characterCanvas = document.getElementById('characterCanvas');
-characterCanvas.ondragover = (e) => {
-e.preventDefault();
+
+characterCanvas.onpointerdown = (downEvent) => {
+  const rect = characterCanvas.getBoundingClientRect();
+  const canvasX = (downEvent.clientX - rect.left) / currentScale;
+  const canvasY = ((downEvent.clientY - rect.top) / currentScale) - 18;
+
+  const allPlaced = Array.from(document.querySelectorAll('#overHairLayersContainer img.clothing-layer, #dynamicLayersContainer img.clothing-layer'));
+  allPlaced.sort((a, b) => (parseInt(b.style.zIndex) || 0) - (parseInt(a.style.zIndex) || 0));
+
+  let hitLayer = null;
+  for (const layer of allPlaced) {
+    const alpha = getLayerPixelAlpha(layer, canvasX, canvasY);
+    if (alpha > 15) {
+      hitLayer = layer;
+      break;
+    }
+  }
+
+  if (!hitLayer) return;
+
+  downEvent.preventDefault();
+  const rawMeta = hitLayer.dataset.meta ? JSON.parse(hitLayer.dataset.meta) : null;
+  if (rawMeta) {
+    hitLayer.style.zIndex = getNextItemZIndex(rawMeta.item.codeName);
+    showItemInfo(rawMeta.category, rawMeta.item);
+  }
+
+  let startX = downEvent.clientX;
+  let startY = downEvent.clientY;
+  let initialLeft = parseFloat(hitLayer.style.left || '0');
+  let initialTop = parseFloat(hitLayer.style.top || '0');
+
+  function onDragMove(moveEvent) {
+    const dx = (moveEvent.clientX - startX) / currentScale;
+    const dy = (moveEvent.clientY - startY) / currentScale;
+
+    let nextLeft = initialLeft + dx;
+    let nextTop = initialTop + dy;
+
+    const clampLimitX = 115;
+    const clampLimitY = 220;
+    nextLeft = Math.max(-clampLimitX, Math.min(clampLimitX, nextLeft));
+    nextTop = Math.max(-clampLimitY, Math.min(clampLimitY, nextTop));
+
+    hitLayer.style.left = `${nextLeft}px`;
+    hitLayer.style.top = `${nextTop}px`;
+  }
+
+  function onDragEnd() {
+    document.removeEventListener('pointermove', onDragMove);
+    document.removeEventListener('pointerup', onDragEnd);
+  }
+  document.addEventListener('pointermove', onDragMove);
+  document.addEventListener('pointerup', onDragEnd);
 };
+
+characterCanvas.ondragover = (e) => e.preventDefault();
+
 characterCanvas.ondrop = (e) => {
-e.preventDefault();
-const rawData = e.dataTransfer.getData('text/plain');
-if (!rawData) return;
+  e.preventDefault();
+  const rawData = e.dataTransfer.getData('text/plain');
+  if (!rawData) return;
 
-try {
-const { category, item } = JSON.parse(rawData);
-if (category === 'hairs' || category === 'makeups') {
-applyCustom(category, item);
-return;
-}
+  try {
+    const { category, item } = JSON.parse(rawData);
+    if (category === 'hairs' || category === 'makeups') {
+      applyCustom(category, item);
+      return;
+    }
 
-if (usedItemIds.has(item.id)) return;
+    if (usedItemIds.has(item.id)) return;
 
-const isDarkMode = document.body.classList.contains('dark-mode');
+    const isDarkMode = document.body.classList.contains('dark-mode');
 
-const newLayer = document.createElement('img');
-newLayer.src = item.image;
-newLayer.className = 'clothing-layer';
-newLayer.id = `placed-item-${item.id}`;
-newLayer.title = "클릭: 앞으로 가져오기";
+    const newLayer = document.createElement('img');
+    newLayer.src = item.image;
+    newLayer.className = 'clothing-layer';
+    newLayer.id = `placed-item-${item.id}`;
+    newLayer.title = "클릭: 앞으로 가져오기";
+    newLayer.dataset.meta = JSON.stringify({ category, item });
 
-/* =========================================================================
-   [Part 1 아이템별 개별 크기(scale) 및 장착 좌표(x, y) 설정]
-   ========================================================================= */
-const p1_styles = {
-  /* 상의 */
-  'NUPTSE': { scale: 0.62, x: 0, y: -75 },
-  'PINK CROP SHIRT': { scale: 0.48, x: 0, y: -103 },
-  'FIELD JACKET': { scale: 0.99, x: 0.7, y: -8.5 },
-  'PINK STRIPED TOP': { scale: 0.6, x: 0, y: -75 },
-  'ADIDAS JERSEY': { scale: 0.6, x: 0, y: -68 },
-  'WHITE T-SHIRT': { scale: 0.58, x: 0, y: -75 },
-  'BABY T-SHIRT': { scale: 0.51, x: 0, y: -95.3 },
-  'LINGERIE DRESS': { scale: 0.32, x: 0, y: -75 },
+    const p1_styles = {
+      'NUPTSE': { scale: 0.62, x: 0, y: -75 },
+      'PINK CROP SHIRT': { scale: 0.48, x: 0, y: -103 },
+      'FIELD JACKET': { scale: 0.99, x: 0.7, y: -8.5 },
+      'PINK STRIPED TOP': { scale: 0.6, x: 0, y: -75 },
+      'ADIDAS JERSEY': { scale: 0.6, x: 0, y: -68 },
+      'WHITE T-SHIRT': { scale: 0.58, x: 0, y: -75 },
+      'BABY T-SHIRT': { scale: 0.51, x: 0, y: -95.3 },
+      'LINGERIE TOP': { scale: 0.32, x: 0, y: -75 },
+      'SHORTS': { scale: 0.48, x: 1.2, y: 0 },
+      'CAPRI DENIM': { scale: 0.41, x: 1.8, y: 47 },
+      'CAPRI BROWN': { scale: 0.425, x: -1, y: 47},
+      'COLOR SKINNY JEANS': { scale: 0.54, x: 0.3, y: 74 },
+      'LOW-RISE JEAN': { scale: 1.0, x: -0.1, y: 89 },
+      'TENNIS SKIRT': { scale: 0.54, x: 1.0, y: -5 },
+      'SUSPENDERS': { scale: 0.8, x: 1.5, y: 26 },
+      'JELLY SHOES': { scale: 0.32, x: -0.8, y: 218 },
+      'MARY JANE SHOES': { scale: 0.318, x: -2.3, y: 218 },
+      'ADIDAS SUPERSTAR': { scale: 0.35, x: 0.32, y: 220 },
+      'HEELYS': { scale: 0.4, x: 0, y: 220 },
+      'STILETTO HEEL': { scale: 0.34, x: 0, y: 220 },
+      'PLATFORM FLIP-FLOP': { scale: 0.4, x: 0, y: 220 },
+      'COLOR STOCKINGS': { scale: 0.6, x: 0, y: 98 },
+      'WIRED EARPHONES': { scale: 0.35, x: 2.3, y: -66 },
+      'BIG FRAME SUNGLASSES': { scale: 0.25, x: 0, y: -185 },
+      'HEADSET': { scale: 0.3, x: 0, y: -203 },
+      'RIMLESS GLASSES': { scale: 0.25, x: 0, y: -186 },
+      'NEWSBOY CAP': { scale: 0.35, x: 0, y: -220 }
+    };
 
-  /* 하의 */
-  'SHORTS': { scale: 0.48, x: 1.2, y: 0 },
-  'CAPRI DENIM': { scale: 0.41, x: 1.8, y: 47 },
-  'CAPRI BROWN': { scale: 0.425, x: -1, y: 47},
-  'COLOR SKINNY JEANS': { scale: 0.54, x: 0.3, y: 74 },
-  'LOW-RISE': { scale: 1.0, x: -0.1, y: 89 },
-  'TENNIS SKIRT': { scale: 0.54, x: 1.0, y: -5 },
-  'SUSPENDERS': { scale: 0.8, x: 1.5, y: 26 },
+    const p2_styles = {
+      'LEOPARD TANK': { scale: 1.32, x: 0, y: -2.5 },
+      'ADIDAS CROP TOP': { scale: 1.32, x: 0, y: -2.5 },
+      'LINGERIE TOP': { scale: 1.32, x: 0, y: -2.5 },
+      'PINK T-SHIRT': { scale: 1.32, x: 0, y: -2.5 },
+      'CARDIGAN': { scale: 1.32, x: 0, y: -2.5 },
+      'OFFSHOULDER TOP': { scale: 1.32, x: 0, y: -2.5 },
+      'ONE SHOULDER': { scale: 1.32, x: 0, y: -2.5 },
+      'HALTER WHITE TOP': { scale: 1.32, x: 0, y: -2.5 },
+      'UNDERBOOB HOOD': { scale: 1.32, x: 0, y: -2.5 },
+      'CROP HOODIE': { scale: 1.32, x: 0, y: -2.5 },
+      'MINT SLEEVELESS': { scale: 1.32, x: 0, y: -2.5 },
+      'WHITE SLEEVELESS': { scale: 1.32, x: 0, y: -2.5 },
+      'SAILOR TOP': { scale: 1.32, x: 0, y: -2.5 },
+      'DOT SKIRT': { scale: 1.32, x: 0, y: -2.5 },
+      'CAPRI BROWN': { scale: 1.32, x: 0, y: -2.5 },
+      'BALLOON JEANS': { scale: 1.32, x: 0, y: -2.5 },
+      'TIERED SKIRT': { scale: 1.32, x: 0, y: -2.5 },
+      'LOW-RISE JEAN': { scale: 1.32, x: 0, y: -2.5 },
+      'DENIM HOTPANTS': { scale: 1.32, x: 0, y: -2.5 },
+      'CAPRI DENIM': { scale: 1.32, x: 0, y: -2.5 },
+      'TRACK PANTS': { scale: 1.32, x: 0, y: -2.5 },
+      'PLEATED SKIRT': { scale: 1.32, x: 0, y: -2.5 },
+      'DENIM SKIRT': { scale: 1.32, x: 0, y: -2.5 },
+      'WHITE FUR SHOES': { scale: 1.32, x: 0, y: -2.5 },
+      'JELLY SHOES': { scale: 1.32, x: 0, y: -2.5 },
+      'BALLET CORE SHOES': { scale: 1.32, x: 0, y: -2.5 },
+      'MARY JANE SHOES': { scale: 1.32, x: 0, y: -2.5 },
+      'LONG BOOTS': { scale: 1.32, x: 0, y: -2.5 },
+      'UGG BOOTS': { scale: 1.32, x: 0, y: -2.5 },
+      'KNEE-HIGH SOCKS': { scale: 1.32, x: 0, y: -2.5 },
+      'LEOPARD GLASSES': { scale: 1.32, x: -0.5, y: -2.3 },
+      'WIRED EARPHONES': { scale: 1.32, x: 0, y: 0 },
+      'NEWERA CAP': { scale: 1.32, x: 0, y: -3 },
+      'MINT SCRUNCHIE': { scale: 1.32, x: 0, y: -2.5 },
+      'Y2K BELT': { scale: 1.32, x: 0, y: -2.5 },
+      'BLACK SOCKS': { scale: 1.32, x: 0, y: -2.5 },
+      'WHITE SOCKS': { scale: 1.32, x: 0, y: -2.5 },
+      'APPLE WATCH': { scale: 1.32, x: 0, y: -2.5 },
+      'RIMLESS GLASSES': { scale: 1.32, x: 0, y: -3.6 },
+      'BLACK SCRUNCHIE': { scale: 1.32, x: 0, y: -2.5 }
+    };
 
-  /* 신발 */
-  'JELLY SHOES': { scale: 0.32, x: -0.8, y: 218 },
-  'MARY JANE': { scale: 0.318, x: -2.3, y: 218 },
-  'ADIDAS SUPERSTAR': { scale: 0.35, x: 0.32, y: 220 },
-  'HEELYS': { scale: 0.4, x: 0, y: 220 },
-  'STILETTO HEEL': { scale: 0.34, x: 0, y: 220 },
-  'PLATFORM FLIP-FLOP': { scale: 0.4, x: 0, y: 220 },
+    const currentStyles = isDarkMode ? p2_styles : p1_styles;
+    const itemStyle = currentStyles[item.codeName] || (isDarkMode ? { scale: 1.32, x: 0, y: -2.5 } : { scale: 0.5, x: 0, y: 0 });
+    const scaleVal = itemStyle.scale;
 
-  /* 악세사리 */
-  'COLOR STOCKINGS': { scale: 0.6, x: 0, y: 98 },
-  'EARPHONES': { scale: 0.35, x: 2.3, y: -66 },
-  'BIG FRAME SUNGLASSES': { scale: 0.25, x: 0, y: -185 },
-  'HEADSET': { scale: 0.3, x: 0, y: -203 },
-  'RIMLESS GLASSES': { scale: 0.25, x: 0, y: -186 },
-  'NEWSBOY CAP': { scale: 0.35, x: 0, y: -220 }
-};
+    const dropX = itemStyle.x !== undefined ? itemStyle.x : 0;
+    const dropY = itemStyle.y !== undefined ? itemStyle.y : 0;
 
-/* =========================================================================
-   [Part 2 아이템별 크기 및 장착 좌표(x, y) 설정]
-   ========================================================================= */
-const p2_styles = {
-  /* 상의 */
-  'LEOPARD TANK': { scale: 1.32, x: 0, y: -2.5 },
-  'ADIDAS CROP TOP': { scale: 1.32, x: 0, y: -2.5 },
-  'LINGERIE DRESS': { scale: 1.32, x: 0, y: -2.5 },
-  'PINK T-SHIRT': { scale: 1.32, x: 0, y: -2.5 },
-  'CARDIGAN': { scale: 1.32, x: 0, y: -2.5 },
-  'OFFSHOULDER TOP': { scale: 1.32, x: 0, y: -2.5 },
-  'ONE SHOULDER': { scale: 1.32, x: 0, y: -2.5 },
-  'HALTER WHITE TOP': { scale: 1.32, x: 0, y: -2.5 },
-  'UNDERBOOB HOOD': { scale: 1.32, x: 0, y: -2.5 },
-  'CROP HOODIE': { scale: 1.32, x: 0, y: -2.5 },
-  'MINT SLEEVELESS': { scale: 1.32, x: 0, y: -2.5 },
-  'WHITE SLEEVELESS': { scale: 1.32, x: 0, y: -2.5 },
-  'SAILOR TOP': { scale: 1.32, x: 0, y: -2.5 },
+    newLayer.style.position = 'absolute';
+    newLayer.style.left = `${dropX}px`;
+    newLayer.style.top = `${dropY}px`;
+    newLayer.style.zIndex = getNextItemZIndex(item.codeName);
+    newLayer.style.transform = `scale(${scaleVal})`;
+    newLayer.style.transformOrigin = 'center center';
 
-  /* 하의 */
-  'DOT SKIRT': { scale: 1.32, x: 0, y: -2.5 },
-  'CAPRI BROWN': { scale: 1.32, x: 0, y: -2.5 },
-  'BALLOON JEANS': { scale: 1.32, x: 0, y: -2.5 },
-  'TIERED SKIRT': { scale: 1.32, x: 0, y: -2.5 },
-  'LOW-RISE JEAN': { scale: 1.32, x: 0, y: -2.5 },
-  'DENIM HOTPANTS': { scale: 1.32, x: 0, y: -2.5 },
-  'CAPRI DENIM': { scale: 1.32, x: 0, y: -2.5 },
-  'TRACK PANTS': { scale: 1.32, x: 0, y: -2.5 },
-  'PLEATED SKIRT': { scale: 1.32, x: 0, y: -2.5 },
-  'DENIM SKIRT': { scale: 1.32, x: 0, y: -2.5 },
+    if (OVER_HAIR_ITEMS.has(item.codeName)) {
+      document.getElementById('overHairLayersContainer').appendChild(newLayer);
+    } else {
+      document.getElementById('dynamicLayersContainer').appendChild(newLayer);
+    }
 
-  /* 신발 */
-  'WHITE FUR SHOES': { scale: 1.32, x: 0, y: -2.5 },
-  'JELLY SHOES': { scale: 1.32, x: 0, y: -2.5 },
-  'BALLET CORE SHOES': { scale: 1.32, x: 0, y: -2.5 },
-  'MARY JANE SHOES': { scale: 1.32, x: 0, y: -2.5 },
-  'LONG BOOTS': { scale: 1.32, x: 0, y: -2.5 },
-  'UGG BOOTS': { scale: 1.32, x: 0, y: -2.5 },
+    usedItemIds.add(item.id);
+    const wardrobeBox = document.getElementById(`wardrobe-box-${item.id}`);
+    if (wardrobeBox) {
+      wardrobeBox.classList.add('in-use');
+      wardrobeBox.setAttribute('draggable', 'false');
+      const closeBtn = wardrobeBox.querySelector('.win-btn-close');
+      if (closeBtn) closeBtn.classList.add('active-remove');
+    }
 
-  /* 악세사리 */
-  'KNEE-HIGH SOCKS': { scale: 1.32, x: 0, y: -2.5 },
-  'LEOPARD GLASSES': { scale: 1.32, x: -0.5, y: -2.3 },
-  'WIRED EARPHONES': { scale: 1.32, x: 0, y: 0 },
-  'NEWERA CAP': { scale: 1.32, x: 0, y: -3 },
-  'MINT SCRUNCHIE': { scale: 1.32, x: 0, y: -2.5 },
-  'Y2K BELT': { scale: 1.32, x: 0, y: -2.5 },
-  'BLACK SOCKS': { scale: 1.32, x: 0, y: -2.5 },
-  'WHITE SOCKS': { scale: 1.32, x: 0, y: -2.5 },
-  'APPLE WATCH': { scale: 1.32, x: 0, y: -2.5 },
-  'RIMLESS GLASSES': { scale: 1.32, x: 0, y: -3.6 },
-  'BLACK SCRUNCHIE': { scale: 1.32, x: 0, y: -2.5 }
-};
-
-const currentStyles = isDarkMode ? p2_styles : p1_styles;
-const itemStyle = currentStyles[item.codeName] || (isDarkMode ? { scale: 1.32, x: 0, y: -2.5 } : { scale: 0.5, x: 0, y: 0 });
-const scaleVal = itemStyle.scale;
-
-const dropX = itemStyle.x !== undefined ? itemStyle.x : 0;
-const dropY = itemStyle.y !== undefined ? itemStyle.y : 0;
-
-newLayer.style.position = 'absolute';
-newLayer.style.left = `${dropX}px`;
-newLayer.style.top = `${dropY}px`;
-newLayer.style.zIndex = getNextItemZIndex(item.codeName);
-newLayer.style.transform = `scale(${scaleVal})`;
-newLayer.style.transformOrigin = 'center center';
-
-newLayer.onpointerdown = (downEvent) => {
-downEvent.preventDefault();
-newLayer.style.zIndex = getNextItemZIndex(item.codeName);
-showItemInfo(category, item);
-
-let startX = downEvent.clientX;
-let startY = downEvent.clientY;
-let initialLeft = parseFloat(newLayer.style.left || '0');
-let initialTop = parseFloat(newLayer.style.top || '0');
-
-function onDragMove(moveEvent) {
-const dx = (moveEvent.clientX - startX) / currentScale;
-const dy = (moveEvent.clientY - startY) / currentScale;
-
-let nextLeft = initialLeft + dx;
-let nextTop = initialTop + dy;
-
-const clampLimitX = 115;
-const clampLimitY = 220;
-nextLeft = Math.max(-clampLimitX, Math.min(clampLimitX, nextLeft));
-nextTop = Math.max(-clampLimitY, Math.min(clampLimitY, nextTop));
-
-newLayer.style.left = `${nextLeft}px`;
-newLayer.style.top = `${nextTop}px`;
-}
-
-function onDragEnd() {
-document.removeEventListener('pointermove', onDragMove);
-document.removeEventListener('pointerup', onDragEnd);
-}
-document.addEventListener('pointermove', onDragMove);
-document.addEventListener('pointerup', onDragEnd);
-};
-
-/* 모자/헤드셋 3종은 머리카락 위 레이어 컨테이너, 그 외는 머리카락 아래 레이어 컨테이너에 삽입 */
-if (OVER_HAIR_ITEMS.has(item.codeName)) {
-  document.getElementById('overHairLayersContainer').appendChild(newLayer);
-} else {
-  document.getElementById('dynamicLayersContainer').appendChild(newLayer);
-}
-
-usedItemIds.add(item.id);
-const wardrobeBox = document.getElementById(`wardrobe-box-${item.id}`);
-if (wardrobeBox) {
-wardrobeBox.classList.add('in-use');
-wardrobeBox.setAttribute('draggable', 'false');
-const closeBtn = wardrobeBox.querySelector('.win-btn-close');
-if (closeBtn) closeBtn.classList.add('active-remove');
-}
-
-showItemInfo(category, item);
-} catch (err) { console.error(err); }
+    showItemInfo(category, item);
+  } catch (err) { console.error(err); }
 };
 
 const win = document.getElementById('browserWindow');
-function triggerCloseWindow() {
-if (win.classList.contains('closing')) return;
-win.classList.add('closing');
-setTimeout(() => {
-win.classList.remove('closing');
-}, 1000);
-}
-
 function minimizeWindow() { win.classList.toggle('minimized'); }
 function maximizeWindow() { win.classList.maximizeWindow?.() || win.classList.toggle('maximized'); }
 
 function toggleTheme() {
-const body = document.body;
-const themeText = document.getElementById('themeText');
-const addressInput = document.getElementById('addressInput');
-const baseCharacter = document.getElementById('base-character');
-const profileTitleText = document.getElementById('profileTitleText');
-const isDarkMode = body.classList.toggle('dark-mode');
-
-document.querySelectorAll('.clothing-layer').forEach(layer => {
-layer.removeAttribute('src');
-layer.style.display = 'none';
-});
-document.getElementById('dynamicLayersContainer').innerHTML = '';
-document.getElementById('overHairLayersContainer').innerHTML = '';
-usedItemIds.clear();
-
-setTimeout(() => {
-if (isDarkMode) {
-themeText.innerText = 'Part. 2';
-addressInput.value = 'www.part2-is-the-new-part1.com';
-baseCharacter.src = currentSelectedP2Skin.image || 'p2-avatar.png';
-baseCharacter.alt = 'Part 2 캐릭터 베이스';
-profileTitleText.innerText = '페이지_소개.txt';
-if (wardrobeData.p2_hairs.length > 0) {
-  applyCustom('hairs', wardrobeData.p2_hairs[0]);
-}
-} else {
-themeText.innerText = 'Part. 1';
-addressInput.value = 'http://www.cyworld.com/anya_y2k_room';
-baseCharacter.src = currentSelectedSkin.image || 'p1-avatar.png';
-baseCharacter.alt = 'Part 1 캐릭터 베이스';
-profileTitleText.innerText = '페이지_소개.txt';
-if (wardrobeData.hairs.length > 0) {
-  applyCustom('hairs', wardrobeData.hairs[0]);
-}
+  const isPart2 = !document.body.classList.contains('dark-mode');
+  if (isPart2) {
+    document.body.classList.add('dark-mode');
+  } else {
+    document.body.classList.remove('dark-mode');
+  }
+  resetAllItems();
+  syncThemeUI(isPart2);
+  showCategory(currentCategory);
 }
 
-switchBeautyTab(currentBeautyCategory);
-showCategory(currentCategory, document.querySelector('.category-btn.active'));
-}, 50);
-}
-
+/* ================= 룩북(Lookbook) 캡처 및 저장 ================= */
 function saveCurrentLook() {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
-  
+
   const W = 270;
   const H = 480;
   const scale = 2;
@@ -2856,11 +3007,12 @@ function saveCurrentLook() {
     ctx.save();
     if (isDarkMode) {
       const cx = (W / 2) * scale;
-      const cy = (H / 2) * scale;
+      const cy = (18 + H / 2) * scale;
       ctx.translate(cx, cy);
       ctx.scale(1.32, 1.32);
+      ctx.translate(0, -2.5 * scale);
       ctx.translate(-cx, -cy);
-      ctx.drawImage(img, rx * scale, (ry + 18 - 2.5) * scale, rw * scale, rh * scale);
+      ctx.drawImage(img, rx * scale, (ry + 18) * scale, rw * scale, rh * scale);
     } else {
       ctx.drawImage(img, rx * scale, (ry + 18) * scale, rw * scale, rh * scale);
     }
@@ -2884,7 +3036,7 @@ function saveCurrentLook() {
     if (yMatch) transY = parseFloat(yMatch[1]);
 
     const originX = (W / 2) * scale;
-    const originY = isDarkMode ? ((H / 2) * scale) : (18 * scale);
+    const originY = 18 * scale;
 
     ctx.translate(originX, originY);
     ctx.scale(scaleVal, scaleVal);
@@ -3016,14 +3168,8 @@ function renderLookbook() {
   });
 }
 
-function openLookbook() {
-  document.getElementById('lookbookModal').style.display = 'flex';
-}
-
-function closeLookbook() {
-  document.getElementById('lookbookModal').style.display = 'none';
-}
-
+function openLookbook() { document.getElementById('lookbookModal').style.display = 'flex'; }
+function closeLookbook() { document.getElementById('lookbookModal').style.display = 'none'; }
 function deleteSavedLook(id) {
   const targetIndex = savedLooks.findIndex(item => item.id === id);
   if (targetIndex > -1) {
@@ -3033,11 +3179,15 @@ function deleteSavedLook(id) {
 }
 
 window.onload = () => {
-resizeApp();
-showCategory('tops', document.querySelector('.category-btn:nth-child(1)'));
-switchBeautyTab('hairs', document.querySelector('.beauty-tab-btn'));
-if (wardrobeData.hairs.length > 0) applyCustom('hairs', wardrobeData.hairs[0]);
-if (wardrobeData.skins.length > 0) applyCustom('skins', wardrobeData.skins[0]);
+  resizeApp();
+  
+  // URL 쿼리 파라미터 체크 (?code=34677)
+  const urlParams = new URLSearchParams(window.location.search);
+  const paramCode = urlParams.get('code');
+  if (paramCode && CODE_BOOK[paramCode]) {
+    const meta = CODE_BOOK[paramCode];
+    launchGame(meta.part, meta.category, meta.id);
+  }
 };
 </script>
 </body>
