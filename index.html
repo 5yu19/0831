@@ -72,20 +72,22 @@
   width: 100%;
 }
 
+/* 맑고 화사한 Y2K 핑크-블루 듀오톤 그라디언트 */
 .intro-title-part2 {
   font-size: 105px;
-  background: linear-gradient(135deg, #d80073 0%, #0099ff 100%);
+  background: linear-gradient(135deg, #e6007e 15%, #00a6ff 85%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transform: skewX(-5deg);
   padding: 0 45px 0 15px;
   overflow: visible;
   display: inline-block;
+  filter: drop-shadow(0 4px 14px rgba(255, 0, 127, 0.1));
 }
 
 .intro-title-isthenew {
   font-size: 82px;
-  background: linear-gradient(135deg, #0099ff 0%, #d80073 100%);
+  background: linear-gradient(135deg, #0099ff 10%, #ff1493 90%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin: 6px 0;
@@ -93,17 +95,19 @@
   padding: 0 45px 0 15px;
   overflow: visible;
   display: inline-block;
+  filter: drop-shadow(0 4px 14px rgba(0, 153, 255, 0.1));
 }
 
 .intro-title-part1 {
   font-size: 105px;
-  background: linear-gradient(135deg, #d80073 0%, #0099ff 100%);
+  background: linear-gradient(135deg, #e6007e 15%, #00a6ff 85%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transform: skewX(-5deg);
   padding: 0 45px 0 15px;
   overflow: visible;
   display: inline-block;
+  filter: drop-shadow(0 4px 14px rgba(255, 0, 127, 0.1));
 }
 
 .intro-code-box {
@@ -111,21 +115,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   z-index: 10;
-}
-
-.intro-guide-text {
-  font-family: 'NeoDunggeunmo', 'Galmuri9', monospace;
-  font-size: 13.5px;
-  font-weight: bold;
-  color: #ff007f;
-  background: rgba(255, 255, 255, 0.85);
-  padding: 5px 14px;
-  border-radius: 20px;
-  border: 1.5px dashed #ff66b2;
-  box-shadow: 0 2px 8px rgba(255, 0, 127, 0.15);
-  letter-spacing: 0.5px;
 }
 
 .code-input-wrapper {
@@ -176,11 +167,24 @@
   filter: brightness(1.1);
 }
 
+.intro-guide-text {
+  font-family: 'NeoDunggeunmo', 'Galmuri9', monospace;
+  font-size: 12px;
+  font-weight: bold;
+  color: #ff007f;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 4px 14px;
+  border-radius: 20px;
+  border: 1.5px dashed #ff66b2;
+  box-shadow: 0 2px 6px rgba(255, 0, 127, 0.12);
+  letter-spacing: 0.5px;
+}
+
 .intro-error-msg {
   font-size: 12px;
   color: #d80000;
   font-weight: bold;
-  height: 18px;
+  height: 16px;
 }
 
 .intro-footer-text {
@@ -372,7 +376,7 @@ body {
 .dot-green::before { content: '🗖'; font-size: 8px; }
 .tab { display: none; }
 
-/* Part 1 회색 주소창: 좌우 여백 잘림 현상 방지 및 완벽 정렬 */
+/* Part 1 회색 주소창: 좌우 여백 정렬 */
 .address-bar-container {
   background-color: #ece9d8;
   padding: 8px 10px;
@@ -1878,11 +1882,11 @@ body.dark-mode {
     </div>
 
     <div class="intro-code-box">
-      <div class="intro-guide-text">★ 진에서 코드를 찾아보세요! ★</div>
       <div class="code-input-wrapper">
         <input type="text" id="zineCodeInput" maxlength="5" placeholder="CODE" autofocus onkeypress="if(event.key==='Enter') verifyCode()">
         <button class="code-submit-btn" onclick="verifyCode()">ENTER ↵</button>
       </div>
+      <div class="intro-guide-text">★ 진에서 코드를 찾아보세요! ★</div>
       <div class="intro-error-msg" id="introErrorMsg"></div>
     </div>
 
