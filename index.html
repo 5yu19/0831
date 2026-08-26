@@ -116,6 +116,7 @@
   filter: drop-shadow(0 4px 14px rgba(255, 0, 127, 0.1));
 }
 
+/* 세련된 미니멀 글래스모피즘 코드 박스 */
 .intro-code-box {
   margin-top: 36px;
   display: flex;
@@ -193,18 +194,23 @@
   transform: scale(0.96);
 }
 
+/* 숫자 5 베이스라인 일치 보정 */
 .intro-guide-text {
-  font-family: 'Space Grotesk', 'NeoDunggeunmo', sans-serif;
-  font-size: 12.5px;
-  font-weight: 700;
+  font-family: 'NeoDunggeunmo', 'Galmuri9', monospace;
+  font-size: 13px;
+  font-weight: bold;
   color: #7a3a85;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(8px);
-  padding: 5px 16px;
+  padding: 6px 18px;
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.85);
   box-shadow: 0 4px 12px rgba(160, 90, 180, 0.08);
-  letter-spacing: 0.3px;
+  letter-spacing: 0px;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .intro-error-msg {
@@ -1081,7 +1087,7 @@ img:not([src]), img[src=""], img[src="about:blank"] { display: none !important; 
 .dark-mode .clothing-win-box img[alt="CROP HOODIE"] { transform: scale(4.1) translateY(12%) !important; }
 .dark-mode .clothing-win-box img[alt="MINT SLEEVELESS"] { transform: scale(4.6) translateY(15%) !important; }
 .dark-mode .clothing-win-box img[alt="WHITE SLEEVELESS"] { transform: scale(4.52) translateY(11.7%) !important; }
-.dark-mode .clothing-win-box img[alt="SAILOR TOP"] { transform: scale(4.22) translateY(10%) !important; }
+.dark-mode .clothing-win-box img[alt="SAILOR UNIFORM TOP"] { transform: scale(4.22) translateY(10%) !important; }
 
 .dark-mode .clothing-win-box img[alt="CAPRI DENIM"] { transform: scale(2.83) translateY(-10%) !important; }
 .dark-mode .clothing-win-box img[alt="CAPRI BROWN"] { transform: scale(2.83) translateY(-10%) !important; }
@@ -1091,7 +1097,7 @@ img:not([src]), img[src=""], img[src="about:blank"] { display: none !important; 
 .dark-mode .clothing-win-box img[alt="TIERED SKIRT"] { transform: scale(3.6) translateY(-6%) !important; }
 .dark-mode .clothing-win-box img[alt="DENIM HOTPANTS"] { transform: scale(3.8) translateY(-2%) !important; }
 .dark-mode .clothing-win-box img[alt="TRACK PANTS"] { transform: scale(2.2) translateY(-17%) !important; }
-.dark-mode .clothing-win-box img[alt="PLEATED SKIRT"] { transform: scale(3.6) translateY(-3%) !important; }
+.dark-mode .clothing-win-box img[alt="SAILOR PLEATED SKIRT"] { transform: scale(3.6) translateY(-3%) !important; }
 .dark-mode .clothing-win-box img[alt="DOT SKIRT"] { transform: scale(3.1) translateY(-6%) !important; }
 
 .dark-mode .clothing-win-box img[alt="JELLY SHOES"] { transform: scale(6.8) translateY(-40%) !important; }
@@ -2328,7 +2334,7 @@ p2_tops: [
   { id: 'P2_HOOD', code: '#0102945', codeName: 'CROP HOODIE', name: '블랙 크롭 후드집업', image: 'p2-hood.png' },
   { id: 'P2_MINT_SLEEVELESS', code: '#0102941', codeName: 'MINT SLEEVELESS', name: '민트 크롭 나시', image: 'p2-mintsleevelessshirt.png' },
   { id: 'P2_WHITE_SLEEVELESS', code: '#0102942', codeName: 'WHITE SLEEVELESS', name: '화이트 크롭 나시', image: 'p2-whitesleevelessshirt.png' },
-  { id: 'P2_SCHOOL_TOP', code: '#0102943', codeName: 'SAILOR TOP', name: '세일러 스쿨룩 탑', image: 'p2-schooluniformtop.png' }
+  { id: 'P2_SCHOOL_TOP', code: '#0102943', codeName: 'SAILOR UNIFORM TOP', name: '세일러 교복 탑', image: 'p2-schooluniformtop.png' }
 ],
 p2_bottoms: [
   { id: 'P2_DOT_SKIRT', code: '#0203852', codeName: 'DOT SKIRT', name: '도트 스커트', image: 'p2-dotskirt.png' },
@@ -2339,7 +2345,7 @@ p2_bottoms: [
   { id: 'P2_JEANS_HOTPANTS', code: '#0203853', codeName: 'DENIM HOTPANTS', name: '데님 숏팬츠', image: 'p2-jeans.png' },
   { id: 'P2_CAPRI_JEAN', code: '#45918', codeName: 'CAPRI DENIM', name: '카프리 데님 팬츠', image: 'p2-capri jean.png', blueWin: true, koreanDesc: '트렌디하게 돌아온 슬림 핏의 7부 카프리 진.' },
   { id: 'P2_TRACKSUIT', code: '#0203854', codeName: 'TRACK PANTS', name: '스타 트랙 팬츠', image: 'p2-tracksuit.png' },
-  { id: 'P2_SCHOOL_SKIRT', code: '#0203851', codeName: 'PLEATED SKIRT', name: '플리츠 스커트', image: 'p2-schooluniformskirt.png' },
+  { id: 'P2_SCHOOL_SKIRT', code: '#0203851', codeName: 'SAILOR PLEATED SKIRT', name: '세일러 플리츠 스커트', image: 'p2-schooluniformskirt.png' },
   { id: 'P2_DENIM_SKIRT', code: '#0203861', codeName: 'DENIM SKIRT', name: '다크 데님 미니스커트', image: 'p2-denim skirt.png' }
 ],
 p2_shoes: [
@@ -2496,6 +2502,7 @@ function launchGame(partNum, targetCategory, targetItemId) {
 
   syncThemeUI(isPart2);
 
+  // 섀도우(general/makeups) 진입 시 안전하게 기본 상의(tops) 탭으로 진입
   if (targetCategory === 'general' || !targetCategory || targetCategory === 'makeups') {
     currentCategory = 'tops';
     showCategory('tops');
@@ -2944,7 +2951,7 @@ characterCanvas.ondrop = (e) => {
       'CROP HOODIE': { scale: 1.32, x: 0, y: -2.5 },
       'MINT SLEEVELESS': { scale: 1.32, x: 0, y: -2.5 },
       'WHITE SLEEVELESS': { scale: 1.32, x: 0, y: -2.5 },
-      'SAILOR TOP': { scale: 1.32, x: 0, y: -2.5 },
+      'SAILOR UNIFORM TOP': { scale: 1.32, x: 0, y: -2.5 },
       'DOT SKIRT': { scale: 1.32, x: 0, y: -2.5 },
       'CAPRI BROWN': { scale: 1.32, x: 0, y: -2.5 },
       'BALLOON JEANS': { scale: 1.32, x: 0, y: -2.5 },
@@ -2953,7 +2960,7 @@ characterCanvas.ondrop = (e) => {
       'DENIM HOTPANTS': { scale: 1.32, x: 0, y: -2.5 },
       'CAPRI DENIM': { scale: 1.32, x: 0, y: -2.5 },
       'TRACK PANTS': { scale: 1.32, x: 0, y: -2.5 },
-      'PLEATED SKIRT': { scale: 1.32, x: 0, y: -2.5 },
+      'SAILOR PLEATED SKIRT': { scale: 1.32, x: 0, y: -2.5 },
       'DENIM SKIRT': { scale: 1.32, x: 0, y: -2.5 },
       'WHITE FUR SHOES': { scale: 1.32, x: 0, y: -2.5 },
       'JELLY SHOES': { scale: 1.32, x: 0, y: -2.5 },
