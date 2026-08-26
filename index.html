@@ -1329,7 +1329,7 @@ img:not([src]), img[src=""], img[src="about:blank"] { display: none !important; 
   font-weight: bold;
 }
 
-/* 홈 확인 모달 창 스타일 (기본 파트1) */
+/* 홈 컨펌 모달 창 스타일 */
 .confirm-modal-overlay {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
@@ -1369,45 +1369,6 @@ img:not([src]), img[src=""], img[src="about:blank"] { display: none !important; 
   justify-content: center;
   gap: 10px;
   background: #ece9d8;
-}
-
-/* 파트2 다크모드 감성에 맞춘 컨펌 창 오버라이드 */
-body.dark-mode .confirm-modal-window {
-  background: radial-gradient(circle at 35% 25%, #ffffff 0%, #fbebf5 50%, #f5d1e8 100%) !important;
-  border: 2px solid #ffffff !important;
-  box-shadow: 0 12px 30px rgba(200, 140, 220, 0.4) !important;
-  border-radius: 16px !important;
-  overflow: hidden;
-}
-body.dark-mode .confirm-modal-window .lookbook-titlebar {
-  background: linear-gradient(90deg, #ffc8e8, #dcbaff) !important;
-  color: #552277 !important;
-  font-family: 'Space Grotesk', sans-serif !important;
-  border-bottom: 1px solid #eed7ff;
-}
-body.dark-mode .confirm-modal-body {
-  background: rgba(255, 255, 255, 0.8) !important;
-  border: 1px solid #f2d4ff !important;
-  border-radius: 12px;
-  color: #552277 !important;
-  font-family: 'Space Grotesk', sans-serif !important;
-}
-body.dark-mode .confirm-modal-footer {
-  background: transparent !important;
-}
-body.dark-mode .confirm-modal-footer .win-btn:first-child {
-  background: radial-gradient(circle at 30% 22%, #ffffff 0%, #ffe2ef 25%, #ffb1d3 60%, #ff8db9 100%) !important;
-  color: #8c2957 !important;
-  border: 1.5px solid #ffffff !important;
-  border-radius: 14px !important;
-  box-shadow: 0 4px 10px rgba(220, 100, 160, 0.3) !important;
-}
-body.dark-mode .confirm-modal-footer .win-btn:last-child {
-  background: rgba(255, 255, 255, 0.7) !important;
-  color: #7a4d8c !important;
-  border: 1.5px solid #ffffff !important;
-  border-radius: 14px !important;
-  box-shadow: 0 4px 10px rgba(200, 150, 220, 0.2) !important;
 }
 
 body.dark-mode {
