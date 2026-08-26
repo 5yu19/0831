@@ -1456,7 +1456,7 @@ body.dark-mode {
 
 .dark-mode .browser-window:not(.minimized):not(.maximized) {
   width: 1080px;
-  height: 680px;
+  height: 695px !important; /* 창 전체 높이를 15픽셀 정도 늘려줍니다 */
 }
 
 .dark-mode .browser-window {
@@ -1473,7 +1473,7 @@ body.dark-mode {
 ========================================================= */
 .dark-mode .browser-header {
   background: linear-gradient(135deg, #ffc7e8 0%, #e2c0ff 100%) !important;
-  padding: 8px 14px 4px 14px !important; /* 위쪽 패딩을 8px 정도로 적당히 줄여줍니다 */
+  padding: 10px 14px 6px 14px !important; /* 위쪽과 아래쪽 여백을 쾌적하게 잡아줍니다 */
   display: flex !important;
   flex-direction: column !important;
   gap: 4px !important;
@@ -1615,7 +1615,7 @@ body.dark-mode {
 }
 
 .dark-mode .game-content {
-  padding: 10px 14px 14px 14px !important; /* 아래쪽 패딩을 살짝 주어 하단 여백을 확보합니다 */
+  padding: 14px !important; /* 내부 콘텐츠 패딩을 사방 동일하게 주어 하단 버튼 여백을 살립니다 */
   gap: 14px !important;
   background: #ffffff !important;
   position: relative;
