@@ -1473,10 +1473,10 @@ body.dark-mode {
 ========================================================= */
 .dark-mode .browser-header {
   background: linear-gradient(135deg, #ffc7e8 0%, #e2c0ff 100%) !important;
-  padding: 5px 14px 2px 14px !important;
+  padding: 8px 14px 4px 14px !important; /* 위쪽 패딩을 8px 정도로 적당히 줄여줍니다 */
   display: flex !important;
   flex-direction: column !important;
-  gap: 2px !important;
+  gap: 4px !important;
   border-top-left-radius: 20px !important;
   border-top-right-radius: 20px !important;
   border-bottom: 1px solid #f4dbff !important;
@@ -1484,10 +1484,10 @@ body.dark-mode {
 
 .dark-mode .tab-bar {
   display: flex !important;
-  align-items: flex-end !important;
+  align-items: center !important; /* 수직 정렬을 가운데로 맞춤 */
   justify-content: flex-start !important;
   gap: 14px !important;
-  padding: 2px 4px 0 2px !important;
+  padding: 4px 6px 0 6px !important; /* 좌우 여백(padding-left, right)을 주어 버튼이 테두리 안쪽으로 들어오게 함 */
   text-shadow: none !important;
 }
 
@@ -1495,7 +1495,7 @@ body.dark-mode {
   display: flex !important;
   gap: 7px !important;
   align-items: center !important;
-  padding-bottom: 5px !important;
+  padding-bottom: 2px !important;
 }
 
 .dark-mode .dot {
@@ -1615,8 +1615,8 @@ body.dark-mode {
 }
 
 .dark-mode .game-content {
-  padding: 14px;
-  gap: 14px;
+  padding: 10px 14px 14px 14px !important; /* 아래쪽 패딩을 살짝 주어 하단 여백을 확보합니다 */
+  gap: 14px !important;
   background: #ffffff !important;
   position: relative;
   border-bottom-left-radius: 20px !important;
