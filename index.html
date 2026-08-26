@@ -51,14 +51,22 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 45px 30px;
+  padding: 40px 30px;
   text-align: center;
   position: relative;
 }
 
+/* 중앙 정렬 래퍼 (타이틀 + 코드 입력창) */
+.intro-center-wrapper {
+  margin: auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
 .intro-title-group {
-  margin-top: auto;
-  margin-bottom: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -66,13 +74,12 @@
   font-family: 'Space Grotesk', sans-serif;
   font-style: italic;
   font-weight: 800;
-  line-height: 0.96;
+  line-height: 0.95;
   letter-spacing: -2px;
   overflow: visible;
   width: 100%;
 }
 
-/* 맑고 화사한 Y2K 핑크-블루 듀오톤 그라디언트 */
 .intro-title-part2 {
   font-size: 105px;
   background: linear-gradient(135deg, #e6007e 15%, #00a6ff 85%);
@@ -110,8 +117,9 @@
   filter: drop-shadow(0 4px 14px rgba(255, 0, 127, 0.1));
 }
 
+/* 상단 타이틀과의 여백을 48px로 시원하게 확장 */
 .intro-code-box {
-  margin-bottom: auto;
+  margin-top: 48px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -194,6 +202,7 @@
   word-break: keep-all;
   max-width: 800px;
   font-family: 'Space Grotesk', 'Noto Serif KR', sans-serif;
+  margin-top: 15px;
 }
 
 /* =========================================================
@@ -376,7 +385,6 @@ body {
 .dot-green::before { content: '🗖'; font-size: 8px; }
 .tab { display: none; }
 
-/* Part 1 회색 주소창: 좌우 여백 정렬 */
 .address-bar-container {
   background-color: #ece9d8;
   padding: 8px 10px;
@@ -1875,19 +1883,21 @@ body.dark-mode {
 <!-- ================= 1. 첫 접속 인트로 화면 ================= -->
 <div id="intro-screen">
   <div class="intro-container">
-    <div class="intro-title-group">
-      <div class="intro-title-part2">Part 2</div>
-      <div class="intro-title-isthenew">is the new</div>
-      <div class="intro-title-part1">Part 1</div>
-    </div>
-
-    <div class="intro-code-box">
-      <div class="code-input-wrapper">
-        <input type="text" id="zineCodeInput" maxlength="5" placeholder="CODE" autofocus onkeypress="if(event.key==='Enter') verifyCode()">
-        <button class="code-submit-btn" onclick="verifyCode()">ENTER ↵</button>
+    <div class="intro-center-wrapper">
+      <div class="intro-title-group">
+        <div class="intro-title-part2">Part 2</div>
+        <div class="intro-title-isthenew">is the new</div>
+        <div class="intro-title-part1">Part 1</div>
       </div>
-      <div class="intro-guide-text">★ 진에서 코드를 찾아보세요! ★</div>
-      <div class="intro-error-msg" id="introErrorMsg"></div>
+
+      <div class="intro-code-box">
+        <div class="code-input-wrapper">
+          <input type="text" id="zineCodeInput" maxlength="5" placeholder="CODE" autofocus onkeypress="if(event.key==='Enter') verifyCode()">
+          <button class="code-submit-btn" onclick="verifyCode()">ENTER ↵</button>
+        </div>
+        <div class="intro-guide-text">★ 진에서 코드를 찾아보세요! ★</div>
+        <div class="intro-error-msg" id="introErrorMsg"></div>
+      </div>
     </div>
 
     <div class="intro-footer-text">
@@ -2002,7 +2012,7 @@ body.dark-mode {
 
         <svg class="p2-radar-grid" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
           <line x1="100" y1="10" x2="100" y2="190" stroke="rgba(255, 255, 255, 0.7)" stroke-width="1.2" stroke-dasharray="3 3"/>
-          <line x1="10" y1="100" x2="190" y2="100" stroke="rgba(255, 255, 255, 0.7)" stroke-width="1.2" stroke-dasharray="3 3"/>
+          <line x1="100" y1="100" x2="190" y2="100" stroke="rgba(255, 255, 255, 0.7)" stroke-width="1.2" stroke-dasharray="3 3"/>
           <circle cx="100" cy="100" r="80" stroke="rgba(255, 255, 255, 0.35)" stroke-width="1" stroke-dasharray="2 4"/>
           <circle cx="100" cy="100" r="45" stroke="rgba(255, 255, 255, 0.45)" stroke-width="1"/>
           <path d="M100 160 C35 110 25 70 55 42 C80 18 100 52 100 52 C100 52 120 18 145 42 C175 70 165 110 100 160 Z" stroke="#ffffff" stroke-width="1.8" fill="rgba(255, 255, 255, 0.05)"/>
