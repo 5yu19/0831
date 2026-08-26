@@ -116,7 +116,6 @@
   filter: drop-shadow(0 4px 14px rgba(255, 0, 127, 0.1));
 }
 
-/* 세련된 미니멀 글래스모피즘 코드 박스 */
 .intro-code-box {
   margin-top: 36px;
   display: flex;
@@ -1661,13 +1660,13 @@ body.dark-mode {
   box-shadow:
     0 8px 22px rgba(33, 150, 243, 0.35),
     inset 0 3px 6px rgba(255, 255, 255, 0.95),
-    inset 0 -4px 8px rgba(25, 118, 210, 0.2) !important;
+    inset 0 -4px 8px rgba(255, 118, 210, 0.2) !important;
 }
 .dark-mode .clothing-win-box.blue-win:hover {
   box-shadow:
     0 12px 28px rgba(33, 150, 243, 0.45),
     inset 0 4px 8px rgba(255, 255, 255, 1),
-    inset 0 -5px 10px rgba(25, 118, 210, 0.25) !important;
+    inset 0 -5px 10px rgba(255, 118, 210, 0.25) !important;
 }
 .dark-mode .clothing-win-box.blue-win .win-titlebar {
   color: #0d47a1 !important;
@@ -2221,7 +2220,7 @@ const CODE_BOOK = {
   '84520': { part: 1, category: 'bottoms', id: 'LOW-RISE' },
   '56325': { part: 1, category: 'shoes', id: 'MARY JANE' },
   '82913': { part: 1, category: 'shoes', id: 'JELLY SHOES' },
-  '74302': { part: 1, category: 'makeups', id: 'smokey' },
+  '74302': { part: 1, category: 'general', id: null },
   '59783': { part: 1, category: 'acc', id: 'RIMLESS GLASSES' },
   '75083': { part: 1, category: 'acc', id: 'EARPHONES' },
 
@@ -2231,7 +2230,7 @@ const CODE_BOOK = {
   '13698': { part: 2, category: 'bottoms', id: 'P2_LOWRISE' },
   '26538': { part: 2, category: 'shoes', id: 'P2_MARYJANE' },
   '54978': { part: 2, category: 'shoes', id: 'P2_JELLYSHOES' },
-  '40862': { part: 2, category: 'makeups', id: 'p2-pink-makeup' },
+  '40862': { part: 2, category: 'general', id: null },
   '29761': { part: 2, category: 'acc', id: 'P2_RIMLESS_GLASSES' },
   '69931': { part: 2, category: 'acc', id: 'P2_WIRED_EARPHONE' }
 };
@@ -2280,7 +2279,7 @@ function toggleStar(starElem) {
 const wardrobeData = {
 /* Part 1 의류 */
 tops: [
-  { id: 'LINGERIE', code: '#0102938', codeName: 'LINGERIE TOP', name: '란제리 탑', image: 'p1-lingerie.png', blueWin: true, koreanDesc: '고ト감ㅎŁ ㅍr격, ⊂よ⊂よㅎŁ ㅈr신감의 상징.' },
+  { id: 'LINGERIE', code: '#34677', codeName: 'LINGERIE TOP', name: '란제리 탑', image: 'p1-lingerie.png', blueWin: true, koreanDesc: '고ト감ㅎŁ ㅍr격, ⊂よ⊂よㅎŁ ㅈr신감의 상징.' },
   { id: 'NUPTSE', code: '#0102931', codeName: 'NUPTSE', name: '눕시 패딩', image: 'p1-northface.png' },
   { id: 'PINK CROP SHIRT', code: '#0102932', codeName: 'PINK CROP SHIRT', name: '핑크 크롭 셔츠', image: 'p1-pink crop top.png' },
   { id: 'FIELD JACKET', code: '#0102933', codeName: 'FIELD JACKET', name: '야상 점퍼', image: 'p1-field jacket.png' },
@@ -2291,16 +2290,16 @@ tops: [
 ],
 bottoms: [
   { id: 'SHORTS', code: '#0203844', codeName: 'SHORTS', name: '핫팬츠', image: 'p1-shorts.png' },
-  { id: 'CAPRI DENIM', code: '#0203847', codeName: 'CAPRI DENIM', name: '카프리 데님 팬츠', image: 'p1-capri.jean.png', blueWin: true, koreanDesc: '⋌ㅔ련된 도ᨈㅣㄴㅕ의 로일ય 필수템.' },
+  { id: 'CAPRI DENIM', code: '#53790', codeName: 'CAPRI DENIM', name: '카프리 데님 팬츠', image: 'p1-capri.jean.png', blueWin: true, koreanDesc: '⋌ㅔ련된 도ᨈㅣㄴㅕ의 로일ય 필수템.' },
   { id: 'CAPRI BROWN', code: '#0203848', codeName: 'CAPRI BROWN', name: '카프리 브라운 팬츠', image: 'p1-capri brown.png', blueWin: true, koreanDesc: '⋌ㅔ련된 도ᨈㅣㄴㅕ의 로일ય 필수템.' },
   { id: 'SUSPENDERS', code: '#0203842', codeName: 'SUSPENDERS', name: '멜빵 바지', image: 'p1-suspenders.png' },
   { id: 'COLOR SKINNY JEANS', code: '#0203843', codeName: 'COLOR SKINNY JEANS', name: '컬러 스키니진', image: 'p1-color skinny jean.png' },
-  { id: 'LOW-RISE', code: '#0203846', codeName: 'LOW-RISE JEAN', name: '로우라이즈 진', image: 'p1-lowrise.png', blueWin: true, koreanDesc: '골ㅂĿના 걸친 speed아슬아슬 멋짐.' },
+  { id: 'LOW-RISE', code: '#84520', codeName: 'LOW-RISE JEAN', name: '로우라이즈 진', image: 'p1-lowrise.png', blueWin: true, koreanDesc: '골ㅂĿના 걸친 speed아슬아슬 멋짐.' },
   { id: 'TENNIS SKIRT', code: '#0203845', codeName: 'TENNIS SKIRT', name: '테니스 스커트', image: 'p1-tennis skirt.png' }
 ],
 shoes: [
-  { id: 'JELLY SHOES', code: '#0304761', codeName: 'JELLY SHOES', name: '젤리슈즈', image: 'p1-jellyshoes.png', blueWin: true, koreanDesc: '말ㄹ6말ㄹ6 통통 튀는 ࿁ㅕ름의 추억' },
-  { id: 'MARY JANE', code: '#0304762', codeName: 'MARY JANE SHOES', name: '메리제인 슈즈', image: 'p1-maryjane.png', blueWin: true, koreanDesc: '소ㄴㅕ 감성 듬뿍, ⋌トㄹ6스સ운 발끝.' },
+  { id: 'JELLY SHOES', code: '#82913', codeName: 'JELLY SHOES', name: '젤리슈즈', image: 'p1-jellyshoes.png', blueWin: true, koreanDesc: '말ㄹ6말ㄹ6 통통 튀는 ࿁ㅕ름의 추억' },
+  { id: 'MARY JANE', code: '#56325', codeName: 'MARY JANE SHOES', name: '메리제인 슈즈', image: 'p1-maryjane.png', blueWin: true, koreanDesc: '소ㄴㅕ 감성 듬뿍, ⋌トㄹ6스સ운 발끝.' },
   { id: 'ADIDAS SUPERSTAR', code: '#0304763', codeName: 'ADIDAS SUPERSTAR', name: '아디다스 슈퍼스타', image: 'p1-adidas superstar.png' },
   { id: 'HEELYS', code: '#0304751', codeName: 'HEELYS', name: '힐리스', image: 'p1-heelys.png' },
   { id: 'STILETTO HEEL', code: '#0304752', codeName: 'STILETTO HEEL', name: '뾰족 구두', image: 'p1-stiletto heel.png' },
@@ -2308,10 +2307,10 @@ shoes: [
 ],
 acc: [
   { id: 'COLOR STOCKINGS', code: '#0494835', codeName: 'COLOR STOCKINGS', name: '컬러 스타킹', image: 'p1-color stockings.png' },
-  { id: 'EARPHONES', code: '#0494830', codeName: 'WIRED EARPHONES', name: '줄 이어폰', image: 'p1-earphones.png', blueWin: true, koreanDesc: '돌돌 감아 ⊂ㅏLㅣ는 レㅓ와 나만의 갬성.' },
+  { id: 'EARPHONES', code: '#75083', codeName: 'WIRED EARPHONES', name: '줄 이어폰', image: 'p1-earphones.png', blueWin: true, koreanDesc: '돌돌 감아 ⊂ㅏLㅣ는 レㅓ와 나만의 갬성.' },
   { id: 'BIG FRAME SUNGLASSES', code: '#0494831', codeName: 'BIG FRAME SUNGLASSES', name: '빅프레임 선글라스', image: 'p1-bigframesunglasses.png' },
   { id: 'HEADSET', code: '#0494832', codeName: 'HEADSET', name: '헤드셋', image: 'p1-headset.png' },
-  { id: 'RIMLESS GLASSES', code: '#0494833', codeName: 'RIMLESS GLASSES', name: '무테 안경', image: 'p1-rimless glasses.png', blueWin: true, koreanDesc: 'スı적인 분위ᥐㅣ를 완성ṑト는 ロド법.' },
+  { id: 'RIMLESS GLASSES', code: '#59783', codeName: 'RIMLESS GLASSES', name: '무테 안경', image: 'p1-rimless glasses.png', blueWin: true, koreanDesc: 'スı적인 분위ᥐㅣ를 완성ṑト는 ロド법.' },
   { id: 'NEWSBOY CAP', code: '#0494836', codeName: 'NEWSBOY CAP', name: '뉴스보이 캡', image: 'p1-newsboy cap.png' }
 ],
 
@@ -2319,7 +2318,7 @@ acc: [
 p2_tops: [
   { id: 'P2_LEOPARD_TANK', code: '#0102951', codeName: 'LEOPARD TANK', name: '레오파드 탱크 탑', image: 'p2-leopard tank top.png' },
   { id: 'P2_ADIDAS_CROP', code: '#0102952', codeName: 'ADIDAS CROP TOP', name: '아디다스 크롭탑', image: 'p2-adidas crop top .png' },
-  { id: 'P2_LINGERIE', code: '#0102956', codeName: 'LINGERIE TOP', name: '란제리 탑', image: 'p2-lingerie.png', blueWin: true, koreanDesc: '과감하고 세련된 무드로 재해석된 모던 란제리룩.' },
+  { id: 'P2_LINGERIE', code: '#75868', codeName: 'LINGERIE TOP', name: '란제리 탑', image: 'p2-lingerie.png', blueWin: true, koreanDesc: '과감하고 세련된 무드로 재해석된 모던 란제리룩.' },
   { id: 'P2_PINK_TSHIRT', code: '#0102953', codeName: 'PINK T-SHIRT', name: '핑크 베이비 티', image: 'p2-pink t-shirt .png' },
   { id: 'P2_CARDIGAN', code: '#0102954', codeName: 'CARDIGAN', name: '블랙 슬림 가디건', image: 'p2-cardigan.png' },
   { id: 'P2_OFFSHOULDER', code: '#0102955', codeName: 'OFFSHOULDER TOP', name: '오프숄더 넘버링 탑', image: 'p2-offshoulder.png' },
@@ -2336,32 +2335,32 @@ p2_bottoms: [
   { id: 'P2_CAPRI_BROWN', code: '#0203848', codeName: 'CAPRI BROWN', name: '카프리 브라운 팬츠', image: 'p2-capri brown.png', blueWin: true, koreanDesc: '시크하고 세련된 무드의 브라운 슬림 카프리.' },
   { id: 'P2_BALLOON_JEANS', code: '#0203862', codeName: 'BALLOON JEANS', name: '벌룬핏 와이드 진', image: 'p2-balloon-fit jeans.png' },
   { id: 'P2_TIERED_SKIRT', code: '#0203863', codeName: 'TIERED SKIRT', name: '캉캉 티어드 스커트', image: 'p2-tiered skirt .png' },
-  { id: 'P2_LOWRISE', code: '#0203846', codeName: 'LOW-RISE JEAN', name: '로우라이즈 진', image: 'p2-lowrise.png', blueWin: true, koreanDesc: '골반 라인을 강조해 힙하게 돌아온 부츠컷 로우라이즈.' },
+  { id: 'P2_LOWRISE', code: '#13698', codeName: 'LOW-RISE JEAN', name: '로우라이즈 진', image: 'p2-lowrise.png', blueWin: true, koreanDesc: '골반 라인을 강조해 힙하게 돌아온 부츠컷 로우라이즈.' },
   { id: 'P2_JEANS_HOTPANTS', code: '#0203853', codeName: 'DENIM HOTPANTS', name: '데님 숏팬츠', image: 'p2-jeans.png' },
-  { id: 'P2_CAPRI_JEAN', code: '#0203847', codeName: 'CAPRI DENIM', name: '카프리 데님 팬츠', image: 'p2-capri jean.png', blueWin: true, koreanDesc: '트렌디하게 돌아온 슬림 핏의 7부 카프리 진.' },
+  { id: 'P2_CAPRI_JEAN', code: '#45918', codeName: 'CAPRI DENIM', name: '카프리 데님 팬츠', image: 'p2-capri jean.png', blueWin: true, koreanDesc: '트렌디하게 돌아온 슬림 핏의 7부 카프리 진.' },
   { id: 'P2_TRACKSUIT', code: '#0203854', codeName: 'TRACK PANTS', name: '스타 트랙 팬츠', image: 'p2-tracksuit.png' },
   { id: 'P2_SCHOOL_SKIRT', code: '#0203851', codeName: 'PLEATED SKIRT', name: '플리츠 스커트', image: 'p2-schooluniformskirt.png' },
   { id: 'P2_DENIM_SKIRT', code: '#0203861', codeName: 'DENIM SKIRT', name: '다크 데님 미니스커트', image: 'p2-denim skirt.png' }
 ],
 p2_shoes: [
   { id: 'P2_WHITE_FUR', code: '#0304781', codeName: 'WHITE FUR SHOES', name: '화이트 퍼 부츠', image: 'p2-white fur shoes.png' },
-  { id: 'P2_JELLYSHOES', code: '#0304776', codeName: 'JELLY SHOES', name: '젤리슈즈', image: 'p2-jellyshoes.png', blueWin: true, koreanDesc: '투명하고 영롱한 무드로 재탄생한 핑크 글리터 젤리슈즈.' },
+  { id: 'P2_JELLYSHOES', code: '#54978', codeName: 'JELLY SHOES', name: '젤리슈즈', image: 'p2-jellyshoes.png', blueWin: true, koreanDesc: '투명하고 영롱한 무드로 재탄생한 핑크 글리터 젤리슈즈.' },
   { id: 'P2_BALLETCORE', code: '#0304777', codeName: 'BALLET CORE SHOES', name: '발레코어 슈즈', image: 'p2-balletcore.png' },
-  { id: 'P2_MARYJANE', code: '#0304774', codeName: 'MARY JANE SHOES', name: '메리제인 슈즈', image: 'p2-maryjane.png', blueWin: true, koreanDesc: '모던한 스트랩 디테일로 사랑받는 클래식 메리제인.' },
+  { id: 'P2_MARYJANE', code: '#26538', codeName: 'MARY JANE SHOES', name: '메리제인 슈즈', image: 'p2-maryjane.png', blueWin: true, koreanDesc: '모던한 스트랩 디테일로 사랑받는 클래식 메리제인.' },
   { id: 'P2_LONGBOOTS', code: '#0304775', codeName: 'LONG BOOTS', name: '블랙 플랫폼 롱부츠', image: 'p2-longboost.png' },
   { id: 'P2_UGG', code: '#0304773', codeName: 'UGG BOOTS', name: '어그 부츠', image: 'p2-ugg.png' }
 ],
 p2_acc: [
   { id: 'P2_KNEE_SOCKS', code: '#0494852', codeName: 'KNEE-HIGH SOCKS', name: '니하이 삭스', image: 'p2-knee-high Socks .png' },
   { id: 'P2_LEOPARD_GLASSES', code: '#0494845', codeName: 'LEOPARD GLASSES', name: '레오파드 안경', image: 'p2-leopardglasses.png' },
-  { id: 'P2_WIRED_EARPHONE', code: '#0494851', codeName: 'WIRED EARPHONES', name: '줄 이어폰', image: 'p2-wired earphones.png', blueWin: true, koreanDesc: '힙스터들의 필수품으로 다시 돌아온 아날로그 줄이어폰.' },
+  { id: 'P2_WIRED_EARPHONE', code: '#69931', codeName: 'WIRED EARPHONES', name: '줄 이어폰', image: 'p2-wired earphones.png', blueWin: true, koreanDesc: '힙스터들의 필수품으로 다시 돌아온 아날로그 줄이어폰.' },
   { id: 'P2_NEWERA', code: '#0494846', codeName: 'NEWERA CAP', name: '뉴에라 볼캡', image: 'p2-newera.png' },
   { id: 'P2_MINT_SCRUNCHIE', code: '#0494842', codeName: 'MINT SCRUNCHIE', name: '민트 곱창 밴드', image: 'p2-mintscrunchie.png' },
   { id: 'P2_BELT', code: '#0494844', codeName: 'Y2K BELT', name: '버클 벨트', image: 'p2-belt.png' },
   { id: 'P2_BLACKSOCKS', code: '#0304771', codeName: 'BLACK SOCKS', name: '블랙 중양말', image: 'p2-blacksocks.png' },
   { id: 'P2_WHITESOCKS', code: '#0304772', codeName: 'WHITE SOCKS', name: '화이트 무릎 양말', image: 'p2-whitesocks.png' },
   { id: 'P2_APPLEWATCH', code: '#0494841', codeName: 'APPLE WATCH', name: '애플 워치', image: 'p2-applewatch.png' },
-  { id: 'P2_RIMLESS_GLASSES', code: '#0494847', codeName: 'RIMLESS GLASSES', name: '무테 안경', image: 'p2-rimlessglasses.png', blueWin: true, koreanDesc: '긱시크 무드를 완성하는 미니멀하고 쿨한 무테 안경.' },
+  { id: 'P2_RIMLESS_GLASSES', code: '#29761', codeName: 'RIMLESS GLASSES', name: '무테 안경', image: 'p2-rimlessglasses.png', blueWin: true, koreanDesc: '긱시크 무드를 완성하는 미니멀하고 쿨한 무테 안경.' },
   { id: 'P2_BLACK_SCRUNCHIE', code: '#0494843', codeName: 'BLACK SCRUNCHIE', name: '블랙 곱창 밴드', image: 'p2-blackscrunchie.png' }
 ],
 
@@ -2497,13 +2496,13 @@ function launchGame(partNum, targetCategory, targetItemId) {
 
   syncThemeUI(isPart2);
 
-  if (targetCategory === 'makeups') {
+  if (targetCategory === 'general' || !targetCategory || targetCategory === 'makeups') {
     currentCategory = 'tops';
     showCategory('tops');
   } else {
-    currentCategory = targetCategory || 'tops';
+    currentCategory = targetCategory;
     showCategory(currentCategory);
-    if (targetCategory && targetItemId) {
+    if (targetItemId) {
       highlightAndFocusItem(targetCategory, targetItemId);
     }
   }
