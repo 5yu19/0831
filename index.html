@@ -193,7 +193,7 @@
 }
 
 .intro-guide-text {
-  font-family: 'Space Grotesk', 'NeoDunggeunmo', sans-serif;
+  font-family: 'NeoDunggeunmo', 'Galmuri9', monospace;
   font-size: 13px;
   font-weight: bold;
   color: #7a3a85;
@@ -2246,6 +2246,26 @@ let currentBeautyCategory = 'hairs';
 const savedLooks = [];
 let currentScale = 1;
 
+/* 3분(180초) 동안 활동이 없으면 첫 화면(인트로)으로 자동 리셋 */
+let inactivityTimer;
+const INACTIVITY_LIMIT = 180 * 1000;
+
+function resetInactivityTimer() {
+  clearTimeout(inactivityTimer);
+  inactivityTimer = setTimeout(() => {
+    const intro = document.getElementById('intro-screen');
+    if (intro && intro.classList.contains('hide')) {
+      resetAllItems();
+      returnToIntro();
+    }
+  }, INACTIVITY_LIMIT);
+}
+
+// 사용자 활동 감지 이벤트 리스너 등록
+['pointermove', 'keydown', 'mousedown', 'touchstart', 'wheel'].forEach(evt => {
+  window.addEventListener(evt, resetInactivityTimer, { passive: true });
+});
+
 const OVER_HAIR_ITEMS = new Set(['NEWSBOY CAP', 'HEADSET', 'NEWERA CAP']);
 
 function getNextItemZIndex(codeName) {
@@ -2470,7 +2490,7 @@ function getLayerPixelAlpha(imgElem, canvasX, canvasY) {
   }
 }
 
-/* ================= Zine 코드 입력 & 부드러운 화면 전환 ================= */
+/* ================= Zine 코드 입력 & 페이지 전환 ================= */
 function verifyCode() {
   const input = document.getElementById('zineCodeInput');
   const code = (input.value || '').trim();
@@ -2485,13 +2505,12 @@ function verifyCode() {
   errorMsg.innerText = '';
   const meta = CODE_BOOK[code];
   
-  // 렉(버벅거림) 방지를 위해 requestAnimationFrame을 통해 부드러운 페이드 아웃 및 전환 처리
   const introScreen = document.getElementById('intro-screen');
   introScreen.classList.add('hide');
 
   setTimeout(() => {
     launchGame(meta.part, meta.category, meta.id);
-  }, 200);
+  }, 180);
 }
 
 function launchGame(partNum, targetCategory, targetItemId) {
@@ -2540,6 +2559,18 @@ function syncThemeUI(isPart2) {
   const addressInput = document.getElementById('addressInput');
   const baseCharacter = document.getElementById('base-character');
   const profileTitleText = document.getElementById('profileTitleText');
+
+  // 머리카락 가발 순간 확대 렉 방지를 위해 테마 전환 시 레이어 초기화
+  const hairLayer = document.getElementById('layer-hair');
+  if(hairLayer) {
+    hairLayer.removeAttribute('src');
+    hairLayer.style.display = 'none';
+  }
+  const makeupLayer = document.getElementById('layer-makeup');
+  if(makeupLayer) {
+    makeupLayer.removeAttribute('src');
+    makeupLayer.style.display = 'none';
+  }
 
   if (isPart2) {
     themeText.innerText = 'Part. 2';
@@ -3204,6 +3235,13 @@ function saveCurrentLook() {
 
     renderLookbook();
     openLookbook();
+
+    // SAVE LOOK 누르면 모달창이 뜬 후 닫히면서 첫 화면(인트로)으로 안전하게 복귀
+    setTimeout(() => {
+      closeLookbook();
+      resetAllItems();
+      returnToIntro();
+    }, 1500);
   }
 }
 
