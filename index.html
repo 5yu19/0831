@@ -1470,12 +1470,15 @@ body.dark-mode {
   box-shadow: 0 20px 45px rgba(255, 0, 127, 0.25), 0 8px 24px rgba(180, 90, 200, 0.35) !important;
 }
 
+/* =========================================================
+   [파트 2 헤더 영역 - 상단 잘림 방지 스타일 최적화]
+========================================================= */
 .dark-mode .browser-header {
   background: linear-gradient(135deg, #ffc7e8 0%, #e2c0ff 100%) !important;
-  padding: 6px 14px 0 14px !important;
+  padding: 10px 16px 6px 16px !important;
   display: flex !important;
   flex-direction: column !important;
-  gap: 4px !important;
+  gap: 6px !important;
   border-top-left-radius: 20px !important;
   border-top-right-radius: 20px !important;
   border-bottom: 1px solid #f4dbff !important;
@@ -1483,10 +1486,10 @@ body.dark-mode {
 
 .dark-mode .tab-bar {
   display: flex !important;
-  align-items: flex-end !important;
+  align-items: center !important;
   justify-content: flex-start !important;
   gap: 14px !important;
-  padding: 2px 4px 0 2px !important;
+  padding: 2px 4px 4px 2px !important;
   text-shadow: none !important;
 }
 
@@ -1494,7 +1497,7 @@ body.dark-mode {
   display: flex !important;
   gap: 7px !important;
   align-items: center !important;
-  padding-bottom: 6px !important;
+  padding: 0 !important;
 }
 
 .dark-mode .dot {
@@ -1535,7 +1538,7 @@ body.dark-mode {
   border: 1.5px solid #ecd5ff !important;
   border-bottom: none !important;
   box-shadow: 0 -2px 6px rgba(200, 150, 220, 0.15) !important;
-  margin-bottom: -1px !important;
+  margin-bottom: -6px !important;
   z-index: 2 !important;
   font-family: 'Space Grotesk', sans-serif !important;
 }
@@ -1557,7 +1560,7 @@ body.dark-mode {
 
 .dark-mode .address-bar-container {
   background: linear-gradient(135deg, #ffc7e8 0%, #e2c0ff 100%) !important;
-  padding: 4px 0 6px 0 !important;
+  padding: 2px 0 6px 0 !important;
   display: flex !important;
   align-items: center !important;
   gap: 12px !important;
@@ -1822,7 +1825,7 @@ body.dark-mode {
   box-shadow: 
     0 8px 22px rgba(33, 150, 243, 0.35),
     inset 0 3px 6px rgba(255, 255, 255, 0.95),
-    inset 0 -4px 8px rgba(25 circumstances, 118, 210, 0.2) !important;
+    inset 0 -4px 8px rgba(25, 118, 210, 0.2) !important;
 }
 .dark-mode .clothing-win-box.blue-win:hover {
   box-shadow: 
@@ -2430,10 +2433,9 @@ function resetInactivityTimer() {
   clearTimeout(inactivityTimer);
   inactivityTimer = setTimeout(() => {
     const intro = document.getElementById('intro-screen');
-    if (intro && intro.classList.contains('hide')) {
-      resetAllItems();
-      returnToIntro();
-    }
+    if (intro && !intro.classList.contains('hide')) return;
+    resetAllItems();
+    returnToIntro();
   }, INACTIVITY_LIMIT);
 }
 
