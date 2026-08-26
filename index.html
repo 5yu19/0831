@@ -219,7 +219,7 @@
 
 .intro-footer-text {
   position: absolute;
-  bottom: 35px;
+  bottom: 65px;
   font-size: 11.5px;
   line-height: 1.65;
   color: #4a2850;
@@ -978,10 +978,13 @@ img:not([src]), img[src=""], img[src="about:blank"] { display: none !important; 
 }
 .clothing-win-box:active { cursor: grabbing; border-color: #808080 #ffffff #ffffff #808080; }
 .clothing-win-box:hover { transform: scale(1.02); }
+
+/* 아이템이 옷 밖으로 꺼내져 사용 중일 때 옷장 박스 흑백 처리 */
 .clothing-win-box.in-use {
-  opacity: 0.95;
-  border-color: #ff007f #808080 #808080 #ff007f;
+  opacity: 0.55;
+  filter: grayscale(100%);
 }
+
 .clothing-win-box .win-titlebar {
   font-size: 10px;
   padding: 2px 4px;
@@ -1054,14 +1057,14 @@ img:not([src]), img[src=""], img[src="about:blank"] { display: none !important; 
 .clothing-win-box img[alt="TENNIS SKIRT"] { transform: scale(0.75); }
 
 .clothing-win-box img[alt="JELLY SHOES"] { transform: scale(0.7); }
-.clothing-win-box img[alt="MARY JANE SHOES"] { transform: scale(0.7); }
+.clothing-win-box img[alt="MARY JANE"] { transform: scale(0.7); }
 .clothing-win-box img[alt="ADIDAS SUPERSTAR"] { transform: scale(0.7); }
 .clothing-win-box img[alt="HEELYS"] { transform: scale(0.7); }
 .clothing-win-box img[alt="STILETTO HEEL"] { transform: scale(0.7); }
 .clothing-win-box img[alt="PLATFORM FLIP-FLOP"] { transform: scale(0.7); }
 
 .clothing-win-box img[alt="COLOR STOCKINGS"] { transform: scale(1.15); }
-.clothing-win-box img[alt="WIRED EARPHONES"] { transform: scale(1.0); }
+.clothing-win-box img[alt="EARPHONES"] { transform: scale(1.0); }
 .clothing-win-box img[alt="BIG FRAME SUNGLASSES"] { transform: scale(0.6) !important; }
 .clothing-win-box img[alt="HEADSET"] { transform: scale(0.76) !important; }
 .clothing-win-box img[alt="RIMLESS GLASSES"] { transform: scale(0.71) !important; }
@@ -2186,7 +2189,7 @@ body.dark-mode {
 
         <div class="action-buttons-group">
           <div class="remove-card-box" onclick="resetAllItems()">RESET ALL</div>
-          <div class="save-card-box" onclick="saveCurrentLook()">SAVE LOOK 💾</div>
+          <div class="save-card-box" onclick="openLookbook()">SAVE LOOK 💾</div>
         </div>
 
         <button class="theme-toggle-btn" onclick="toggleTheme()" id="themeBtn" style="width: 100%; padding: 12px; font-size: 15px; font-weight: 800; letter-spacing: 1px; justify-content: center; margin-top: 2px;">
@@ -2213,7 +2216,7 @@ body.dark-mode {
       </div>
       <div class="lookbook-footer">
         <span class="notice-msg" id="saveNoticeMsg"></span>
-        <button class="win-btn" style="width: auto; padding: 2px 14px; height: 22px; font-weight: bold;" onclick="closeLookbook()">닫기</button>
+        <button class="win-btn" style="width: auto; padding: 4px 16px; height: 26px; font-weight: bold; background: linear-gradient(180deg, #ff3366, #cc0033); color: white; border: 2px outset #ff99bb; font-family: inherit; cursor: pointer;" onclick="saveCurrentLook()">💾 현재 코디 저장하기</button>
       </div>
     </div>
   </div>
@@ -2569,7 +2572,6 @@ function syncThemeUI(isPart2) {
   const baseCharacter = document.getElementById('base-character');
   const profileTitleText = document.getElementById('profileTitleText');
 
-  // 테마 전환 시 이전 머리 잔상/확대 렉 방지를 위한 레이어 초기화
   const hairLayer = document.getElementById('layer-hair');
   if(hairLayer) {
     hairLayer.removeAttribute('src');
@@ -3197,7 +3199,7 @@ function saveCurrentLook() {
 
   queue.sort((a, b) => {
     if (a.type === 'base') return -1;
-    if (a.type === 'base') return 1;
+    if (b.type === 'base') return 1;
     return (a.zIndex || 0) - (b.zIndex || 0);
   });
 
@@ -3243,9 +3245,8 @@ function saveCurrentLook() {
     });
 
     renderLookbook();
-    openLookbook();
-
-    // 저장 직후 10초 카운트다운 시작
+    
+    // 저장 버튼 클릭 시에만 10초 뒤 인트로로 복귀하는 타이머 실행
     startSaveCountdown(10);
   }
 }
@@ -3255,7 +3256,7 @@ function startSaveCountdown(secondsLeft) {
   if (!noticeElem) return;
 
   if (secondsLeft > 0) {
-    noticeElem.innerText = `💾 코디가 저장되었습니다! (${secondsLeft}초 뒤 첫 화면으로 복귀)`;
+    noticeElem.innerText = `💾 저장되었습니다! (${secondsLeft}초 뒤 첫 화면으로 복귀)`;
     returnToIntroTimeout = setTimeout(() => {
       startSaveCountdown(secondsLeft - 1);
     }, 1000);
@@ -3292,7 +3293,10 @@ function renderLookbook() {
   });
 }
 
-function openLookbook() { document.getElementById('lookbookModal').style.display = 'flex'; }
+function openLookbook() { 
+  renderLookbook();
+  document.getElementById('lookbookModal').style.display = 'flex'; 
+}
 
 function closeLookbook() { 
   if (returnToIntroTimeout) clearTimeout(returnToIntroTimeout);
