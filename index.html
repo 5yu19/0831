@@ -494,11 +494,11 @@ body {
   padding-right: 4px;
 }
 
-/* 첫 화면으로 이동하는 레트로 스타일 버튼 */
+/* 파트1용 홈(HOME) 버튼 스타일 */
 .intro-home-btn {
   background: linear-gradient(180deg, #ece9d8 0%, #d8d4c4 100%);
   border: 2px outset #ffffff;
-  padding: 3px 8px;
+  padding: 3px 10px;
   font-size: 10.5px;
   font-weight: bold;
   color: #444;
@@ -507,11 +507,38 @@ body {
   align-items: center;
   gap: 4px;
   box-shadow: 1px 1px 0px rgba(0,0,0,0.2);
-  font-family: inherit;
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: 0.5px;
 }
 .intro-home-btn:active {
   border-style: inset;
   transform: translate(1px, 1px);
+}
+
+/* 파트2 전용 미니멀 홈(HOME) 버튼 스타일 */
+.p2-intro-home-btn {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1.5px solid #ecd5ff;
+  border-radius: 12px;
+  padding: 4px 12px;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #7a4d8c;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 2px 6px rgba(200, 150, 220, 0.2);
+  font-family: 'Space Grotesk', sans-serif;
+  transition: all 0.15s ease;
+}
+.p2-intro-home-btn:hover {
+  background: #ffffff;
+  color: #ff007f;
+  transform: scale(1.03);
+}
+.p2-intro-home-btn:active {
+  transform: scale(0.97);
 }
 
 .p1-toolbar-btns { display: flex; align-items: center; gap: 8px; }
@@ -1302,6 +1329,87 @@ img:not([src]), img[src=""], img[src="about:blank"] { display: none !important; 
   font-weight: bold;
 }
 
+/* 홈 확인 모달 창 스타일 (기본 파트1) */
+.confirm-modal-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+  z-index: 3000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+.confirm-modal-window {
+  width: 320px;
+  background: #ece9d8;
+  border: 3px solid #ffffff;
+  border-right-color: #404040;
+  border-bottom-color: #404040;
+  box-shadow: 4px 4px 0px rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+  font-family: 'NeoDunggeunmo', 'Galmuri9', monospace;
+  animation: modalPop 0.2s ease;
+}
+.confirm-modal-body {
+  padding: 20px 16px;
+  text-align: center;
+  background: #fff;
+  margin: 4px;
+  border: 2px inset #d9d9d9;
+  font-size: 12px;
+  color: #333;
+  line-height: 1.5;
+  word-break: keep-all;
+}
+.confirm-modal-footer {
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  background: #ece9d8;
+}
+
+/* 파트2 다크모드 감성에 맞춘 컨펌 창 오버라이드 */
+body.dark-mode .confirm-modal-window {
+  background: radial-gradient(circle at 35% 25%, #ffffff 0%, #fbebf5 50%, #f5d1e8 100%) !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: 0 12px 30px rgba(200, 140, 220, 0.4) !important;
+  border-radius: 16px !important;
+  overflow: hidden;
+}
+body.dark-mode .confirm-modal-window .lookbook-titlebar {
+  background: linear-gradient(90deg, #ffc8e8, #dcbaff) !important;
+  color: #552277 !important;
+  font-family: 'Space Grotesk', sans-serif !important;
+  border-bottom: 1px solid #eed7ff;
+}
+body.dark-mode .confirm-modal-body {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid #f2d4ff !important;
+  border-radius: 12px;
+  color: #552277 !important;
+  font-family: 'Space Grotesk', sans-serif !important;
+}
+body.dark-mode .confirm-modal-footer {
+  background: transparent !important;
+}
+body.dark-mode .confirm-modal-footer .win-btn:first-child {
+  background: radial-gradient(circle at 30% 22%, #ffffff 0%, #ffe2ef 25%, #ffb1d3 60%, #ff8db9 100%) !important;
+  color: #8c2957 !important;
+  border: 1.5px solid #ffffff !important;
+  border-radius: 14px !important;
+  box-shadow: 0 4px 10px rgba(220, 100, 160, 0.3) !important;
+}
+body.dark-mode .confirm-modal-footer .win-btn:last-child {
+  background: rgba(255, 255, 255, 0.7) !important;
+  color: #7a4d8c !important;
+  border: 1.5px solid #ffffff !important;
+  border-radius: 14px !important;
+  box-shadow: 0 4px 10px rgba(200, 150, 220, 0.2) !important;
+}
+
 body.dark-mode {
   background-color: #ffbfe0;
   background-image: radial-gradient(rgba(255, 255, 255, 0.7) 22%, transparent 22%);
@@ -2027,11 +2135,11 @@ body.dark-mode {
         </div>
 
         <div class="p1-toolbar-btns">
-          <button class="intro-home-btn" onclick="returnToIntro()">🏠 첫 화면</button>
+          <button class="intro-home-btn" onclick="openConfirmModal()">HOME</button>
         </div>
 
         <div class="p2-action-group">
-          <button class="intro-home-btn" onclick="returnToIntro()">🏠 첫 화면</button>
+          <button class="p2-intro-home-btn" onclick="openConfirmModal()">HOME</button>
           <div class="profile-avatar-circle" title="ANYA Profile">
             <svg viewBox="0 0 24 24">
               <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
@@ -2090,7 +2198,7 @@ body.dark-mode {
             <span id="profileTitleText">페이지_소개.txt</span>
             <div class="win-buttons">
               <div class="win-btn">_</div>
-              <div class="win-btn" onclick="returnToIntro()">✕</div>
+              <div class="win-btn" onclick="openConfirmModal()">✕</div>
             </div>
           </div>
           <div class="win-body">
@@ -2120,7 +2228,7 @@ body.dark-mode {
             <span>BGM_Player.exe</span>
             <div class="win-buttons">
               <div class="win-btn">_</div>
-              <div class="win-btn" onclick="returnToIntro()">✕</div>
+              <div class="win-btn" onclick="openConfirmModal()">✕</div>
             </div>
           </div>
           <div class="win-body">
@@ -2138,7 +2246,7 @@ body.dark-mode {
             <span>뷰티_꾸미기.exe <span class="beauty-badge">CUSTOM</span></span>
             <div class="win-buttons">
               <div class="win-btn">_</div>
-              <div class="win-btn" onclick="returnToIntro()">✕</div>
+              <div class="win-btn" onclick="openConfirmModal()">✕</div>
             </div>
           </div>
           <div class="win-body" style="padding: 6px;">
@@ -2221,6 +2329,25 @@ body.dark-mode {
       <div class="lookbook-footer">
         <span class="notice-msg" id="saveNoticeMsg"></span>
         <button class="win-btn" style="width: auto; padding: 4px 16px; height: 26px; font-weight: bold; background: linear-gradient(180deg, #ff3366, #cc0033); color: white; border: 2px outset #ff99bb; font-family: inherit; cursor: pointer;" onclick="saveCurrentLook()">💾 현재 코디 저장하기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOME 이동 확인 모달 (예/아니오) -->
+  <div class="confirm-modal-overlay" id="confirmModal">
+    <div class="confirm-modal-window">
+      <div class="lookbook-titlebar">
+        <span>⚠️ 확인 (CONFIRM)</span>
+        <div class="win-buttons">
+          <div class="win-btn" onclick="closeConfirmModal()">✕</div>
+        </div>
+      </div>
+      <div class="confirm-modal-body">
+        정말 첫 화면으로 갈까요?<br>진행 중인 코디가 초기화될 수 있습니다.
+      </div>
+      <div class="confirm-modal-footer">
+        <button class="win-btn" style="width: 70px; height: 24px; font-weight: bold; background: linear-gradient(180deg, #ff4d4d, #cc0000); color: white; border: 2px outset #ff99bb; font-family: inherit; cursor: pointer;" onclick="confirmGoToIntro()">YES</button>
+        <button class="win-btn" style="width: 70px; height: 24px; font-weight: bold; background: #ece9d8; color: #333; border: 2px outset #fff; font-family: inherit; cursor: pointer;" onclick="closeConfirmModal()">X</button>
       </div>
     </div>
   </div>
@@ -2549,6 +2676,21 @@ function launchGame(partNum, targetCategory, targetItemId) {
       highlightAndFocusItem(targetCategory, targetItemId);
     }
   }
+}
+
+/* HOME 확인 모달 제어 함수들 */
+function openConfirmModal() {
+  document.getElementById('confirmModal').style.display = 'flex';
+}
+
+function closeConfirmModal() {
+  document.getElementById('confirmModal').style.display = 'none';
+}
+
+function confirmGoToIntro() {
+  closeConfirmModal();
+  resetAllItems();
+  returnToIntro();
 }
 
 function returnToIntro() {
