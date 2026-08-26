@@ -16,7 +16,7 @@
 }
 
 /* =========================================================
-   [INTRO SCREEN: 진(Zine) 표지 감성 시작 화면]
+   [INTRO SCREEN: 진(Zine) 감성 인트로 화면]
 ========================================================= */
 #intro-screen {
   position: fixed;
@@ -116,93 +116,116 @@
   filter: drop-shadow(0 4px 14px rgba(255, 0, 127, 0.1));
 }
 
+/* 세련된 미니멀 글래스모피즘 코드 박스 */
 .intro-code-box {
-  margin-top: 40px;
+  margin-top: 36px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   z-index: 10;
 }
 
 .code-input-wrapper {
   display: flex;
   align-items: center;
-  background: #ffffff;
-  border: 3px solid #ff007f;
-  border-radius: 40px;
-  padding: 6px 8px 6px 22px;
-  box-shadow: 0 0 20px rgba(255, 0, 127, 0.25), 4px 4px 0px rgba(0,0,0,0.1);
-  transition: all 0.2s;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  border-radius: 50px;
+  padding: 5px 6px 5px 24px;
+  box-shadow: 
+    0 12px 35px rgba(230, 0, 120, 0.12),
+    0 4px 12px rgba(0, 150, 255, 0.08),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  transition: all 0.25s ease;
 }
 
 .code-input-wrapper:focus-within {
-  box-shadow: 0 0 22px rgba(255, 0, 127, 0.45), 4px 4px 0px #ff007f;
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #ff3399;
+  box-shadow: 
+    0 14px 40px rgba(255, 0, 127, 0.22),
+    0 0 0 3px rgba(255, 102, 178, 0.25);
+  transform: translateY(-2px);
 }
 
 .code-input-wrapper input {
   border: none;
   outline: none;
-  font-family: 'Space Grotesk', 'NeoDunggeunmo', monospace;
-  font-size: 21px;
+  font-family: 'Space Grotesk', monospace;
+  font-size: 20px;
   font-weight: 700;
-  letter-spacing: 5px;
+  letter-spacing: 6px;
   width: 140px;
-  color: #333;
+  color: #2b1030;
   text-align: center;
   background: transparent;
 }
+.code-input-wrapper input::placeholder {
+  color: #b59cb8;
+  font-weight: 600;
+  letter-spacing: 4px;
+}
 
 .code-submit-btn {
-  background: linear-gradient(135deg, #ff007f, #0099ff);
+  background: linear-gradient(135deg, #ff1493 0%, #0099ff 100%);
   color: #ffffff;
   border: none;
   outline: none;
   font-family: 'Space Grotesk', sans-serif;
   font-size: 13px;
   font-weight: 800;
-  padding: 10px 20px;
-  border-radius: 30px;
+  padding: 10px 22px;
+  border-radius: 40px;
   cursor: pointer;
-  box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-  transition: transform 0.15s, filter 0.15s;
+  box-shadow: 0 4px 14px rgba(255, 20, 147, 0.35);
+  transition: all 0.2s ease;
+  letter-spacing: 0.5px;
 }
 
 .code-submit-btn:hover {
-  transform: scale(1.05);
-  filter: brightness(1.1);
+  transform: scale(1.04);
+  box-shadow: 0 6px 18px rgba(0, 153, 255, 0.45);
+  filter: brightness(1.06);
+}
+.code-submit-btn:active {
+  transform: scale(0.96);
 }
 
 .intro-guide-text {
-  font-family: 'NeoDunggeunmo', 'Galmuri9', monospace;
-  font-size: 12px;
-  font-weight: bold;
-  color: #ff007f;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 4px 14px;
+  font-family: 'Space Grotesk', 'NeoDunggeunmo', sans-serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #7a3a85;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  padding: 5px 16px;
   border-radius: 20px;
-  border: 1.5px dashed #ff66b2;
-  box-shadow: 0 2px 6px rgba(255, 0, 127, 0.12);
-  letter-spacing: 0.5px;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 12px rgba(160, 90, 180, 0.08);
+  letter-spacing: 0.3px;
 }
 
 .intro-error-msg {
   font-size: 12px;
-  color: #d80000;
-  font-weight: bold;
+  color: #e60050;
+  font-weight: 700;
   height: 16px;
 }
 
 .intro-footer-text {
   position: absolute;
-  bottom: 40px;
+  bottom: 35px;
   font-size: 11.5px;
   line-height: 1.65;
-  color: #333;
+  color: #4a2850;
   word-break: keep-all;
   max-width: 820px;
   font-family: 'Space Grotesk', 'Noto Serif KR', sans-serif;
   text-align: center;
+  opacity: 0.85;
 }
 
 /* =========================================================
@@ -1638,13 +1661,13 @@ body.dark-mode {
   box-shadow:
     0 8px 22px rgba(33, 150, 243, 0.35),
     inset 0 3px 6px rgba(255, 255, 255, 0.95),
-    inset 0 -4px 8px rgba(255, 118, 210, 0.2) !important;
+    inset 0 -4px 8px rgba(25, 118, 210, 0.2) !important;
 }
 .dark-mode .clothing-win-box.blue-win:hover {
   box-shadow:
     0 12px 28px rgba(33, 150, 243, 0.45),
     inset 0 4px 8px rgba(255, 255, 255, 1),
-    inset 0 -5px 10px rgba(255, 118, 210, 0.25) !important;
+    inset 0 -5px 10px rgba(25, 118, 210, 0.25) !important;
 }
 .dark-mode .clothing-win-box.blue-win .win-titlebar {
   color: #0d47a1 !important;
@@ -1903,7 +1926,7 @@ body.dark-mode {
           <input type="text" id="zineCodeInput" maxlength="5" placeholder="CODE" autofocus onkeypress="if(event.key==='Enter') verifyCode()">
           <button class="code-submit-btn" onclick="verifyCode()">ENTER ↵</button>
         </div>
-        <div class="intro-guide-text">★ 진에서 코드를 찾아보세요! ★</div>
+        <div class="intro-guide-text">진에서 5자리 코드를 찾아보세요!</div>
         <div class="intro-error-msg" id="introErrorMsg"></div>
       </div>
     </div>
@@ -2020,7 +2043,7 @@ body.dark-mode {
 
         <svg class="p2-radar-grid" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
           <line x1="100" y1="10" x2="100" y2="190" stroke="rgba(255, 255, 255, 0.7)" stroke-width="1.2" stroke-dasharray="3 3"/>
-          <line x1="10" y1="100" x2="190" y2="100" stroke="rgba(255, 255, 255, 0.7)" stroke-width="1.2" stroke-dasharray="3 3"/>
+          <line x1="100" y1="100" x2="190" y2="100" stroke="rgba(255, 255, 255, 0.7)" stroke-width="1.2" stroke-dasharray="3 3"/>
           <circle cx="100" cy="100" r="80" stroke="rgba(255, 255, 255, 0.35)" stroke-width="1" stroke-dasharray="2 4"/>
           <circle cx="100" cy="100" r="45" stroke="rgba(255, 255, 255, 0.45)" stroke-width="1"/>
           <path d="M100 160 C35 110 25 70 55 42 C80 18 100 52 100 52 C100 52 120 18 145 42 C175 70 165 110 100 160 Z" stroke="#ffffff" stroke-width="1.8" fill="rgba(255, 255, 255, 0.05)"/>
@@ -2474,16 +2497,12 @@ function launchGame(partNum, targetCategory, targetItemId) {
 
   syncThemeUI(isPart2);
 
-  // 섀도우(makeups) 입력 시 옷장 탭은 기본 'tops'를 유지하고 메이크업만 적용
   if (targetCategory === 'makeups') {
+    currentCategory = 'tops';
     showCategory('tops');
-    const makeupList = isPart2 ? wardrobeData.p2_makeups : wardrobeData.makeups;
-    const targetItem = makeupList.find(m => m.id === targetItemId);
-    if (targetItem) {
-      applyCustom('makeups', targetItem);
-    }
   } else {
-    showCategory(targetCategory || 'tops');
+    currentCategory = targetCategory || 'tops';
+    showCategory(currentCategory);
     if (targetCategory && targetItemId) {
       highlightAndFocusItem(targetCategory, targetItemId);
     }
@@ -2534,7 +2553,11 @@ function syncThemeUI(isPart2) {
 
 /* ================= 옷장 및 인터랙션 시스템 ================= */
 function showCategory(category, btnElement) {
+  if (!['tops', 'bottoms', 'shoes', 'acc'].includes(category)) {
+    category = 'tops';
+  }
   currentCategory = category;
+
   document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
   if (btnElement) {
     btnElement.classList.add('active');
@@ -2998,7 +3021,8 @@ function toggleTheme() {
   }
   resetAllItems();
   syncThemeUI(isPart2);
-  showCategory(currentCategory);
+  currentCategory = 'tops';
+  showCategory('tops');
 }
 
 /* ================= 룩북(Lookbook) 캡처 및 저장 ================= */
