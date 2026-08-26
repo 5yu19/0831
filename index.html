@@ -34,13 +34,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1), transform 0.55s ease;
+  transition: opacity 0.4s ease-out;
 }
 
 #intro-screen.hide {
   opacity: 0;
   pointer-events: none;
-  transform: scale(1.04);
 }
 
 .intro-container {
@@ -116,7 +115,6 @@
   filter: drop-shadow(0 4px 14px rgba(255, 0, 127, 0.1));
 }
 
-/* 세련된 미니멀 글래스모피즘 코드 박스 */
 .intro-code-box {
   margin-top: 36px;
   display: flex;
@@ -194,9 +192,8 @@
   transform: scale(0.96);
 }
 
-/* 숫자 5 베이스라인 일치 보정 */
 .intro-guide-text {
-  font-family: 'NeoDunggeunmo', 'Galmuri9', monospace;
+  font-family: 'Space Grotesk', 'NeoDunggeunmo', sans-serif;
   font-size: 13px;
   font-weight: bold;
   color: #7a3a85;
@@ -1672,7 +1669,7 @@ body.dark-mode {
   box-shadow:
     0 12px 28px rgba(33, 150, 243, 0.45),
     inset 0 4px 8px rgba(255, 255, 255, 1),
-    inset 0 -5px 10px rgba(255, 118, 210, 0.25) !important;
+    inset 0 -5px 10px rgba(25, 118, 210, 0.25) !important;
 }
 .dark-mode .clothing-win-box.blue-win .win-titlebar {
   color: #0d47a1 !important;
@@ -2048,7 +2045,7 @@ body.dark-mode {
 
         <svg class="p2-radar-grid" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
           <line x1="100" y1="10" x2="100" y2="190" stroke="rgba(255, 255, 255, 0.7)" stroke-width="1.2" stroke-dasharray="3 3"/>
-          <line x1="100" y1="100" x2="190" y2="100" stroke="rgba(255, 255, 255, 0.7)" stroke-width="1.2" stroke-dasharray="3 3"/>
+          <line x1="10" y1="100" x2="190" y2="100" stroke="rgba(255, 255, 255, 0.7)" stroke-width="1.2" stroke-dasharray="3 3"/>
           <circle cx="100" cy="100" r="80" stroke="rgba(255, 255, 255, 0.35)" stroke-width="1" stroke-dasharray="2 4"/>
           <circle cx="100" cy="100" r="45" stroke="rgba(255, 255, 255, 0.45)" stroke-width="1"/>
           <path d="M100 160 C35 110 25 70 55 42 C80 18 100 52 100 52 C100 52 120 18 145 42 C175 70 165 110 100 160 Z" stroke="#ffffff" stroke-width="1.8" fill="rgba(255, 255, 255, 0.05)"/>
@@ -2297,7 +2294,7 @@ tops: [
 bottoms: [
   { id: 'SHORTS', code: '#0203844', codeName: 'SHORTS', name: '핫팬츠', image: 'p1-shorts.png' },
   { id: 'CAPRI DENIM', code: '#53790', codeName: 'CAPRI DENIM', name: '카프리 데님 팬츠', image: 'p1-capri.jean.png', blueWin: true, koreanDesc: '⋌ㅔ련된 도ᨈㅣㄴㅕ의 로일ય 필수템.' },
-  { id: 'CAPRI BROWN', code: '#0203848', codeName: 'CAPRI BROWN', name: '카프리 브라운 팬츠', image: 'p1-capri brown.png', blueWin: true, koreanDesc: '⋌ㅔ련된 도ᨈㅣㄴㅕ의 로일ય 필수템.' },
+  { id: 'CAPRI BROWN', code: '#53790', codeName: 'CAPRI BROWN', name: '카프리 브라운 팬츠', image: 'p1-capri brown.png', blueWin: true, koreanDesc: '⋌ㅔ련된 도ᨈㅣㄴㅕ의 로일ય 필수템.' },
   { id: 'SUSPENDERS', code: '#0203842', codeName: 'SUSPENDERS', name: '멜빵 바지', image: 'p1-suspenders.png' },
   { id: 'COLOR SKINNY JEANS', code: '#0203843', codeName: 'COLOR SKINNY JEANS', name: '컬러 스키니진', image: 'p1-color skinny jean.png' },
   { id: 'LOW-RISE', code: '#84520', codeName: 'LOW-RISE JEAN', name: '로우라이즈 진', image: 'p1-lowrise.png', blueWin: true, koreanDesc: '골ㅂĿના 걸친 speed아슬아슬 멋짐.' },
@@ -2338,7 +2335,7 @@ p2_tops: [
 ],
 p2_bottoms: [
   { id: 'P2_DOT_SKIRT', code: '#0203852', codeName: 'DOT SKIRT', name: '도트 스커트', image: 'p2-dotskirt.png' },
-  { id: 'P2_CAPRI_BROWN', code: '#0203848', codeName: 'CAPRI BROWN', name: '카프리 브라운 팬츠', image: 'p2-capri brown.png', blueWin: true, koreanDesc: '시크하고 세련된 무드의 브라운 슬림 카프리.' },
+  { id: 'P2_CAPRI_BROWN', code: '#45918', codeName: 'CAPRI BROWN', name: '카프리 브라운 팬츠', image: 'p2-capri brown.png', blueWin: true, koreanDesc: '시크하고 세련된 무드의 브라운 슬림 카프리.' },
   { id: 'P2_BALLOON_JEANS', code: '#0203862', codeName: 'BALLOON JEANS', name: '벌룬핏 와이드 진', image: 'p2-balloon-fit jeans.png' },
   { id: 'P2_TIERED_SKIRT', code: '#0203863', codeName: 'TIERED SKIRT', name: '캉캉 티어드 스커트', image: 'p2-tiered skirt .png' },
   { id: 'P2_LOWRISE', code: '#13698', codeName: 'LOW-RISE JEAN', name: '로우라이즈 진', image: 'p2-lowrise.png', blueWin: true, koreanDesc: '골반 라인을 강조해 힙하게 돌아온 부츠컷 로우라이즈.' },
@@ -2473,7 +2470,7 @@ function getLayerPixelAlpha(imgElem, canvasX, canvasY) {
   }
 }
 
-/* ================= Zine 코드 입력 & 페이지 전환 ================= */
+/* ================= Zine 코드 입력 & 부드러운 화면 전환 ================= */
 function verifyCode() {
   const input = document.getElementById('zineCodeInput');
   const code = (input.value || '').trim();
@@ -2487,7 +2484,14 @@ function verifyCode() {
 
   errorMsg.innerText = '';
   const meta = CODE_BOOK[code];
-  launchGame(meta.part, meta.category, meta.id);
+  
+  // 렉(버벅거림) 방지를 위해 requestAnimationFrame을 통해 부드러운 페이드 아웃 및 전환 처리
+  const introScreen = document.getElementById('intro-screen');
+  introScreen.classList.add('hide');
+
+  setTimeout(() => {
+    launchGame(meta.part, meta.category, meta.id);
+  }, 200);
 }
 
 function launchGame(partNum, targetCategory, targetItemId) {
@@ -2502,7 +2506,6 @@ function launchGame(partNum, targetCategory, targetItemId) {
 
   syncThemeUI(isPart2);
 
-  // 섀도우(general/makeups) 진입 시 안전하게 기본 상의(tops) 탭으로 진입
   if (targetCategory === 'general' || !targetCategory || targetCategory === 'makeups') {
     currentCategory = 'tops';
     showCategory('tops');
@@ -2513,12 +2516,11 @@ function launchGame(partNum, targetCategory, targetItemId) {
       highlightAndFocusItem(targetCategory, targetItemId);
     }
   }
-
-  document.getElementById('intro-screen').classList.add('hide');
 }
 
 function returnToIntro() {
-  document.getElementById('intro-screen').classList.remove('hide');
+  const introScreen = document.getElementById('intro-screen');
+  introScreen.classList.remove('hide');
   document.getElementById('zineCodeInput').value = '';
   document.getElementById('introErrorMsg').innerText = '';
 }
@@ -2530,7 +2532,7 @@ function highlightAndFocusItem(category, itemId) {
       box.scrollIntoView({ behavior: 'smooth', block: 'center' });
       box.click();
     }
-  }, 300);
+  }, 100);
 }
 
 function syncThemeUI(isPart2) {
