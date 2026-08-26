@@ -1279,11 +1279,17 @@ img:not([src]), img[src=""], img[src="about:blank"] { display: none !important; 
   line-height: 1.6;
 }
 .lookbook-footer {
-  padding: 6px 10px 8px 10px;
+  padding: 8px 12px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   background: #ece9d8;
+  border-top: 2px solid #fff;
+}
+.lookbook-footer .notice-msg {
+  font-size: 10px;
+  color: #d80064;
+  font-weight: bold;
 }
 
 body.dark-mode {
@@ -2206,6 +2212,7 @@ body.dark-mode {
         </div>
       </div>
       <div class="lookbook-footer">
+        <span class="notice-msg" id="saveNoticeMsg"></span>
         <button class="win-btn" style="width: auto; padding: 2px 14px; height: 22px; font-weight: bold;" onclick="closeLookbook()">닫기</button>
       </div>
     </div>
@@ -2245,6 +2252,7 @@ let currentCategory = 'tops';
 let currentBeautyCategory = 'hairs';
 const savedLooks = [];
 let currentScale = 1;
+let returnToIntroTimeout = null;
 
 /* 3분(180초) 동안 활동이 없으면 첫 화면(인트로)으로 자동 리셋 */
 let inactivityTimer;
@@ -2261,7 +2269,6 @@ function resetInactivityTimer() {
   }, INACTIVITY_LIMIT);
 }
 
-// 사용자 활동 감지 이벤트 리스너 등록
 ['pointermove', 'keydown', 'mousedown', 'touchstart', 'wheel'].forEach(evt => {
   window.addEventListener(evt, resetInactivityTimer, { passive: true });
 });
@@ -2538,10 +2545,12 @@ function launchGame(partNum, targetCategory, targetItemId) {
 }
 
 function returnToIntro() {
+  if (returnToIntroTimeout) clearTimeout(returnToIntroTimeout);
   const introScreen = document.getElementById('intro-screen');
   introScreen.classList.remove('hide');
   document.getElementById('zineCodeInput').value = '';
   document.getElementById('introErrorMsg').innerText = '';
+  document.getElementById('saveNoticeMsg').innerText = '';
 }
 
 function highlightAndFocusItem(category, itemId) {
@@ -2560,7 +2569,7 @@ function syncThemeUI(isPart2) {
   const baseCharacter = document.getElementById('base-character');
   const profileTitleText = document.getElementById('profileTitleText');
 
-  // 머리카락 가발 순간 확대 렉 방지를 위해 테마 전환 시 레이어 초기화
+  // 테마 전환 시 이전 머리 잔상/확대 렉 방지를 위한 레이어 초기화
   const hairLayer = document.getElementById('layer-hair');
   if(hairLayer) {
     hairLayer.removeAttribute('src');
@@ -3188,7 +3197,7 @@ function saveCurrentLook() {
 
   queue.sort((a, b) => {
     if (a.type === 'base') return -1;
-    if (b.type === 'base') return 1;
+    if (a.type === 'base') return 1;
     return (a.zIndex || 0) - (b.zIndex || 0);
   });
 
@@ -3236,12 +3245,25 @@ function saveCurrentLook() {
     renderLookbook();
     openLookbook();
 
-    // SAVE LOOK 누르면 모달창이 뜬 후 닫히면서 첫 화면(인트로)으로 안전하게 복귀
-    setTimeout(() => {
-      closeLookbook();
-      resetAllItems();
-      returnToIntro();
-    }, 1500);
+    // 저장 직후 10초 카운트다운 시작
+    startSaveCountdown(10);
+  }
+}
+
+function startSaveCountdown(secondsLeft) {
+  const noticeElem = document.getElementById('saveNoticeMsg');
+  if (!noticeElem) return;
+
+  if (secondsLeft > 0) {
+    noticeElem.innerText = `💾 코디가 저장되었습니다! (${secondsLeft}초 뒤 첫 화면으로 복귀)`;
+    returnToIntroTimeout = setTimeout(() => {
+      startSaveCountdown(secondsLeft - 1);
+    }, 1000);
+  } else {
+    noticeElem.innerText = '';
+    closeLookbook();
+    resetAllItems();
+    returnToIntro();
   }
 }
 
@@ -3271,7 +3293,13 @@ function renderLookbook() {
 }
 
 function openLookbook() { document.getElementById('lookbookModal').style.display = 'flex'; }
-function closeLookbook() { document.getElementById('lookbookModal').style.display = 'none'; }
+
+function closeLookbook() { 
+  if (returnToIntroTimeout) clearTimeout(returnToIntroTimeout);
+  document.getElementById('saveNoticeMsg').innerText = '';
+  document.getElementById('lookbookModal').style.display = 'none'; 
+}
+
 function deleteSavedLook(id) {
   const targetIndex = savedLooks.findIndex(item => item.id === id);
   if (targetIndex > -1) {
