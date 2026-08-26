@@ -47,18 +47,17 @@
   width: 100%;
   max-width: 1050px;
   height: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-  padding: 40px 30px;
-  text-align: center;
-  position: relative;
 }
 
-/* 중앙 정렬 래퍼 (타이틀 + 코드 입력창) */
 .intro-center-wrapper {
-  margin: auto 0;
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -117,9 +116,8 @@
   filter: drop-shadow(0 4px 14px rgba(255, 0, 127, 0.1));
 }
 
-/* 상단 타이틀과의 여백을 48px로 시원하게 확장 */
 .intro-code-box {
-  margin-top: 48px;
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -196,13 +194,15 @@
 }
 
 .intro-footer-text {
+  position: absolute;
+  bottom: 40px;
   font-size: 11.5px;
   line-height: 1.65;
   color: #333;
   word-break: keep-all;
-  max-width: 800px;
+  max-width: 820px;
   font-family: 'Space Grotesk', 'Noto Serif KR', sans-serif;
-  margin-top: 15px;
+  text-align: center;
 }
 
 /* =========================================================
@@ -289,7 +289,6 @@ body {
 }
 
 .browser-header {
-  padding: 4px 6px 0 6px;
   display: flex;
   flex-direction: column;
   background-color: #0055ea;
@@ -359,7 +358,16 @@ body {
   justify-content: space-between;
 }
 
-.tab-bar { display: flex; align-items: center; justify-content: space-between; color: white; font-size: 12px; font-weight: bold; text-shadow: 1px 1px #002266; }
+.tab-bar { 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  color: white; 
+  font-size: 12px; 
+  font-weight: bold; 
+  text-shadow: 1px 1px #002266;
+  padding: 4px 6px;
+}
 .window-dots { display: flex; gap: 4px; }
 
 .dot {
@@ -387,10 +395,10 @@ body {
 
 .address-bar-container {
   background-color: #ece9d8;
-  padding: 8px 10px;
+  padding: 6px 8px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   margin: 0;
   width: 100%;
   border-top: 1px solid #ffffff;
@@ -404,8 +412,8 @@ body {
   flex-grow: 1;
   display: flex;
   align-items: center;
-  padding: 3px 10px;
-  gap: 8px;
+  padding: 3px 8px;
+  gap: 6px;
   font-size: 11px;
   color: #333;
   border: 1px solid #7f9db9;
@@ -1630,13 +1638,13 @@ body.dark-mode {
   box-shadow:
     0 8px 22px rgba(33, 150, 243, 0.35),
     inset 0 3px 6px rgba(255, 255, 255, 0.95),
-    inset 0 -4px 8px rgba(25, 118, 210, 0.2) !important;
+    inset 0 -4px 8px rgba(255, 118, 210, 0.2) !important;
 }
 .dark-mode .clothing-win-box.blue-win:hover {
   box-shadow:
     0 12px 28px rgba(33, 150, 243, 0.45),
     inset 0 4px 8px rgba(255, 255, 255, 1),
-    inset 0 -5px 10px rgba(25, 118, 210, 0.25) !important;
+    inset 0 -5px 10px rgba(255, 118, 210, 0.25) !important;
 }
 .dark-mode .clothing-win-box.blue-win .win-titlebar {
   color: #0d47a1 !important;
@@ -1902,7 +1910,7 @@ body.dark-mode {
 
     <div class="intro-footer-text">
       패션은 돌고 돈다. 10년 전에 유행했던 아이템이 다시 돌아왔다. 그러나 다시 마주한 모습은 10년 전과 같으면서 다르다.<br>
-      이 책에서는 다시 돌아온 패션 아이템이 어떤 모습으로 변화했는지를 기록하고, 그 과정에서 마주한 아이템에 대한 두 H의 이야기를 함께 담았다.
+      &lt;Part.2&gt;에서는 다시 돌아온 패션 아이템이 어떤 모습으로 변화했는지를 기록하고, 그 과정에서 마주한 아이템에 대한 두 H의 이야기를 함께 담았다.
     </div>
   </div>
 </div>
@@ -2012,7 +2020,7 @@ body.dark-mode {
 
         <svg class="p2-radar-grid" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
           <line x1="100" y1="10" x2="100" y2="190" stroke="rgba(255, 255, 255, 0.7)" stroke-width="1.2" stroke-dasharray="3 3"/>
-          <line x1="100" y1="100" x2="190" y2="100" stroke="rgba(255, 255, 255, 0.7)" stroke-width="1.2" stroke-dasharray="3 3"/>
+          <line x1="10" y1="100" x2="190" y2="100" stroke="rgba(255, 255, 255, 0.7)" stroke-width="1.2" stroke-dasharray="3 3"/>
           <circle cx="100" cy="100" r="80" stroke="rgba(255, 255, 255, 0.35)" stroke-width="1" stroke-dasharray="2 4"/>
           <circle cx="100" cy="100" r="45" stroke="rgba(255, 255, 255, 0.45)" stroke-width="1"/>
           <path d="M100 160 C35 110 25 70 55 42 C80 18 100 52 100 52 C100 52 120 18 145 42 C175 70 165 110 100 160 Z" stroke="#ffffff" stroke-width="1.8" fill="rgba(255, 255, 255, 0.05)"/>
@@ -2352,8 +2360,8 @@ hairs: [
   { id: 'mint', name: '민트', color: '#7bbca9', image: 'p1-minit-h.png' }
 ],
 makeups: [
-  { id: 'green-makeup', codeName: 'GREEN', name: '그린 메이크업', image: 'p1-green-m.png', color: '#99cc99' },
   { id: 'smokey', codeName: 'SMOKEY', name: '스모키 메이크업', image: 'p1-smokey-m.png', color: '#555555' },
+  { id: 'green-makeup', codeName: 'GREEN', name: '그린 메이크업', image: 'p1-green-m.png', color: '#99cc99' },
   { id: 'blue-core', codeName: 'BLUE', name: '블루 메이크업', image: 'p1-blue-m.png', color: '#3366ff' }
 ],
 p2_skins: [
@@ -2465,10 +2473,20 @@ function launchGame(partNum, targetCategory, targetItemId) {
   }
 
   syncThemeUI(isPart2);
-  showCategory(targetCategory || 'tops');
-  
-  if (targetCategory && targetItemId) {
-    highlightAndFocusItem(targetCategory, targetItemId);
+
+  // 섀도우(makeups) 입력 시 옷장 탭은 기본 'tops'를 유지하고 메이크업만 적용
+  if (targetCategory === 'makeups') {
+    showCategory('tops');
+    const makeupList = isPart2 ? wardrobeData.p2_makeups : wardrobeData.makeups;
+    const targetItem = makeupList.find(m => m.id === targetItemId);
+    if (targetItem) {
+      applyCustom('makeups', targetItem);
+    }
+  } else {
+    showCategory(targetCategory || 'tops');
+    if (targetCategory && targetItemId) {
+      highlightAndFocusItem(targetCategory, targetItemId);
+    }
   }
 
   document.getElementById('intro-screen').classList.add('hide');
