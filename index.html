@@ -979,10 +979,23 @@ img:not([src]), img[src=""], img[src="about:blank"] { display: none !important; 
 .clothing-win-box:active { cursor: grabbing; border-color: #808080 #ffffff #ffffff #808080; }
 .clothing-win-box:hover { transform: scale(1.02); }
 
-/* 아이템이 옷 밖으로 꺼내져 사용 중일 때 옷장 박스 흑백 처리 */
+/* 수정 후: 옷장 박스는 유지하고 내부 이미지(.win-body)만 흑백 처리 */
 .clothing-win-box.in-use {
-  opacity: 0.55;
+  opacity: 0.85;
+}
+.clothing-win-box.in-use .win-body {
   filter: grayscale(100%);
+  opacity: 0.7;
+}
+
+/* 닫기(X) 버튼은 필터 영향을 받지 않고 선명한 빨간색 유지 */
+.clothing-win-box .win-btn-close.active-remove {
+  background: linear-gradient(180deg, #ff4d4d 0%, #d80000 100%) !important;
+  color: #ffffff !important;
+  font-weight: 900;
+  border: 1px solid #ffffff;
+  box-shadow: 0 0 3px #ff0000;
+  animation: pulseClose 1.2s infinite alternate;
 }
 
 .clothing-win-box .win-titlebar {
@@ -1057,14 +1070,14 @@ img:not([src]), img[src=""], img[src="about:blank"] { display: none !important; 
 .clothing-win-box img[alt="TENNIS SKIRT"] { transform: scale(0.75); }
 
 .clothing-win-box img[alt="JELLY SHOES"] { transform: scale(0.7); }
-.clothing-win-box img[alt="MARY JANE"] { transform: scale(0.7); }
+.clothing-win-box img[alt="MARY JANE SHOES"] { transform: scale(0.7); }
 .clothing-win-box img[alt="ADIDAS SUPERSTAR"] { transform: scale(0.7); }
 .clothing-win-box img[alt="HEELYS"] { transform: scale(0.7); }
 .clothing-win-box img[alt="STILETTO HEEL"] { transform: scale(0.7); }
 .clothing-win-box img[alt="PLATFORM FLIP-FLOP"] { transform: scale(0.7); }
 
 .clothing-win-box img[alt="COLOR STOCKINGS"] { transform: scale(1.15); }
-.clothing-win-box img[alt="EARPHONES"] { transform: scale(1.0); }
+.clothing-win-box img[alt="WIRED EARPHONES"] { transform: scale(1.0); }
 .clothing-win-box img[alt="BIG FRAME SUNGLASSES"] { transform: scale(0.6) !important; }
 .clothing-win-box img[alt="HEADSET"] { transform: scale(0.76) !important; }
 .clothing-win-box img[alt="RIMLESS GLASSES"] { transform: scale(0.71) !important; }
@@ -1442,7 +1455,7 @@ body.dark-mode {
   color: #581d87;
   border: 2px solid #ffffff;
   border-radius: 24px;
-  box-shadow:
+  box-shadow: 
     0 4px 12px rgba(170, 90, 230, 0.4),
     inset 0 3px 5px rgba(255,255,255,0.9),
     inset 0 -5px 8px rgba(140, 50, 200, 0.25);
@@ -1450,6 +1463,8 @@ body.dark-mode {
   font-weight: 800;
   position: relative;
   overflow: hidden;
+  pointer-events: auto !important;
+  cursor: pointer !important;
 }
 .dark-mode .theme-toggle-btn::before {
   content: '';
@@ -1574,7 +1589,7 @@ body.dark-mode {
 .dark-mode .speech-bubble {
   background: linear-gradient(135deg, #ffe0f0, #eed7ff);
   color: #652a78;
-  border: 2px solid #f2d4ff;
+  border: 2.5px solid #f2d4ff;
   box-shadow: 0 4px 12px rgba(200, 140, 220, 0.3);
   border-radius: 16px;
   font-weight: bold;
@@ -1587,7 +1602,7 @@ body.dark-mode {
   height: 58px;
   background: radial-gradient(ellipse at 50% 25%, #ffffff 0%, #ffcbe8 40%, #f3b6ff 75%, #d896ff 100%);
   border: 3px solid #ffffff;
-  box-shadow:
+  box-shadow: 
     0 4px 0 #f9b8e6,
     0 8px 0 #ea9ee0,
     0 12px 0 #da86d5,
@@ -1611,7 +1626,7 @@ body.dark-mode {
   color: #6a3d7a;
   border: 1px solid #ffffff;
   border-radius: 12px;
-  box-shadow:
+  box-shadow: 
     0 3px 8px rgba(180, 130, 220, 0.25),
     inset 0 2px 4px rgba(255,255,255,0.9);
   font-family: 'Space Grotesk', sans-serif;
@@ -1636,7 +1651,7 @@ body.dark-mode {
   border-radius: 20px;
   border: none !important;
   background: radial-gradient(circle at 35% 25%, #ffffff 0%, #fbebf5 50%, #f5d1e8 100%) !important;
-  box-shadow:
+  box-shadow: 
     0 8px 20px rgba(210, 140, 220, 0.3),
     inset 0 3px 6px rgba(255, 255, 255, 0.95),
     inset 0 -4px 8px rgba(200, 100, 180, 0.15);
@@ -1645,7 +1660,7 @@ body.dark-mode {
 }
 .dark-mode .clothing-win-box:hover {
   transform: translateY(-3px) scale(1.03);
-  box-shadow:
+  box-shadow: 
     0 12px 26px rgba(200, 110, 210, 0.4),
     inset 0 4px 8px rgba(255, 255, 255, 1),
     inset 0 -5px 10px rgba(200, 100, 180, 0.2);
@@ -1669,13 +1684,13 @@ body.dark-mode {
 .dark-mode .clothing-win-box.blue-win {
   background: radial-gradient(circle at 35% 25%, #ffffff 0%, #e3f2fd 45%, #bbdefb 75%, #90caf9 100%) !important;
   border: 1.5px solid #ffffff !important;
-  box-shadow:
+  box-shadow: 
     0 8px 22px rgba(33, 150, 243, 0.35),
     inset 0 3px 6px rgba(255, 255, 255, 0.95),
-    inset 0 -4px 8px rgba(255, 118, 210, 0.2) !important;
+    inset 0 -4px 8px rgba(25, 118, 210, 0.2) !important;
 }
 .dark-mode .clothing-win-box.blue-win:hover {
-  box-shadow:
+  box-shadow: 
     0 12px 28px rgba(33, 150, 243, 0.45),
     inset 0 4px 8px rgba(255, 255, 255, 1),
     inset 0 -5px 10px rgba(25, 118, 210, 0.25) !important;
@@ -2094,7 +2109,7 @@ body.dark-mode {
               <h4><b style="color: #ff007f;">Part 2 is the New Part 1</b></h4>
               <p>
                 ㅎŁ 번 スıㄴr간 유행은 정말 끝난 걸ㄲト?<br>
-                10년 전의 패션๐ㅣ ㄷrᨈㅣ 돌ටㅏ왔ㄷr.<br>
+                10년 전의 패션이 ㄷrᨈㅣ 돌ටㅏ왔ㄷr.<br>
                 익숙ṑト스ıㅁビ Ꙕ딘フГ 달ㄹr진 모습으로.<br>
                 우ય는 ユ 변호r와 ユ ㅇビનાᨈㅓ 만난 두 H의 ๐ㅣ࿁ㅑᥐㅣ를 ᥐㅣ록했ㄷr.
               </p>
@@ -2312,7 +2327,7 @@ function toggleStar(starElem) {
 const wardrobeData = {
 /* Part 1 의류 */
 tops: [
-  { id: 'LINGERIE', code: '#34677', codeName: 'LINGERIE TOP', name: '란제리 탑', image: 'p1-lingerie.png', blueWin: true, koreanDesc: '고ト감ㅎŁ ㅍr격, ⊂よ⊂よㅎŁ ㅈr신감의 상징.' },
+  { id: 'LINGERIE', code: '#34677', codeName: 'LINGERIE TOP', name: '란제리 탑', image: 'p1-lingerie.png', blueWin: true, koreanDesc: '고토감ㅎŁ ㅍr격, ⊂よ⊂よㅎŁ ㅈr신감의 상징.' },
   { id: 'NUPTSE', code: '#0102931', codeName: 'NUPTSE', name: '눕시 패딩', image: 'p1-northface.png' },
   { id: 'PINK CROP SHIRT', code: '#0102932', codeName: 'PINK CROP SHIRT', name: '핑크 크롭 셔츠', image: 'p1-pink crop top.png' },
   { id: 'FIELD JACKET', code: '#0102933', codeName: 'FIELD JACKET', name: '야상 점퍼', image: 'p1-field jacket.png' },
@@ -2752,7 +2767,7 @@ function switchBeautyTab(category, btnElement) {
     if (category === 'skins') {
       resetBtn.onclick = () => applyCustom('skins', isDarkMode ? wardrobeData.p2_skins[0] : wardrobeData.skins[0]);
     } else if (category === 'hairs') {
-      resetBtn.onclick = () => applyCustom('hairs', isDarkMode ? wardrobeData.p2_hairs[0] : wardrobeData.hairs[0]);
+      resetBtn.onclick = () => applyCustom('hairs', isDarkMode ? wardrobeData.p2_hairs[0] : wardrobeData.p2_hairs[0]);
     } else if (category === 'makeups') {
       resetBtn.onclick = () => {
         const makeupLayer = document.getElementById('layer-makeup');
@@ -3199,7 +3214,7 @@ function saveCurrentLook() {
 
   queue.sort((a, b) => {
     if (a.type === 'base') return -1;
-    if (b.type === 'base') return 1;
+    if (a.type === 'base') return 1;
     return (a.zIndex || 0) - (b.zIndex || 0);
   });
 
@@ -3245,8 +3260,6 @@ function saveCurrentLook() {
     });
 
     renderLookbook();
-    
-    // 저장 버튼 클릭 시에만 10초 뒤 인트로로 복귀하는 타이머 실행
     startSaveCountdown(10);
   }
 }
