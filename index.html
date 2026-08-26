@@ -1707,23 +1707,64 @@ body.dark-mode {
   box-shadow: 0 2px 6px rgba(180, 120, 220, 0.3) !important;
   text-shadow: none !important;
 }
-.dark-mode .beauty-options-panel {
+
+.beauty-options-panel {
   display: flex;
   gap: 6px;
-  flex-wrap: wrap;
+  align-items: center;
   padding: 8px 6px;
   min-height: 42px;
-  align-items: center;
   background: #fff8fb;
   border: 2px inset #d9b3c7;
+  overflow-x: auto; /* 아이템이 많으면 가로 스크롤이 생기도록 처리하여 밀림 방지 */
 }
+
+.beauty-reset-btn {
+  background: #ece9d8;
+  border: 2px outset #ffffff;
+  box-shadow: 1px 1px 0px rgba(0,0,0,0.2);
+  font-size: 9px;
+  font-weight: bold;
+  padding: 4px 10px;
+  cursor: pointer;
+  color: #b30059;
+  margin-left: auto; /* 항상 남은 공간을 밀어내어 오른쪽 끝에 고정 */
+  flex-shrink: 0;
+  font-family: inherit;
+}
+
+.beauty-reset-btn:active {
+  border: 2px inset #808080;
+  transform: translate(1px, 1px);
+}
+
+/* 다크모드 대응 스타일 */
+.dark-mode .beauty-options-panel {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 10px 12px !important;
+  min-height: 52px !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 1.5px solid #f2d4ff !important;
+  border-radius: 14px !important;
+  box-shadow: inset 0 2px 5px rgba(200, 150, 220, 0.1) !important;
+  overflow-x: auto !important;
+}
+
 .dark-mode .beauty-reset-btn {
-  background: linear-gradient(135deg, #ffeef8, #f5e8ff) !important;
-  border: 1px solid #ffffff !important;
-  border-radius: 8px !important;
+  background: radial-gradient(circle at 30% 22%, #ffffff 0%, #ffe2ef 25%, #ffb1d3 60%, #ff8db9 100%) !important;
+  border: 1.5px solid #ffffff !important;
+  border-radius: 12px !important;
   color: #8c2957 !important;
-  box-shadow: 0 2px 5px rgba(200, 140, 220, 0.2) !important;
+  box-shadow: 0 3px 8px rgba(220, 100, 160, 0.25) !important;
   font-family: 'Space Grotesk', sans-serif !important;
+  font-size: 9.5px !important;
+  font-weight: 700 !important;
+  padding: 4px 10px !important;
+  cursor: pointer !important;
+  margin-left: auto !important; /* 항상 오른쪽 끝으로 배치 */
+  flex-shrink: 0 !important;
 }
 
 .dark-mode .speech-bubble {
@@ -2348,7 +2389,7 @@ body.dark-mode {
       <div class="lookbook-content" id="lookbookList">
         <div class="lookbook-empty-msg">
           아직 저장된 코디가 없습니다.<br>
-          [SAVE LOOK 💾] 버튼을 눌러 나만의 코디를 기록해보세요!
+          [현재 코디 저장하기] 버튼을 눌러 나만의 코디를 기록해보세요!
         </div>
       </div>
       <div class="lookbook-footer">
@@ -3503,7 +3544,7 @@ function renderLookbook() {
     list.innerHTML = `
       <div class="lookbook-empty-msg">
         아직 저장된 코디가 없습니다.<br>
-        [SAVE LOOK 💾] 버튼을 눌러 나만의 코디를 기록해보세요!
+        [현재 코디 저장하기] 버튼을 눌러 나만의 코디를 기록해보세요!
       </div>
     `;
     return;
