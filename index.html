@@ -312,7 +312,7 @@ body {
   overflow: visible !important;
   position: relative;
   z-index: 40;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.35s ease, width 0.3s ease, height 0.3s ease;
 }
 
 .browser-header {
@@ -321,14 +321,21 @@ body {
   background-color: #0055ea;
 }
 
-.browser-window.closing {
-  transform: scale(0.1) rotate(-10deg);
-  opacity: 0;
+.browser-window.poof-hide {
+  transform: scale(0.08) rotate(-12deg) !important;
+  opacity: 0 !important;
   pointer-events: none;
 }
-.browser-window.closed { display: none !important; }
-.browser-window.minimized { height: 42px !important; overflow: hidden !important; }
-.browser-window.maximized { width: 98% !important; height: 95% !important; border-radius: 6px; }
+.browser-window.minimized { 
+  height: 42px !important; 
+  overflow: hidden !important; 
+  transform: scale(0.96);
+}
+.browser-window.maximized { 
+  width: 1140px !important; 
+  height: 720px !important; 
+  transform: scale(1.02);
+}
 
 .deco-window-1 {
   position: absolute;
@@ -522,7 +529,7 @@ body {
   background: rgba(255, 255, 255, 0.75);
   border: 1.5px solid #ecd5ff;
   border-radius: 12px;
-  padding: 4px 12px;
+  padding: 3px 10px;
   font-size: 10.5px;
   font-weight: 700;
   color: #7a4d8c;
@@ -546,8 +553,8 @@ body {
 .p1-toolbar-btns { display: flex; align-items: center; gap: 8px; }
 .p2-action-group { display: none; align-items: center; gap: 10px; }
 .profile-avatar-circle {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   background: #0096c7;
   display: flex;
@@ -559,7 +566,7 @@ body {
   transition: transform 0.15s;
 }
 .profile-avatar-circle:hover { transform: scale(1.08); }
-.profile-avatar-circle svg { width: 15px; height: 15px; fill: #ffffff; }
+.profile-avatar-circle svg { width: 14px; height: 14px; fill: #ffffff; }
 
 .theme-toggle-btn {
   background: linear-gradient(180deg, #ff99cc 0%, #ff3385 100%);
@@ -698,19 +705,6 @@ body {
   align-items: center;
   font-weight: bold;
 }
-.win-buttons { display: flex; gap: 2px; }
-.win-btn {
-  width: 14px;
-  height: 14px;
-  background: #ece9d8;
-  border: 1px solid;
-  border-color: #ffffff #808080 #808080 #ffffff;
-  font-size: 9px;
-  line-height: 12px;
-  text-align: center;
-  cursor: pointer;
-  color: black;
-}
 .win-body {
   padding: 8px;
   background: #fff;
@@ -779,12 +773,6 @@ body {
   justify-content: space-between;
   align-items: center;
   font-weight: bold;
-}
-.bgm-player .win-buttons .win-btn {
-  width: 11px;
-  height: 11px;
-  font-size: 7.5px;
-  line-height: 9px;
 }
 .bgm-player .win-body {
   padding: 4px 6px;
@@ -1119,8 +1107,8 @@ img:not([src]), img[src=""], img[src="about:blank"] { display: none !important; 
 .dark-mode .clothing-win-box img[alt="OFFSHOULDER TOP"] { transform: scale(4.52) translateY(13%) !important; }
 .dark-mode .clothing-win-box img[alt="ONE SHOULDER"] { transform: scale(4.52) translateY(11%) !important; }
 .dark-mode .clothing-win-box img[alt="HALTER WHITE TOP"] { transform: scale(4.22) translateY(15%) !important; }
-.dark-mode .clothing-win-box img[alt="UNDERBOOB HOOD"] { transform: scale(4.1) translateY(12%) !important; }
-.dark-mode .clothing-win-box img[alt="CROP HOODIE"] { transform: scale(4.1) translateY(12%) !important; }
+.dark-mode .clothing-win-box img[alt="BLACK CROP HOODIE"] { transform: scale(4.1) translateY(12%) !important; }
+.dark-mode .clothing-win-box img[alt="BLACK CROP ZIP-UP"] { transform: scale(4.1) translateY(12%) !important; }
 .dark-mode .clothing-win-box img[alt="MINT SLEEVELESS"] { transform: scale(4.6) translateY(15%) !important; }
 .dark-mode .clothing-win-box img[alt="WHITE SLEEVELESS"] { transform: scale(4.52) translateY(11.7%) !important; }
 .dark-mode .clothing-win-box img[alt="SAILOR UNIFORM TOP"] { transform: scale(4.22) translateY(10%) !important; }
@@ -1373,7 +1361,7 @@ img:not([src]), img[src=""], img[src="about:blank"] { display: none !important; 
   background: #ece9d8;
 }
 
-/* 파트2 다크모드 감성에 맞춘 룩북(코디 저장 창) 오버라이드 */
+/* 파트2 다크모드 감성에 맞춘 룩북(코디 저장 창) 오버라이드 및 하단 버튼 정렬 수정 */
 body.dark-mode .lookbook-window {
   background: radial-gradient(circle at 35% 25%, #ffffff 0%, #fbebf5 50%, #f5d1e8 100%) !important;
   border: 2px solid #ffffff !important;
@@ -1403,6 +1391,13 @@ body.dark-mode .lookbook-footer .win-btn {
   border-radius: 16px !important;
   box-shadow: 0 4px 10px rgba(120, 200, 240, 0.35) !important;
   font-family: 'Space Grotesk', sans-serif !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 18px !important;
+  height: 30px !important;
+  line-height: normal !important;
+  vertical-align: middle !important;
 }
 
 /* 파트2 다크모드 감성에 맞춘 컨펌 창 오버라이드 */
@@ -1459,9 +1454,12 @@ body.dark-mode {
 .dark-mode .deco-window-2,
 .dark-mode .bgm-player, .dark-mode .sparkle { display: none !important; }
 
+.dark-mode .browser-window:not(.minimized):not(.maximized) {
+  width: 1080px;
+  height: 680px;
+}
+
 .dark-mode .browser-window {
-  width: 1080px !important;
-  height: 680px !important;
   background-color: transparent !important;
   border: none !important;
   outline: none !important;
@@ -1471,14 +1469,14 @@ body.dark-mode {
 }
 
 /* =========================================================
-   [파트 2 헤더 영역 - 상단 잘림 방지 스타일 최적화]
+   [파트 2 헤더 영역 - 상하 균형 및 정렬 완벽 최적화]
 ========================================================= */
 .dark-mode .browser-header {
   background: linear-gradient(135deg, #ffc7e8 0%, #e2c0ff 100%) !important;
-  padding: 10px 16px 6px 16px !important;
+  padding: 5px 14px 2px 14px !important;
   display: flex !important;
   flex-direction: column !important;
-  gap: 6px !important;
+  gap: 2px !important;
   border-top-left-radius: 20px !important;
   border-top-right-radius: 20px !important;
   border-bottom: 1px solid #f4dbff !important;
@@ -1486,10 +1484,10 @@ body.dark-mode {
 
 .dark-mode .tab-bar {
   display: flex !important;
-  align-items: center !important;
+  align-items: flex-end !important;
   justify-content: flex-start !important;
   gap: 14px !important;
-  padding: 2px 4px 4px 2px !important;
+  padding: 2px 4px 0 2px !important;
   text-shadow: none !important;
 }
 
@@ -1497,7 +1495,7 @@ body.dark-mode {
   display: flex !important;
   gap: 7px !important;
   align-items: center !important;
-  padding: 0 !important;
+  padding-bottom: 5px !important;
 }
 
 .dark-mode .dot {
@@ -1530,7 +1528,7 @@ body.dark-mode {
   align-items: center !important;
   gap: 8px !important;
   background-color: #ffffff !important;
-  padding: 5px 12px !important;
+  padding: 4px 12px !important;
   border-radius: 10px 10px 0 0 !important;
   font-size: 11.5px !important;
   color: #6a3a78 !important;
@@ -1538,7 +1536,7 @@ body.dark-mode {
   border: 1.5px solid #ecd5ff !important;
   border-bottom: none !important;
   box-shadow: 0 -2px 6px rgba(200, 150, 220, 0.15) !important;
-  margin-bottom: -6px !important;
+  margin-bottom: -1px !important;
   z-index: 2 !important;
   font-family: 'Space Grotesk', sans-serif !important;
 }
@@ -1560,7 +1558,7 @@ body.dark-mode {
 
 .dark-mode .address-bar-container {
   background: linear-gradient(135deg, #ffc7e8 0%, #e2c0ff 100%) !important;
-  padding: 2px 0 6px 0 !important;
+  padding: 2px 0 4px 0 !important;
   display: flex !important;
   align-items: center !important;
   gap: 12px !important;
@@ -1617,7 +1615,7 @@ body.dark-mode {
 }
 
 .dark-mode .game-content {
-  padding: 16px;
+  padding: 14px;
   gap: 14px;
   background: #ffffff !important;
   position: relative;
@@ -1634,7 +1632,7 @@ body.dark-mode {
   transform: none !important;
 }
 
-.dark-mode .left-panel { width: 285px; gap: 12px; }
+.dark-mode .left-panel { width: 285px; gap: 8px; }
 .dark-mode .right-panel { width: 325px; }
 
 .dark-mode .left-panel .win-window:first-child {
@@ -1650,19 +1648,19 @@ body.dark-mode {
   background: linear-gradient(90deg, #ffc8e8, #dcbaff);
   color: #552277;
   font-family: 'Space Grotesk', sans-serif;
-  padding: 5px 10px;
+  padding: 4px 8px;
   border-bottom: 1px solid #eed7ff;
 }
 .dark-mode .left-panel .win-window:first-child .win-body {
   background: transparent;
   border: none;
-  padding: 8px 10px;
+  padding: 6px 8px;
 }
 .dark-mode .p1-profile-body { display: none; }
 .dark-mode .p2-profile-card { display: flex; }
 
 .dark-mode .beauty-tool-window {
-  margin-top: 4px;
+  margin-top: 2px;
   background: rgba(255, 255, 255, 0.85);
   border: 2px solid #f2d4ff;
   box-shadow: 0 6px 18px rgba(200, 140, 220, 0.25);
@@ -1675,7 +1673,7 @@ body.dark-mode {
   background: linear-gradient(90deg, #ffbfe0, #cfa8ff);
   color: #4b1a6d;
   font-family: 'Space Grotesk', sans-serif;
-  padding: 5px 10px;
+  padding: 4px 8px;
   border-bottom: 1px solid #eed7ff;
   text-shadow: none;
   animation: none;
@@ -1683,45 +1681,49 @@ body.dark-mode {
 .dark-mode .beauty-tool-window .win-body {
   background: transparent;
   border: none;
-  padding: 8px;
+  padding: 6px;
 }
 .dark-mode .beauty-category-tabs {
-  background: rgba(240, 220, 255, 0.5);
-  border: 1px solid #edd5ff;
-  border-radius: 12px;
-  padding: 3px;
-  gap: 4px;
+  background: rgba(240, 220, 255, 0.5) !important;
+  border: 1px solid #edd5ff !important;
+  border-radius: 12px !important;
+  padding: 3px !important;
+  gap: 4px !important;
 }
 .dark-mode .beauty-tab-btn {
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid #ffffff;
-  border-radius: 8px;
-  color: #7a4d8c;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 10.5px;
-  box-shadow: none;
+  background: rgba(255, 255, 255, 0.7) !important;
+  border: 1px solid #ffffff !important;
+  border-radius: 8px !important;
+  color: #7a4d8c !important;
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-size: 10.5px !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
 }
 .dark-mode .beauty-tab-btn.active {
-  background: linear-gradient(135deg, #ffc7e8 0%, #e2c0ff 100%);
-  color: #551d75;
-  border: 1px solid #ffffff;
-  box-shadow: 0 2px 6px rgba(180, 120, 220, 0.3);
-  text-shadow: none;
+  background: linear-gradient(135deg, #ffc7e8 0%, #e2c0ff 100%) !important;
+  color: #551d75 !important;
+  border: 1px solid #ffffff !important;
+  box-shadow: 0 2px 6px rgba(180, 120, 220, 0.3) !important;
+  text-shadow: none !important;
 }
 .dark-mode .beauty-options-panel {
-  background: rgba(255, 255, 255, 0.6);
-  border: 1.5px solid #edd5ff;
-  border-radius: 12px;
-  margin-top: 4px;
-  padding: 6px 8px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 8px 6px;
+  min-height: 42px;
+  align-items: center;
+  background: #fff8fb;
+  border: 2px inset #d9b3c7;
 }
 .dark-mode .beauty-reset-btn {
-  background: linear-gradient(135deg, #ffeef8, #f5e8ff);
-  border: 1px solid #ffffff;
-  border-radius: 8px;
-  color: #8c2957;
-  box-shadow: 0 2px 5px rgba(200, 140, 220, 0.2);
-  font-family: 'Space Grotesk', sans-serif;
+  background: linear-gradient(135deg, #ffeef8, #f5e8ff) !important;
+  border: 1px solid #ffffff !important;
+  border-radius: 8px !important;
+  color: #8c2957 !important;
+  box-shadow: 0 2px 5px rgba(200, 140, 220, 0.2) !important;
+  font-family: 'Space Grotesk', sans-serif !important;
 }
 
 .dark-mode .speech-bubble {
@@ -1756,8 +1758,8 @@ body.dark-mode {
   border: 2px solid #f2d4ff;
   box-shadow: 0 4px 12px rgba(200, 140, 220, 0.2);
   border-radius: 16px;
-  padding: 5px;
-  gap: 5px;
+  padding: 4px;
+  gap: 4px;
 }
 .dark-mode .category-btn {
   background: radial-gradient(circle at 32% 26%, #ffffff 0%, #f9edff 20%, #e9d5ff 55%, #d8baff 100%);
@@ -1780,7 +1782,7 @@ body.dark-mode {
   border: 2px solid #f2d4ff;
   box-shadow: 0 6px 16px rgba(200, 140, 220, 0.2);
   border-radius: 16px;
-  padding: 10px;
+  padding: 8px;
   max-height: 420px;
   backdrop-filter: blur(4px);
 }
@@ -1810,7 +1812,7 @@ body.dark-mode {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 10px;
   font-weight: 700;
-  padding: 6px 8px;
+  padding: 4px 6px;
 }
 .dark-mode .clothing-win-box .win-body {
   background: transparent !important;
@@ -2110,7 +2112,6 @@ body.dark-mode {
   <div class="deco-window-1" id="decoWindow1">
     <div class="title">
       <span>jellyshoes_mood.txt</span>
-      <span>▲ ✕</span>
     </div>
     <div class="body">
       비가 오면... 난 젤리슈즈를 신는ㄷr...<br>
@@ -2124,7 +2125,6 @@ body.dark-mode {
   <div class="deco-window-2" id="decoWindow2">
     <div class="title">
       <span>earphone_mood.txt</span>
-      <span>▲ ✕</span>
     </div>
     <div class="body">
       ๐ㅔꙕ팟을 잃네မㅓયૃ 뻔㉭Ł 경험을 ࿁ㅕ㉣ㅓ번 ṑトヱ しビ 후 줄๐ㅣøł폰을 샀⊂ㅏ.<br>
@@ -2136,13 +2136,13 @@ body.dark-mode {
     <div class="browser-header">
       <div class="tab-bar">
         <div class="window-dots">
-          <div class="dot dot-red" onclick="openConfirmModal()" title="홈으로 돌아가기"></div>
+          <div class="dot dot-red" onclick="closeBrowser()" title="닫기"></div>
           <div class="dot dot-yellow" onclick="minimizeWindow()" title="최소화"></div>
           <div class="dot dot-green" onclick="maximizeWindow()" title="최대화"></div>
         </div>
         <div class="tab">
           <span>archiving trends.com</span>
-          <span class="tab-close" onclick="openConfirmModal()">✕</span>
+          <span class="tab-close" onclick="closeBrowser()">✕</span>
         </div>
       </div>
 
@@ -2228,15 +2228,11 @@ body.dark-mode {
 
       <div class="info-line" id="infoLine"></div>
 
-      <!-- [좌측 패널] -->
+      <!-- [좌측 패널 - 작은 창들: X, 최소화 버튼 제거됨] -->
       <div class="left-panel">
-        <div class="win-window">
+        <div class="win-window" id="profileWindow">
           <div class="win-titlebar" id="profileTitlebar">
             <span id="profileTitleText">페이지_소개.txt</span>
-            <div class="win-buttons">
-              <div class="win-btn">_</div>
-              <div class="win-btn" onclick="openConfirmModal()">✕</div>
-            </div>
           </div>
           <div class="win-body">
             <div class="p1-profile-body">
@@ -2260,13 +2256,9 @@ body.dark-mode {
           </div>
         </div>
 
-        <div class="bgm-player">
+        <div class="bgm-player" id="bgmWindow">
           <div class="win-titlebar">
             <span>BGM_Player.exe</span>
-            <div class="win-buttons">
-              <div class="win-btn">_</div>
-              <div class="win-btn" onclick="openConfirmModal()">✕</div>
-            </div>
           </div>
           <div class="win-body">
             <div class="song-title">Kara - Pretty Girl</div>
@@ -2278,13 +2270,9 @@ body.dark-mode {
           </div>
         </div>
 
-        <div class="win-window beauty-tool-window">
+        <div class="win-window beauty-tool-window" id="beautyWindow">
           <div class="win-titlebar">
             <span>뷰티_꾸미기.exe <span class="beauty-badge">CUSTOM</span></span>
-            <div class="win-buttons">
-              <div class="win-btn">_</div>
-              <div class="win-btn" onclick="openConfirmModal()">✕</div>
-            </div>
           </div>
           <div class="win-body" style="padding: 6px;">
             <div class="beauty-tool-container">
@@ -2365,7 +2353,7 @@ body.dark-mode {
       </div>
       <div class="lookbook-footer">
         <span class="notice-msg" id="saveNoticeMsg"></span>
-        <button class="win-btn" style="width: auto; padding: 4px 16px; height: 26px; font-weight: bold; background: linear-gradient(180deg, #ff3366, #cc0033); color: white; border: 2px outset #ff99bb; font-family: inherit; cursor: pointer;" onclick="saveCurrentLook()">💾 현재 코디 저장하기</button>
+        <button class="win-btn" style="width: auto; padding: 4px 16px; height: 32px; font-weight: bold; background: linear-gradient(180deg, #ff3366, #cc0033); color: white; border: 2px outset #ff99bb; font-family: inherit; cursor: pointer; display: flex; align-items: center; justify-content: center;" onclick="saveCurrentLook()">현재 코디 저장하기</button>
       </div>
     </div>
   </div>
@@ -2483,11 +2471,59 @@ function toggleStar(starElem) {
   starElem.classList.toggle('starred');
 }
 
+/* ================= 창 애니메이션 및 인터랙션 ================= */
+let minTimer = null;
+let maxTimer = null;
+
+function closeBrowser() {
+  const browser = document.getElementById('browserWindow');
+  browser.classList.add('poof-hide');
+  setTimeout(() => {
+    browser.classList.remove('poof-hide');
+  }, 450);
+}
+
+function minimizeWindow() { 
+  const browser = document.getElementById('browserWindow');
+  browser.classList.remove('maximized');
+  browser.classList.toggle('minimized');
+
+  if (minTimer) clearTimeout(minTimer);
+  if (browser.classList.contains('minimized')) {
+    minTimer = setTimeout(() => {
+      browser.classList.remove('minimized');
+    }, 1200);
+  }
+}
+
+function maximizeWindow() { 
+  const browser = document.getElementById('browserWindow');
+  browser.classList.remove('minimized');
+  browser.classList.toggle('maximized');
+
+  if (maxTimer) clearTimeout(maxTimer);
+  if (browser.classList.contains('maximized')) {
+    maxTimer = setTimeout(() => {
+      browser.classList.remove('maximized');
+    }, 1200);
+  }
+}
+
+function restoreAllWindows() {
+  ['decoWindow1', 'decoWindow2', 'profileWindow', 'bgmWindow', 'beautyWindow', 'browserWindow'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.style.display = '';
+      el.classList.remove('closed', 'closing', 'poof-hide', 'minimized', 'maximized');
+    }
+  });
+}
+
 /* ================= 전체 아이템 데이터 ================= */
 const wardrobeData = {
 /* Part 1 의류 */
 tops: [
-  { id: 'LINGERIE', code: '#34677', codeName: 'LINGERIE TOP', name: '란제리 탑', image: 'p1-lingerie.png', blueWin: true, koreanDesc: '고토감ㅎŁ ㅍr격, ⊂よ⊂よㅎŁ ㅈr신감의 상징.' },
+  { id: 'LINGERIE', code: '#34677', codeName: 'LINGERIE TOP', name: '란제리 탑', image: 'p1-lingerie.png', blueWin: true, koreanDesc: '과감하고 섹시한 란제리 무드의 탑.' },
   { id: 'NUPTSE', code: '#0102931', codeName: 'NUPTSE', name: '눕시 패딩', image: 'p1-northface.png' },
   { id: 'PINK CROP SHIRT', code: '#0102932', codeName: 'PINK CROP SHIRT', name: '핑크 크롭 셔츠', image: 'p1-pink crop top.png' },
   { id: 'FIELD JACKET', code: '#0102933', codeName: 'FIELD JACKET', name: '야상 점퍼', image: 'p1-field jacket.png' },
@@ -2498,16 +2534,16 @@ tops: [
 ],
 bottoms: [
   { id: 'SHORTS', code: '#0203844', codeName: 'SHORTS', name: '핫팬츠', image: 'p1-shorts.png' },
-  { id: 'CAPRI DENIM', code: '#53790', codeName: 'CAPRI DENIM', name: '카프리 데님 팬츠', image: 'p1-capri.jean.png', blueWin: true, koreanDesc: '⋌ㅔ련된 도ᨈㅣㄴㅕ의 로일ય 필수템.' },
-  { id: 'CAPRI BROWN', code: '#53790', codeName: 'CAPRI BROWN', name: '카프리 브라운 팬츠', image: 'p1-capri brown.png', blueWin: true, koreanDesc: '⋌ㅔ련된 도ᨈㅣㄴㅕ의 로일ય 필수템.' },
+  { id: 'CAPRI DENIM', code: '#53790', codeName: 'CAPRI DENIM', name: '카프리 데님 팬츠', image: 'p1-capri.jean.png', blueWin: true, koreanDesc: '세련된 무드의 카프리 데님.' },
+  { id: 'CAPRI BROWN', code: '#53790', codeName: 'CAPRI BROWN', name: '카프리 브라운 팬츠', image: 'p1-capri brown.png', blueWin: true, koreanDesc: '세련된 무드의 브라운 카프리 팬츠.' },
   { id: 'SUSPENDERS', code: '#0203842', codeName: 'SUSPENDERS', name: '멜빵 바지', image: 'p1-suspenders.png' },
   { id: 'COLOR SKINNY JEANS', code: '#0203843', codeName: 'COLOR SKINNY JEANS', name: '컬러 스키니진', image: 'p1-color skinny jean.png' },
-  { id: 'LOW-RISE', code: '#84520', codeName: 'LOW-RISE JEAN', name: '로우라이즈 진', image: 'p1-lowrise.png', blueWin: true, koreanDesc: '골ㅂĿના 걸친 speed아슬아슬 멋짐.' },
+  { id: 'LOW-RISE', code: '#84520', codeName: 'LOW-RISE JEAN', name: '로우라이즈 진', image: 'p1-lowrise.png', blueWin: true, koreanDesc: '골반에 걸쳐 입는 로우라이즈 진.' },
   { id: 'TENNIS SKIRT', code: '#0203845', codeName: 'TENNIS SKIRT', name: '테니스 스커트', image: 'p1-tennis skirt.png' }
 ],
 shoes: [
-  { id: 'JELLY SHOES', code: '#82913', codeName: 'JELLY SHOES', name: '젤리슈즈', image: 'p1-jellyshoes.png', blueWin: true, koreanDesc: '말ㄹ6말ㄹ6 통통 튀는 ࿁ㅕ름의 추억' },
-  { id: 'MARY JANE', code: '#56325', codeName: 'MARY JANE SHOES', name: '메리제인 슈즈', image: 'p1-maryjane.png', blueWin: true, koreanDesc: '소ㄴㅕ 감성 듬뿍, ⋌トㄹ6스સ운 발끝.' },
+  { id: 'JELLY SHOES', code: '#82913', codeName: 'JELLY SHOES', name: '젤리슈즈', image: 'p1-jellyshoes.png', blueWin: true, koreanDesc: '말랑말랑 투명한 젤리슈즈.' },
+  { id: 'MARY JANE', code: '#56325', codeName: 'MARY JANE SHOES', name: '메리제인 슈즈', image: 'p1-maryjane.png', blueWin: true, koreanDesc: '사랑스러운 스트랩 메리제인 슈즈.' },
   { id: 'ADIDAS SUPERSTAR', code: '#0304763', codeName: 'ADIDAS SUPERSTAR', name: '아디다스 슈퍼스타', image: 'p1-adidas superstar.png' },
   { id: 'HEELYS', code: '#0304751', codeName: 'HEELYS', name: '힐리스', image: 'p1-heelys.png' },
   { id: 'STILETTO HEEL', code: '#0304752', codeName: 'STILETTO HEEL', name: '뾰족 구두', image: 'p1-stiletto heel.png' },
@@ -2515,10 +2551,10 @@ shoes: [
 ],
 acc: [
   { id: 'COLOR STOCKINGS', code: '#0494835', codeName: 'COLOR STOCKINGS', name: '컬러 스타킹', image: 'p1-color stockings.png' },
-  { id: 'EARPHONES', code: '#75083', codeName: 'WIRED EARPHONES', name: '줄 이어폰', image: 'p1-earphones.png', blueWin: true, koreanDesc: '돌돌 감아 ⊂ㅏLㅣ는 レㅓ와 나만의 갬성.' },
+  { id: 'EARPHONES', code: '#75083', codeName: 'WIRED EARPHONES', name: '줄 이어폰', image: 'p1-earphones.png', blueWin: true, koreanDesc: '아날로그 감성의 줄 이어폰.' },
   { id: 'BIG FRAME SUNGLASSES', code: '#0494831', codeName: 'BIG FRAME SUNGLASSES', name: '빅프레임 선글라스', image: 'p1-bigframesunglasses.png' },
   { id: 'HEADSET', code: '#0494832', codeName: 'HEADSET', name: '헤드셋', image: 'p1-headset.png' },
-  { id: 'RIMLESS GLASSES', code: '#59783', codeName: 'RIMLESS GLASSES', name: '무테 안경', image: 'p1-rimless glasses.png', blueWin: true, koreanDesc: 'スı적인 분위ᥐㅣ를 완성ṑト는 로드법.' },
+  { id: 'RIMLESS GLASSES', code: '#59783', codeName: 'RIMLESS GLASSES', name: '무테 안경', image: 'p1-rimless glasses.png', blueWin: true, koreanDesc: '긱시크 무드의 무테 안경.' },
   { id: 'NEWSBOY CAP', code: '#0494836', codeName: 'NEWSBOY CAP', name: '뉴스보이 캡', image: 'p1-newsboy cap.png' }
 ],
 
@@ -2527,49 +2563,49 @@ p2_tops: [
   { id: 'P2_LEOPARD_TANK', code: '#0102951', codeName: 'LEOPARD TANK', name: '레오파드 탱크 탑', image: 'p2-leopard tank top.png' },
   { id: 'P2_ADIDAS_CROP', code: '#0102952', codeName: 'ADIDAS CROP TOP', name: '아디다스 크롭탑', image: 'p2-adidas crop top .png' },
   { id: 'P2_LINGERIE', code: '#75868', codeName: 'LINGERIE TOP', name: '란제리 탑', image: 'p2-lingerie.png', blueWin: true, koreanDesc: '과감하고 세련된 무드로 재해석된 모던 란제리룩.' },
-  { id: 'P2_PINK_TSHIRT', code: '#0102953', codeName: 'PINK T-SHIRT', name: '핑크 블라우스', image: 'p2-pink t-shirt .png' },
-  { id: 'P2_CARDIGAN', code: '#0102954', codeName: 'CARDIGAN', name: '블랙 오버핏 가디건', image: 'p2-cardigan.png' },
-  { id: 'P2_OFFSHOULDER', code: '#0102955', codeName: 'OFFSHOULDER TOP', name: '오프숄더 넘버링 탑', image: 'p2-offshoulder.png' },
-  { id: 'P2_ONESHOUDLER', code: '#0102946', codeName: 'ONE SHOULDER', name: '원숄더 넘버링 탑', image: 'p2-oneshoulder.png' },
+  { id: 'P2_PINK_TSHIRT', code: '#0102953', codeName: 'PINK T-SHIRT', name: '핑크 티셔츠', image: 'p2-pink t-shirt .png' },
+  { id: 'P2_CARDIGAN', code: '#0102954', codeName: 'CARDIGAN', name: '가디건', image: 'p2-cardigan.png' },
+  { id: 'P2_OFFSHOULDER', code: '#0102955', codeName: 'OFFSHOULDER TOP', name: '오프숄더 탑', image: 'p2-offshoulder.png' },
+  { id: 'P2_ONESHOUDLER', code: '#0102946', codeName: 'ONE SHOULDER', name: '원숄더 탑', image: 'p2-oneshoulder.png' },
   { id: 'P2_WHITETOP', code: '#0102947', codeName: 'HALTER WHITE TOP', name: '화이트 홀터넥 탑', image: 'p2-whitetop.png' },
-  { id: 'P2_UNDERBOOB_HOOD', code: '#0102944', codeName: 'UNDERBOOB HOOD', name: '블랙 크롭 후드', image: 'p2-underboobhood.png' },
-  { id: 'P2_HOOD', code: '#0102945', codeName: 'CROP HOODIE', name: '블랙 크롭 후드집업', image: 'p2-hood.png' },
-  { id: 'P2_MINT_SLEEVELESS', code: '#0102941', codeName: 'MINT SLEEVELESS', name: '민트 크롭 나시', image: 'p2-mintsleevelessshirt.png' },
-  { id: 'P2_WHITE_SLEEVELESS', code: '#0102942', codeName: 'WHITE SLEEVELESS', name: '화이트 크롭 나시', image: 'p2-whitesleevelessshirt.png' },
-  { id: 'P2_SCHOOL_TOP', code: '#0102943', codeName: 'SAILOR UNIFORM TOP', name: '세일러 교복 탑', image: 'p2-schooluniformtop.png' }
+  { id: 'P2_BLACK CROP HOODIE', code: '#0102944', codeName: 'BLACK CROP HOODIE', name: '블랙 크롭 후드', image: 'p2-underboobhood.png' },
+  { id: 'P2_BLACK CROP ZIP-UP', code: '#0102945', codeName: 'BLACK CROP ZIP-UP', name: '블랙 크롭 집업', image: 'p2-hood.png' },
+  { id: 'P2_MINT_SLEEVELESS', code: '#0102941', codeName: 'MINT SLEEVELESS', name: '민트 슬리브리스', image: 'p2-mintsleevelessshirt.png' },
+  { id: 'P2_WHITE_SLEEVELESS', code: '#0102942', codeName: 'WHITE SLEEVELESS', name: '화이트 슬리브리스', image: 'p2-whitesleevelessshirt.png' },
+  { id: 'P2_SCHOOL_TOP', code: '#0102943', codeName: 'SAILOR UNIFORM TOP', name: '세일러 유니폼 탑', image: 'p2-schooluniformtop.png' }
 ],
 p2_bottoms: [
   { id: 'P2_DOT_SKIRT', code: '#0203852', codeName: 'DOT SKIRT', name: '도트 스커트', image: 'p2-dotskirt.png' },
   { id: 'P2_CAPRI_BROWN', code: '#45918', codeName: 'CAPRI BROWN', name: '카프리 브라운 팬츠', image: 'p2-capri brown.png', blueWin: true, koreanDesc: '시크하고 세련된 무드의 브라운 슬림 카프리.' },
-  { id: 'P2_BALLOON_JEANS', code: '#0203862', codeName: 'BALLOON JEANS', name: '벌룬핏 와이드 진', image: 'p2-balloon-fit jeans.png' },
-  { id: 'P2_TIERED_SKIRT', code: '#0203863', codeName: 'TIERED SKIRT', name: '캉캉 스커트', image: 'p2-tiered skirt .png' },
+  { id: 'P2_BALLOON_JEANS', code: '#0203862', codeName: 'BALLOON JEANS', name: '벌룬 진', image: 'p2-balloon-fit jeans.png' },
+  { id: 'P2_TIERED_SKIRT', code: '#0203863', codeName: 'TIERED SKIRT', name: '티어드 스커트', image: 'p2-tiered skirt .png' },
   { id: 'P2_LOWRISE', code: '#13698', codeName: 'LOW-RISE JEAN', name: '로우라이즈 진', image: 'p2-lowrise.png', blueWin: true, koreanDesc: '골반 라인을 강조해 힙하게 돌아온 부츠컷 로우라이즈.' },
-  { id: 'P2_JEANS_HOTPANTS', code: '#0203853', codeName: 'DENIM HOTPANTS', name: '데님 숏팬츠', image: 'p2-jeans.png' },
+  { id: 'P2_JEANS_HOTPANTS', code: '#0203853', codeName: 'DENIM HOTPANTS', name: '데님 핫팬츠', image: 'p2-jeans.png' },
   { id: 'P2_CAPRI_JEAN', code: '#45918', codeName: 'CAPRI DENIM', name: '카프리 데님 팬츠', image: 'p2-capri jean.png', blueWin: true, koreanDesc: '트렌디하게 돌아온 슬림 핏의 7부 카프리 진.' },
-  { id: 'P2_TRACKSUIT', code: '#0203854', codeName: 'TRACK PANTS', name: '스타 츄리닝 팬츠', image: 'p2-tracksuit.png' },
+  { id: 'P2_TRACKSUIT', code: '#0203854', codeName: 'TRACK PANTS', name: '트랙 팬츠', image: 'p2-tracksuit.png' },
   { id: 'P2_SCHOOL_SKIRT', code: '#0203851', codeName: 'SAILOR PLEATED SKIRT', name: '세일러 플리츠 스커트', image: 'p2-schooluniformskirt.png' },
-  { id: 'P2_DENIM_SKIRT', code: '#0203861', codeName: 'DENIM SKIRT', name: '데님 미니스커트', image: 'p2-denim skirt.png' }
+  { id: 'P2_DENIM_SKIRT', code: '#0203861', codeName: 'DENIM SKIRT', name: '데님 스커트', image: 'p2-denim skirt.png' }
 ],
 p2_shoes: [
-  { id: 'P2_WHITE_FUR', code: '#0304781', codeName: 'WHITE FUR SHOES', name: '화이트 퍼 부츠', image: 'p2-white fur shoes.png' },
+  { id: 'P2_WHITE_FUR', code: '#0304781', codeName: 'WHITE FUR SHOES', name: '화이트 퍼 슈즈', image: 'p2-white fur shoes.png' },
   { id: 'P2_JELLYSHOES', code: '#54978', codeName: 'JELLY SHOES', name: '젤리슈즈', image: 'p2-jellyshoes.png', blueWin: true, koreanDesc: '투명하고 영롱한 무드로 재탄생한 핑크 글리터 젤리슈즈.' },
   { id: 'P2_BALLETCORE', code: '#0304777', codeName: 'BALLET CORE SHOES', name: '발레코어 슈즈', image: 'p2-balletcore.png' },
   { id: 'P2_MARYJANE', code: '#26538', codeName: 'MARY JANE SHOES', name: '메리제인 슈즈', image: 'p2-maryjane.png', blueWin: true, koreanDesc: '모던한 스트랩 디테일로 사랑받는 클래식 메리제인.' },
-  { id: 'P2_LONGBOOTS', code: '#0304775', codeName: 'LONG BOOTS', name: '블랙 롱부츠', image: 'p2-longboost.png' },
+  { id: 'P2_LONGBOOTS', code: '#0304775', codeName: 'LONG BOOTS', name: '롱 부츠', image: 'p2-longboost.png' },
   { id: 'P2_UGG', code: '#0304773', codeName: 'UGG BOOTS', name: '어그 부츠', image: 'p2-ugg.png' }
 ],
 p2_acc: [
   { id: 'P2_KNEE_SOCKS', code: '#0494852', codeName: 'KNEE-HIGH SOCKS', name: '니하이 삭스', image: 'p2-knee-high Socks .png' },
   { id: 'P2_LEOPARD_GLASSES', code: '#0494845', codeName: 'LEOPARD GLASSES', name: '레오파드 안경', image: 'p2-leopardglasses.png' },
   { id: 'P2_WIRED_EARPHONE', code: '#69931', codeName: 'WIRED EARPHONES', name: '줄 이어폰', image: 'p2-wired earphones.png', blueWin: true, koreanDesc: '힙스터들의 필수품으로 다시 돌아온 아날로그 줄이어폰.' },
-  { id: 'P2_NEWERA', code: '#0494846', codeName: 'NEWERA CAP', name: '뉴에라 볼캡', image: 'p2-newera.png' },
-  { id: 'P2_MINT_SCRUNCHIE', code: '#0494842', codeName: 'MINT SCRUNCHIE', name: '민트 곱창 밴드', image: 'p2-mintscrunchie.png' },
-  { id: 'P2_BELT', code: '#0494844', codeName: 'Y2K BELT', name: '버클 벨트', image: 'p2-belt.png' },
+  { id: 'P2_NEWERA', code: '#0494846', codeName: 'NEWERA CAP', name: '뉴에라 캡', image: 'p2-newera.png' },
+  { id: 'P2_MINT_SCRUNCHIE', code: '#0494842', codeName: 'MINT SCRUNCHIE', name: '민트 스크런치', image: 'p2-mintscrunchie.png' },
+  { id: 'P2_BELT', code: '#0494844', codeName: 'Y2K BELT', name: 'Y2K 벨트', image: 'p2-belt.png' },
   { id: 'P2_BLACKSOCKS', code: '#0304771', codeName: 'BLACK SOCKS', name: '블랙 양말', image: 'p2-blacksocks.png' },
   { id: 'P2_WHITESOCKS', code: '#0304772', codeName: 'WHITE SOCKS', name: '화이트 양말', image: 'p2-whitesocks.png' },
   { id: 'P2_APPLEWATCH', code: '#0494841', codeName: 'APPLE WATCH', name: '애플 워치', image: 'p2-applewatch.png' },
   { id: 'P2_RIMLESS_GLASSES', code: '#29761', codeName: 'RIMLESS GLASSES', name: '무테 안경', image: 'p2-rimlessglasses.png', blueWin: true, koreanDesc: '긱시크 무드를 완성하는 미니멀하고 쿨한 무테 안경.' },
-  { id: 'P2_BLACK_SCRUNCHIE', code: '#0494843', codeName: 'BLACK SCRUNCHIE', name: '블랙 곱창 밴드', image: 'p2-blackscrunchie.png' }
+  { id: 'P2_BLACK_SCRUNCHIE', code: '#0494843', codeName: 'BLACK SCRUNCHIE', name: '블랙 스크런치', image: 'p2-blackscrunchie.png' }
 ],
 
 /* 커스텀 뷰티 (피부 / 헤어 / 메이크업) */
@@ -2694,6 +2730,7 @@ function verifyCode() {
   introScreen.classList.add('hide');
 
   setTimeout(() => {
+    restoreAllWindows();
     launchGame(meta.part, meta.category, meta.id);
   }, 180);
 }
@@ -3181,8 +3218,8 @@ characterCanvas.ondrop = (e) => {
       'OFFSHOULDER TOP': { scale: 1.32, x: 0, y: -2.5 },
       'ONE SHOULDER': { scale: 1.32, x: 0, y: -2.5 },
       'HALTER WHITE TOP': { scale: 1.32, x: 0, y: -2.5 },
-      'UNDERBOOB HOOD': { scale: 1.32, x: 0, y: -2.5 },
-      'CROP HOODIE': { scale: 1.32, x: 0, y: -2.5 },
+      'BLACK CROP HOODIE': { scale: 1.32, x: 0, y: -2.5 },
+      'BLACK CROP ZIP-UP': { scale: 1.32, x: 0, y: -2.5 },
       'MINT SLEEVELESS': { scale: 1.32, x: 0, y: -2.5 },
       'WHITE SLEEVELESS': { scale: 1.32, x: 0, y: -2.5 },
       'SAILOR UNIFORM TOP': { scale: 1.32, x: 0, y: -2.5 },
@@ -3247,10 +3284,6 @@ characterCanvas.ondrop = (e) => {
     showItemInfo(category, item);
   } catch (err) { console.error(err); }
 };
-
-const win = document.getElementById('browserWindow');
-function minimizeWindow() { win.classList.toggle('minimized'); }
-function maximizeWindow() { win.classList.maximizeWindow?.() || win.classList.toggle('maximized'); }
 
 function toggleTheme() {
   const isPart2 = !document.body.classList.contains('dark-mode');
