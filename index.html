@@ -71,7 +71,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: 'Helvetica Neue', sans-serif; /* Helvetica Neue만 지정 */
+  font-family: 'Helvetica Neue', sans-serif;
   font-style: italic;
   font-weight: 500;
   line-height: 0.95;
@@ -1204,16 +1204,25 @@ img:not([src]), img[src=""], img[src="about:blank"] { display: none !important; 
   overflow-y: auto;
 }
 
-.lookbook-modal-overlay {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
+/* =========================================================
+   [전체 화면 모달 - fixed로 뷰포트 전체 블러 처리]
+========================================================= */
+.lookbook-modal-overlay,
+.confirm-modal-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
   background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(3px);
-  z-index: 2000;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 99999 !important;
   display: none;
   justify-content: center;
   align-items: center;
 }
+
 .lookbook-window {
   width: 580px;
   height: 480px;
@@ -1322,16 +1331,6 @@ img:not([src]), img[src=""], img[src="about:blank"] { display: none !important; 
 }
 
 /* HOME 확인 모달 창 스타일 (기본 파트1) */
-.confirm-modal-overlay {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(2px);
-  z-index: 3000;
-  display: none;
-  justify-content: center;
-  align-items: center;
-}
 .confirm-modal-window {
   width: 320px;
   background: #ece9d8;
@@ -1872,7 +1871,7 @@ body.dark-mode {
   box-shadow: 
     0 8px 22px rgba(33, 150, 243, 0.35),
     inset 0 3px 6px rgba(255, 255, 255, 0.95),
-    inset 0 -4px 8px rgba(25금118, 210, 0.2) !important;
+    inset 0 -4px 8px rgba(25, 118, 210, 0.2) !important;
 }
 .dark-mode .clothing-win-box.blue-win:hover {
   box-shadow: 
@@ -1981,7 +1980,7 @@ body.dark-mode {
 
 .p2-tag-tl { top: 18px; left: 24px; }
 .p2-tag-br { 
-  bottom: 28px !important; /* 좌표와 버튼 사이의 간격을 안정적으로 확보 */
+  bottom: 28px !important;
   right: 180px; 
 }
 .p2-tag-mid { 
@@ -2091,22 +2090,6 @@ body.dark-mode {
   align-items: center;
   background: #fff8fb;
   border: 2px inset #d9b3c7;
-}
-.beauty-reset-btn {
-  background: #ece9d8;
-  border: 2px outset #ffffff;
-  box-shadow: 1px 1px 0px rgba(0,0,0,0.2);
-  font-size: 9px;
-  font-weight: bold;
-  padding: 4px 6px;
-  cursor: pointer;
-  color: #b30059;
-  margin-left: auto;
-  font-family: inherit;
-}
-.beauty-reset-btn:active {
-  border: 2px inset #808080;
-  transform: translate(1px, 1px);
 }
 .custom-btn {
   width: 22px;
@@ -2276,7 +2259,7 @@ body.dark-mode {
 
       <div class="info-line" id="infoLine"></div>
 
-      <!-- [좌측 패널 - 작은 창들: X, 최소화 버튼 제거됨] -->
+      <!-- 좌측 패널 -->
       <div class="left-panel">
         <div class="win-window" id="profileWindow">
           <div class="win-titlebar" id="profileTitlebar">
@@ -2335,7 +2318,7 @@ body.dark-mode {
         </div>
       </div>
 
-      <!-- [중앙 패널] -->
+      <!-- 중앙 패널 -->
       <div class="center-panel">
         <div class="speech-bubble">
           <div>궁금한 아이템은 <span class="action-badge badge-click">CLICK!</span></div>
@@ -2351,7 +2334,7 @@ body.dark-mode {
         <div class="pedestal"></div>
       </div>
 
-      <!-- [우측 패널] -->
+      <!-- 우측 패널 -->
       <div class="right-panel">
         <div class="category-tabs">
           <button class="category-btn active" onclick="showCategory('tops', this)">
@@ -2383,45 +2366,46 @@ body.dark-mode {
       </div>
     </div>
   </div>
+</div>
 
-  <!-- LOOKBOOK 모달 -->
-  <div class="lookbook-modal-overlay" id="lookbookModal">
-    <div class="lookbook-window">
-      <div class="lookbook-titlebar">
-        <span>📸 코디_사진첩.exe (LOOKBOOK)</span>
-        <div class="win-buttons">
-          <div class="win-btn" onclick="closeLookbook()">✕</div>
-        </div>
-      </div>
-      <div class="lookbook-content" id="lookbookList">
-        <div class="lookbook-empty-msg">
-          아직 저장된 코디가 없습니다.<br>
-          [현재 코디 저장하기] 버튼을 눌러 나만의 코디를 기록해보세요!
-        </div>
-      </div>
-      <div class="lookbook-footer">
-        <span class="notice-msg" id="saveNoticeMsg"></span>
-        <button class="win-btn" style="width: auto; padding: 4px 16px; height: 32px; font-weight: bold; background: linear-gradient(180deg, #ff3366, #cc0033); color: white; border: 2px outset #ff99bb; font-family: inherit; cursor: pointer; display: flex; align-items: center; justify-content: center;" onclick="saveCurrentLook()">현재 코디 저장하기</button>
+<!-- ================= 3. 전체 화면 모달 (스케일러 밖으로 배치하여 화면 꽉 차게 표시) ================= -->
+<!-- LOOKBOOK 모달 -->
+<div class="lookbook-modal-overlay" id="lookbookModal">
+  <div class="lookbook-window">
+    <div class="lookbook-titlebar">
+      <span>📸 코디_사진첩.exe (LOOKBOOK)</span>
+      <div class="win-buttons">
+        <div class="win-btn" onclick="closeLookbook()">✕</div>
       </div>
     </div>
+    <div class="lookbook-content" id="lookbookList">
+      <div class="lookbook-empty-msg">
+        아직 저장된 코디가 없습니다.<br>
+        [현재 코디 저장하기] 버튼을 눌러 나만의 코디를 기록해보세요!
+      </div>
+    </div>
+    <div class="lookbook-footer">
+      <span class="notice-msg" id="saveNoticeMsg"></span>
+      <button class="win-btn" style="width: auto; padding: 4px 16px; height: 32px; font-weight: bold; background: linear-gradient(180deg, #ff3366, #cc0033); color: white; border: 2px outset #ff99bb; font-family: inherit; cursor: pointer; display: flex; align-items: center; justify-content: center;" onclick="saveCurrentLook()">현재 코디 저장하기</button>
+    </div>
   </div>
+</div>
 
-  <!-- HOME 이동 확인 모달 (YES/NO) -->
-  <div class="confirm-modal-overlay" id="confirmModal">
-    <div class="confirm-modal-window">
-      <div class="lookbook-titlebar">
-        <span>⚠️ 확인 (CONFIRM)</span>
-        <div class="win-buttons">
-          <div class="win-btn" onclick="closeConfirmModal()">✕</div>
-        </div>
+<!-- HOME 이동 확인 모달 (YES/NO) -->
+<div class="confirm-modal-overlay" id="confirmModal">
+  <div class="confirm-modal-window">
+    <div class="lookbook-titlebar">
+      <span>⚠️ 확인 (CONFIRM)</span>
+      <div class="win-buttons">
+        <div class="win-btn" onclick="closeConfirmModal()">✕</div>
       </div>
-      <div class="confirm-modal-body">
-        정말 첫 화면으로 갈까요?<br>진행 중인 코디가 초기화될 수 있습니다.
-      </div>
-      <div class="confirm-modal-footer">
-        <button class="win-btn" style="width: 70px; height: 24px; font-weight: bold; background: linear-gradient(180deg, #ff4d4d, #cc0000); color: white; border: 2px outset #ff99bb; font-family: inherit; cursor: pointer;" onclick="confirmGoToIntro()">YES</button>
-        <button class="win-btn" style="width: 70px; height: 24px; font-weight: bold; background: #ece9d8; color: #333; border: 2px outset #fff; font-family: inherit; cursor: pointer;" onclick="closeConfirmModal()">NO</button>
-      </div>
+    </div>
+    <div class="confirm-modal-body">
+      정말 첫 화면으로 갈까요?<br>진행 중인 코디가 초기화될 수 있습니다.
+    </div>
+    <div class="confirm-modal-footer">
+      <button class="win-btn" style="width: 70px; height: 24px; font-weight: bold; background: linear-gradient(180deg, #ff4d4d, #cc0000); color: white; border: 2px outset #ff99bb; font-family: inherit; cursor: pointer;" onclick="confirmGoToIntro()">YES</button>
+      <button class="win-btn" style="width: 70px; height: 24px; font-weight: bold; background: #ece9d8; color: #333; border: 2px outset #fff; font-family: inherit; cursor: pointer;" onclick="closeConfirmModal()">NO</button>
     </div>
   </div>
 </div>
@@ -2642,7 +2626,7 @@ p2_shoes: [
   { id: 'P2_MARYJANE', code: '#26538', codeName: 'MARY JANE SHOES', name: '메리제인 슈즈', image: 'p2-maryjane.png', blueWin: true, koreanDesc: '모던한 스트랩 디테일로 사랑받는 클래식 메리제인.' },
   { id: 'P2_LONGBOOTS', code: '#0304775', codeName: 'LONG BOOTS', name: '롱 부츠', image: 'p2-longboost.png' },
   { id: 'P2_UGG', code: '#0304773', codeName: 'UGG BOOTS', name: '어그', image: 'p2-ugg.png' },
-   { id: 'P2_NIKE_AIR_FORCE', code: '#0304782', codeName: 'AIR FORCE', name: '에어포스', image: 'p2-nike air force.png' }
+  { id: 'P2_NIKE_AIR_FORCE', code: '#0304782', codeName: 'AIR FORCE', name: '에어포스', image: 'p2-nike air force.png' }
 ],
 p2_acc: [
   { id: 'P2_KNEE_SOCKS', code: '#0494852', codeName: 'KNEE-HIGH SOCKS', name: '니하이 삭스', image: 'p2-knee-high Socks .png' },
@@ -2837,7 +2821,6 @@ function highlightAndFocusItem(category, itemId) {
   setTimeout(() => {
     const box = document.getElementById(`wardrobe-box-${itemId}`);
     if (box) {
-      // scrollIntoView가 전체 창 레이아웃을 밀어내는 현상을 막기 위해 block 모드 조정
       box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       box.click();
     }
@@ -3147,7 +3130,7 @@ function drawInfoLine(category) {
   line.style.display = 'block';
 }
 
-/* ================= 캔버스 정밀 픽셀 히트테스트 & 터치/드래그 ================= */
+/* ================= 캔버스 정밀 픽셀 히트테스트 & 드래그 ================= */
 const characterCanvas = document.getElementById('characterCanvas');
 
 characterCanvas.onpointerdown = (downEvent) => {
