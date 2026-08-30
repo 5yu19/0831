@@ -1234,11 +1234,12 @@ img:not([src]), img[src=""], img[src="about:blank"] { display: none !important; 
   display: flex;
   flex-direction: column;
   font-family: 'NeoDunggeunmo', 'Galmuri9', monospace;
+  transform-origin: center center;
   animation: modalPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 @keyframes modalPop {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 .lookbook-titlebar {
   background: linear-gradient(90deg, #0058ee, #3593ff);
@@ -1341,6 +1342,7 @@ img:not([src]), img[src=""], img[src="about:blank"] { display: none !important; 
   display: flex;
   flex-direction: column;
   font-family: 'NeoDunggeunmo', 'Galmuri9', monospace;
+  transform-origin: center center;
   animation: modalPop 0.2s ease;
 }
 .confirm-modal-body {
@@ -2483,7 +2485,7 @@ function bringItemToFront(itemId, codeName) {
   }
 }
 
-/* 화면 크기에 맞춰 게임과 인트로 컨테이너를 함께 완벽 스케일링 */
+/* 화면 크기에 맞춰 게임 컨테이너 및 모달 창을 상대 배율로 자동 스케일링 */
 function resizeApp() {
   const scaler = document.getElementById('app-scaler');
   if (scaler) {
@@ -2495,6 +2497,17 @@ function resizeApp() {
   if (intro) {
     const introScale = Math.min(window.innerWidth / 1280, window.innerHeight / 800);
     intro.style.transform = `scale(${introScale})`;
+  }
+
+  // 모달 창 크기를 화면 크기 배율에 맞춰 동기화
+  const lookbookWin = document.querySelector('.lookbook-window');
+  if (lookbookWin) {
+    lookbookWin.style.transform = `scale(${currentScale})`;
+  }
+
+  const confirmWin = document.querySelector('.confirm-modal-window');
+  if (confirmWin) {
+    confirmWin.style.transform = `scale(${currentScale})`;
   }
 }
 window.addEventListener('resize', resizeApp);
@@ -3130,7 +3143,7 @@ function drawInfoLine(category) {
   line.style.display = 'block';
 }
 
-/* ================= 캔버스 정밀 픽셀 히트테스트 & 드래그 ================= */
+/* ================= 캔버스 정밀 픽셀 히트테스트 & 터치/드래그 ================= */
 const characterCanvas = document.getElementById('characterCanvas');
 
 characterCanvas.onpointerdown = (downEvent) => {
@@ -3560,6 +3573,7 @@ function renderLookbook() {
 
 function openLookbook() { 
   renderLookbook();
+  resizeApp();
   document.getElementById('lookbookModal').style.display = 'flex'; 
 }
 
